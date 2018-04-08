@@ -1,0 +1,54 @@
+<header>
+
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark bg-faded" data-toggle="sticky-onscroll">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <a class="navbar-brand" href="#"><img alt="" src="/images/logo-small-no-text.fw.png" height="40px"></a>
+    
+        <div class="collapse navbar-collapse justify-content-center" id="nav-content">
+        	<ul class="navbar-nav nav" id="myNav" >
+          		<li class="nav-item">
+            		<a class="nav-link active" id="home-tab" href="/" role="tab">{{ 'HEADER.HOME'|trans }}</a>
+          		</li>
+          		<li class="nav-item">
+            		<a class="nav-link" id="description-tab" href="/" role="tab">{{ 'HEADER.DESCRIPTION'|trans }}</a>
+          		</li>
+          		<li class="nav-item">
+            		<a class="nav-link" id="contact-tab" href="/" role="tab">{{ 'HEADER.CONTACT'|trans }}</a>
+          		</li>
+          		<li class="nav-item dropdown">
+            		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.PROJECT'|trans }}</a>
+            			<div class="dropdown-menu">
+                          <a class="dropdown-item" href="/">{{ 'HEADER.LISTPROJECT'|trans }}</a>
+                          <a class="dropdown-item" href="/">{{ 'HEADER.CREATEPROJECT'|trans }}</a>
+        
+            			</div>
+          		</li>
+          		<li class="nav-item dropdown">
+            		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.TRANSLATIONLIST'|trans }}</a>
+            			<div class="dropdown-menu">
+                          <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}">{{ 'HEADER.TRANSLATIONEN'|trans }}</a>
+                          <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}">{{ 'HEADER.TRANSLATIONFR'|trans }}</a>
+                          <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'de'}) }}">{{ 'HEADER.TRANSLATIONDE'|trans }}</a>
+        
+            			</div>
+          		</li>
+          		<li class="nav-item dropdown">
+            		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.USER'|trans }}</a>
+            			<div class="dropdown-menu">
+                          <a class="dropdown-item" href="/">{{ 'HEADER.LOGIN'|trans }}</a>
+                          <a class="dropdown-item" href="/">{{ 'HEADER.REGISTER'|trans }}</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/">{{ 'HEADER.LOGOUT'|trans }}</a>
+            			</div>
+          		</li>
+        
+        	</ul>
+    	</div>
+    </nav>
+
+
+</header>
