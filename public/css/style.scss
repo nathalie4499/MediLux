@@ -38,20 +38,22 @@ goldenrod
     src: url(../fonts/Comfortaa-Regular.ttf);
 }
 
-body {
-    font-family: Comfortaa-Bold;
+html, body {
+  font-family: Comfortaa-Bold;
+  background-color: #507cbe;
 }
 
 
 footer{
-  color: white;
   position: sticky;
+  height: 50px;
+  color: white;
   width: 100%;
   text-align: center;
-  height: 50px;
   line-height: 50px;
-  left: 0;
   bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .sticky.is-sticky {
@@ -71,8 +73,32 @@ footer{
 }
 
 .datacontainer img {
-  display: block;
   margin-left: auto;
   margin-right: auto;
   max-height:350px;
+}
+
+.logindatacontainer {
+  min-height: calc(100vh - 116px);
+  /*min-height: 84%;*/
+  display:flex;
+  align-content: space-around;
+  flex-direction: row;
+  padding: 50px;
+
+  background-color: #507cbe;
+  color: black;
+}
+
+.logindatacontainer img {
+  max-width: 90%;
+  max-height: 300px;
+}
+
+.loginLeft {
+  width: 48%;
+}
+
+.loginRight {
+  width: 48%;
 }
