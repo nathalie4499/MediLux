@@ -9,3 +9,14 @@ homepage:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'
+          
+login:
+    path: /{_locale}/login
+    controller: App\Controller\UserController::login
+    defaults:
+      _locale: 'en'   
+    requirements:
+       _locale: 'en|fr|de' 
+ 
+logout:
+    path: /logout          
