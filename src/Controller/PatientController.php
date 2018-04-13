@@ -295,7 +295,7 @@ class PatientController extends Controller
     
         return new Response(
             $twig->render(
-                'Patient/patient.html.twig', [
+                'Modules/Patient/patient.html.twig', [
             'controller_name' => 'PatientController',
         ])
      );
