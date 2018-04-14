@@ -2,11 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta property="og:title" content="MediLux Demo">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://demo.medilux.doctor">
+        <meta property="og:image" content="">
+        <meta property="og:description" content="MediLux Demo">
+        <meta property="fb:admin" content="">
+        
         <title>{% block title %}MediLux{% endblock %}</title>
+        
         {% block stylesheets %}
-        	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  			<link rel="stylesheet" href="/css/style.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/style.min.css">
         {% endblock %}
+        
     </head>
 
 
@@ -23,23 +34,44 @@
         <div class="collapse navbar-collapse justify-content-center" id="nav-content">
         	<ul class="navbar-nav nav" id="myNav" >
           		<li class="nav-item">
-            		<a class="nav-link" id="home-tab" href="/" role="tab">{{ 'HEADER.SEARCH'|trans }}</a>
+            		<a class="nav-link" href="{{ path ('search_patient_list') }}" role="tab">{{ 'HEADER.SEARCHPATIENT'|trans }}</a>
           		</li>
           		<li class="nav-item">
-            		<a class="nav-link" id="description-tab" href="/" role="tab">{{ 'HEADER.PATIENT'|trans }}</a>
+            		<a class="nav-link" href="{{ path ('patient_record') }}" role="tab">{{ 'HEADER.PATIENTRECORD'|trans }}</a>
           		</li>
           		<li class="nav-item">
-            		<a class="nav-link" id="contact-tab" href="/" role="tab">{{ 'HEADER.ADDRESSBOOK'|trans }}</a>
+            		<a class="nav-link" href="{{ path ('addressbook_list') }}" role="tab">{{ 'HEADER.ADDRESSBOOKLIST'|trans }}</a>
+          		</li>
+          		<li class="nav-item">
+            		<a class="nav-link" href="{{ path ('drugs_list') }}" role="tab">{{ 'HEADER.DRUGSLIST'|trans }}</a>
           		</li>
           		<li class="nav-item dropdown">
             		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.ADMIN'|trans }}</a>
             			<div class="dropdown-menu">
-                          <a class="dropdown-item" href="/">{{ 'HEADER.LISTPROJECT'|trans }}</a>
-                          <a class="dropdown-item" href="/">{{ 'HEADER.CREATEPROJECT'|trans }}</a>
+                          <a class="dropdown-item" href="{{ path ('admin_main') }}">{{ 'HEADER.ADMINMAIN'|trans }}</a>
+
         
             			</div>
           		</li>
+
+          		
           		<li class="nav-item dropdown">
+            		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.USER'|trans }}</a>
+            			<div class="dropdown-menu">
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            					<a class="dropdown-item" href="{{ path ('logout') }}">{{ 'HEADER.LOGOUT'|trans }}</a>
+            				{% else %}
+                                <a class="dropdown-item" href="{{ path ('login') }}">{{ 'HEADER.LOGIN'|trans }}</a>
+                            {% endif %}
+              			</div>
+          		</li>
+          		        
+        	</ul>
+    	</div>
+    	
+    	
+    		<ul class="navbar-nav nav" id="LanguageSelector" >
+    	       	<li class="nav-item dropdown LanguageSelector">
             		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.TRANSLATIONLIST'|trans }}</a>
             			<div class="dropdown-menu">
                           <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}">{{ 'HEADER.TRANSLATIONEN'|trans }}</a>
@@ -48,16 +80,8 @@
         
             			</div>
           		</li>
-          		
-          		<li class="nav-item dropdown">
-            		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.USER'|trans }}</a>
-            			<div class="dropdown-menu">
-                          <a class="dropdown-item" href="/">{{ 'HEADER.LOGOUT'|trans }}</a>
-            			</div>
-          		</li>
-        
-        	</ul>
-    	</div>
+    		</ul>
+    	
     </nav>
 
 </header>

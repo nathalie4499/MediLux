@@ -1,11 +1,14 @@
 HEADER:
   TRANSLATIONLIST: Language
-  SEARCH: Search
-  PATIENT: Patient
-  ADDRESSBOOK: Address Book
+  SEARCHPATIENT: Search
+  PATIENTRECORD: Patient
+  ADDRESSBOOKLIST: Address Book
   ADMIN: Admin
   USER: User
   LOGOUT: Logout
+  LOGIN: Login
   TRANSLATIONEN: English
   TRANSLATIONDE: Deutsch
   TRANSLATIONFR: Français
+  DRUGSLIST: Drugs
+  ADMINMAIN: Main

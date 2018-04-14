@@ -20,14 +20,7 @@ login:
  
 logout:
     path: /logout
-    
-      
-register_user:
-     path: /{_locale}/register/user
-     controller: App\Controller\UserController::registerUser    
-     requirements:
-          _locale: 'en|fr|de' 
-          
+           
 search_patient_list:
      path: /{_locale}/search/patient
      controller: App\Controller\SearchController::searchPatientList
@@ -39,4 +32,36 @@ search_patient_list:
 username_available:
     path: /username/available
     controller: App\Controller\UserController::usernameAvailable
-    methods: ['POST']                 
+    methods: ['POST']
+               
+drugs_list:
+     path: /{_locale}/drugs/list
+     controller: App\Controller\DrugsController::drugsList
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'  
+                     
+addressbook_list:
+     path: /{_locale}/addressbook/list
+     controller: App\Controller\AddressbookController::addressbookList
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'  
+                     
+admin_main:
+     path: /{_locale}/admin/main
+     controller: App\Controller\AdminController::adminMain
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'
+                     
+patient_record:
+     path: /{_locale}/patient/record
+     controller: App\Controller\PatientController::patientRecord
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'                     
