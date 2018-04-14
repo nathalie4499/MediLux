@@ -16,7 +16,15 @@ login:
     defaults:
       _locale: 'en'   
     requirements:
-       _locale: 'en|fr|de' 
+      _locale: 'en|fr|de' 
  
 logout:
-    path: /logout          
+    path: /logout
+    
+patient:
+    path: /{_locale}/patient
+    controller: App\Controller\PatientController::patientRecord
+    defaults:
+          _locale: 'en'
+    requirements:
+          _locale: 'en|fr|de'
