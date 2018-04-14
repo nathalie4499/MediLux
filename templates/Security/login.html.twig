@@ -4,19 +4,24 @@
 <div class="logindatacontainer">
 	<div class="loginLeft">
     	<img src="/images/choosing-a-doctor.png" alt="Choosing a doctor">
+
+     </div>
+     <div class="loginRight">
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-     </div>
-     <div class="loginRight">   
+        {% endif %}   
         <form action="{{ path('login') }}" method="post">
+        <div class="loginUsername">
             <label for="username">Username:</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
-        
+        </div>
+        <div class="loginPassword">
             <label for="password">Password:</label>
             <input type="password" id="password" name="_password" />
-        
+        </div>
+        <div class="loginSubmit">
             <button type="submit">login</button>
+        </div>
         </form>
       </div>
 </div>

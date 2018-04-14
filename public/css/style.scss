@@ -85,6 +85,7 @@ footer{
   align-content: space-around;
   flex-direction: row;
   padding: 50px;
+  max-width: 80%;
 
   background-color: #507cbe;
   color: black;
@@ -96,9 +97,17 @@ footer{
 }
 
 .loginLeft {
+  display:flex;
   width: 48%;
+  height:300px;
+  align-content: center;
+  align-items: center;
 }
 
 .loginRight {
+  display:flex;
   width: 48%;
+  height:300px;
+  align-content: center;
+  align-items: center;
 }

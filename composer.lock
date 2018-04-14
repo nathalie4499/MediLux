@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "4402831bdb3160508c62546e6a08af65",
-=======
-    "content-hash": "aa2471b062fca5d3c9736631111ea46f",
->>>>>>> 78647bc0c635f700e29cf4afcd1071c036eaa109
     "packages": [
         {
             "name": "composer/installers",
@@ -3102,18 +3098,6 @@
         },
         {
             "name": "symfony/maker-bundle",
-<<<<<<< HEAD
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "c936864823ac60508e37d8fb1d9bc6a02d03ffa7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c936864823ac60508e37d8fb1d9bc6a02d03ffa7",
-                "reference": "c936864823ac60508e37d8fb1d9bc6a02d03ffa7",
-=======
             "version": "v1.4.0",
             "source": {
                 "type": "git",
@@ -3124,7 +3108,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/253cee42124de11dc0a5bb7c91e5375d7197be12",
                 "reference": "253cee42124de11dc0a5bb7c91e5375d7197be12",
->>>>>>> 78647bc0c635f700e29cf4afcd1071c036eaa109
                 "shasum": ""
             },
             "require": {
@@ -3176,11 +3159,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-<<<<<<< HEAD
-            "time": "2018-03-21T13:40:46+00:00"
-=======
             "time": "2018-04-11T22:44:12+00:00"
->>>>>>> 78647bc0c635f700e29cf4afcd1071c036eaa109
         },
         {
             "name": "symfony/monolog-bridge",
