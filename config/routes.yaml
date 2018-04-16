@@ -4,11 +4,13 @@
 
 homepage:
      path: /{_locale}
-     controller: App\Controller\SearchController::searchPatientList
      defaults:
-          _locale: 'en'
+        _controller: FrameworkBundle:Redirect:Redirect
+        route: search_patient_list
+        permanent: true
+        _locale: 'en'  
      requirements:
-          _locale: 'en|fr|de'
+        _locale: 'en|fr|de'   
           
 login:
     path: /{_locale}/login
@@ -20,64 +22,6 @@ login:
  
 logout:
     path: /logout
-<<<<<<< HEAD
-    
-patient_record:
-    path: /{_locale}/patient
-    controller: App\Controller\PatientController::patientRecord
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de'
-          
-doctor_list:
-    path: /{_locale}/doctor_list
-    controller: App\Controller\AddressBookController::doctorList
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de' 
-          
-drugs_list:
-    path: /{_locale}/drugs_list
-    controller: App\Controller\AddressBookController::drugsList
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de'                 
-          
-search_patient:
-    path: /{_locale}/search_patient
-    controller: App\Controller\SearchController::searchPatient
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de'     
-          
-search_drugs:
-    path: /{_locale}/search_drugs
-    controller: App\Controller\SearchController::searchDrugs
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de'  
-          
-search_doctor:
-    path: /{_locale}/search_doctor
-    controller: App\Controller\SearchController::searchDoctor
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de' 
-          
-search_address:     
-    path: /{_locale}/search_address
-    controller: App\Controller\SearchController::searchaddress
-    defaults:
-          _locale: 'en'
-    requirements:
-          _locale: 'en|fr|de'                 
-=======
            
 search_patient_list:
      path: /{_locale}/search/patient
@@ -122,5 +66,4 @@ patient_record:
      defaults:
           _locale: 'en'
      requirements:
-          _locale: 'en|fr|de'                     
->>>>>>> 8a47207cd27a5a16a27ca82bf2e231b0f9603b16
+          _locale: 'en|fr|de'   
