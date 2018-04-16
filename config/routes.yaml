@@ -16,10 +16,11 @@ login:
     defaults:
       _locale: 'en'   
     requirements:
-      _locale: 'en|fr|de' 
+       _locale: 'en|fr|de' 
  
 logout:
     path: /logout
+<<<<<<< HEAD
     
 patient_record:
     path: /{_locale}/patient
@@ -76,3 +77,50 @@ search_address:
           _locale: 'en'
     requirements:
           _locale: 'en|fr|de'                 
+=======
+           
+search_patient_list:
+     path: /{_locale}/search/patient
+     controller: App\Controller\SearchController::searchPatientList
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'          
+
+username_available:
+    path: /username/available
+    controller: App\Controller\UserController::usernameAvailable
+    methods: ['POST']
+               
+drugs_list:
+     path: /{_locale}/drugs/list
+     controller: App\Controller\DrugsController::drugsList
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'  
+                     
+addressbook_list:
+     path: /{_locale}/addressbook/list
+     controller: App\Controller\AddressbookController::addressbookList
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'  
+                     
+admin_main:
+     path: /{_locale}/admin/main
+     controller: App\Controller\AdminController::adminMain
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'
+                     
+patient_record:
+     path: /{_locale}/patient/record
+     controller: App\Controller\PatientController::patientRecord
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'                     
+>>>>>>> 8a47207cd27a5a16a27ca82bf2e231b0f9603b16
