@@ -66,8 +66,8 @@ footer{
 }
 
 .datacontainer {
+  min-height: calc(100vh - 116px);
   padding: 50px;
-  min-height: 300px;
   background-color: #507cbe;
   color: black;
 }
