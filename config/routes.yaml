@@ -53,7 +53,7 @@ addressbook_list:
           _locale: 'en|fr|de'  
 
 addressbook_detail:
-     path: /{_locale}/addressbook/detail/{doctor}
+     path: /{_locale}/addressbook/detail/{doctorId}
      controller: App\Controller\AddressbookController::addressbookDetail
      defaults:
           _locale: 'en'
