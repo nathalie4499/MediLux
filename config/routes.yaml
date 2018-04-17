@@ -12,10 +12,10 @@ homepage:
      requirements:
         _locale: 'en|fr|de'   
         
-user_list:
-     path: /{_locale}/admin/user/list
+admin_user:
+     path: /{_locale}/admin/user
      defaults:
-        _controller: App\Controller\AdminController:userList
+        _controller: App\Controller\AdminController:adminUser
         _locale: 'en'  
      requirements:
         _locale: 'en|fr|de'           
