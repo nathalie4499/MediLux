@@ -37,15 +37,17 @@
         </tr>
       </thead>
       <tbody>
+      	{% for value in doctor %}
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>555-555</td>
-          <td><a type="button" class="btn btn-success" href="{{ path ('addressbook_detail') }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
+          <th scope="row">{{ value.id }}</th>
+          <td>{{ value.specialization }}</td>
+          <td>{{ value.lastname }}</td>
+          <td>{{ value.firstname }}</td>
+          <td>{{ value.telwork }}</td>
+          <td><a type="button" class="btn btn-success" href="{{ path ('addressbook_detail', {'doctor': doctor.getId()}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
         </tr>
+        {% endfor %}
       </tbody>
 	</table>
-
+	
 {% endblock %}

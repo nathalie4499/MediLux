@@ -19,30 +19,51 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Doctors;
+use App\Repository\DoctorsRepository;
 
 
 class AddressbookController extends Controller
 {
-    public function addressbookList(Environment $twig)
+    public function addressbookList(
+                                     Environment $twig,
+                                     DoctorsRepository $repository
+                                    )
     {
         return new Response(
             $twig->render(
-                'Modules/Addressbook/addressbookList.html.twig', [
-                    'controller_name' => 'PatientController',
-                ])
+                'Modules/Addressbook/addressbookList.html.twig', 
+                [
+                    'doctor' => $repository->findAll(),
+                ]
+                )
             );
     }
     
-    public function addressbookDetail(Environment $twig)
+    public function addressbookDetail(
+                                       Environment $twig,
+                                       int $doctor
+                                        )
     {
-        return new Response(
-            $twig->render(
-                'Modules/Addressbook/addressbookDetail.html.twig', [
-                    'controller_name' => 'PatientController',
-                ])
-            );
+        $doctor = $repository->find($doctor);
+        if (!$doctor) {
+            throw new NotFoundHttpException();
+        }
+
+        return new Response
+                   (
+                       $twig->render
+                              (
+                                'Modules/Addressbook/addressbookDetail.html.twig',
+                                [
+                                    'doctor' => $doctor,
+                                    'routeAttr' => ['doctor' => $doctor->getId()],
+                                    'form' => $form->createView()
+                                ]
+                               )
+                    );
     }
     
     public function addDoctor(Environment $twig,
