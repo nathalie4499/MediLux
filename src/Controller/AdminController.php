@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,4 +33,20 @@ class AdminController extends Controller
                 ])
             );
     }
+
+    public function userList(Environment $twig, Request $request, ObjectManager $manager, SessionInterface $session,
+        UrlGeneratorInterface $urlGenerator)
+    {
+        
+        $repository = $this->getDoctrine()
+        ->getRepository(User::class);
+        $users = $repository->findAll();
+        return new Response(
+            $twig->render(
+                'Modules/Admin/listUser.html.twig',
+                array('users' => $users)
+                )
+            );
+    }
+
 }
