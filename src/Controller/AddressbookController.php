@@ -32,4 +32,14 @@ class AddressbookController extends Controller
                 ])
             );
     }
+    
+    public function addressbookDetail(Environment $twig)
+    {
+        return new Response(
+            $twig->render(
+                'Modules/Addressbook/addressbookDetail.html.twig', [
+                    'controller_name' => 'PatientController',
+                ])
+            );
+    }
 }

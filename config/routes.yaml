@@ -51,7 +51,15 @@ addressbook_list:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'  
-                     
+
+addressbook_detail:
+     path: /{_locale}/addressbook/detail
+     controller: App\Controller\AddressbookController::addressbookDetail
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'  
+                  
 admin_main:
      path: /{_locale}/admin/main
      controller: App\Controller\AdminController::adminMain

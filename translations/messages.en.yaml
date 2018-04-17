@@ -12,3 +12,7 @@ HEADER:
   TRANSLATIONFR: Français
   DRUGSLIST: Drugs
   ADMINMAIN: Main
+
+ADDRESSBOOK:
+    DETAIL: detail
+    ADD: add

@@ -31,6 +31,9 @@
   				<input placeholder="telephone" type="text" class="form-control">
 			</div>
           </th>
+          <th>
+          	<a type="button" class="btn btn-primary" href="#">{{ 'ADDRESSBOOK.ADD'|trans }}</a>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -40,17 +43,22 @@
           <td>Otto</td>
           <td>@mdo</td>
           <td>555-555</td>
+          <td><a type="button" class="btn btn-success" href="{{ path ('addressbook_detail') }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
         </tr>
         <tr>
           <th scope="row">2</th>
           <td>Jacob</td>
           <td>Thornton</td>
           <td>@fat</td>
+          <td>555-555</td>
+          <td><a type="button" class="btn btn-success">Primary</a></td>
         </tr>
         <tr>
           <th scope="row">3</th>
           <td colspan="2">Larry the Bird</td>
           <td>@twitter</td>
+          <td>555-555</td>
+          <td><a type="button" class="btn btn-success">Primary</a></td>
         </tr>
       </tbody>
 	</table>
