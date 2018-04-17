@@ -4,11 +4,13 @@
 
 homepage:
      path: /{_locale}
-     controller: App\Controller\UserController::login
      defaults:
-          _locale: 'en'
+        _controller: FrameworkBundle:Redirect:Redirect
+        route: search_patient_list
+        permanent: true
+        _locale: 'en'  
      requirements:
-          _locale: 'en|fr|de'
+        _locale: 'en|fr|de'   
           
 login:
     path: /{_locale}/login
@@ -64,4 +66,4 @@ patient_record:
      defaults:
           _locale: 'en'
      requirements:
-          _locale: 'en|fr|de'                     
+          _locale: 'en|fr|de'   
