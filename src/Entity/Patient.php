@@ -63,9 +63,15 @@ class Patient
      */
     private $activeproblems;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PatientAddress", mappedBy="relatedpatient")
+     */
+    private $patientaddress;
+
     public function __construct()
     {
         $this->activeproblems = new ArrayCollection();
+        $this->patientaddress = new ArrayCollection();
     }
 
 
@@ -195,6 +201,37 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($activeproblem->getPatient() === $this) {
                 $activeproblem->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PatientAddress[]
+     */
+    public function getPatientaddress(): Collection
+    {
+        return $this->patientaddress;
+    }
+
+    public function addPatientaddress(PatientAddress $patientaddress): self
+    {
+        if (!$this->patientaddress->contains($patientaddress)) {
+            $this->patientaddress[] = $patientaddress;
+            $patientaddress->setRelatedpatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatientaddress(PatientAddress $patientaddress): self
+    {
+        if ($this->patientaddress->contains($patientaddress)) {
+            $this->patientaddress->removeElement($patientaddress);
+            // set the owning side to null (unless already changed)
+            if ($patientaddress->getRelatedpatient() === $this) {
+                $patientaddress->setRelatedpatient(null);
             }
         }
 
