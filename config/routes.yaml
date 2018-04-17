@@ -59,6 +59,14 @@ addressbook_detail:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'  
+
+addressbook_add:
+     path: /{_locale}/addressbook/add
+     controller: App\Controller\AddressbookController::addDoctor
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'
                   
 admin_main:
      path: /{_locale}/admin/main

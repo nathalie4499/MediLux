@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<table id="addressTable" class="table table-hover table-striped">
+	<table class="cardmedilux table table-hover table-striped">
       <thead>
         <tr>
           <th scope="col">
@@ -32,7 +32,7 @@
 			</div>
           </th>
           <th>
-          	<a type="button" class="btn btn-primary" href="#">{{ 'ADDRESSBOOK.ADD'|trans }}</a>
+          	<a type="button" class="btn btn-primary" href="{{ path ('addressbook_add') }}">{{ 'ADDRESSBOOK.ADD'|trans }}</a>
           </th>
         </tr>
       </thead>
@@ -44,21 +44,6 @@
           <td>@mdo</td>
           <td>555-555</td>
           <td><a type="button" class="btn btn-success" href="{{ path ('addressbook_detail') }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>555-555</td>
-          <td><a type="button" class="btn btn-success">Primary</a></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-          <td>555-555</td>
-          <td><a type="button" class="btn btn-success">Primary</a></td>
         </tr>
       </tbody>
 	</table>

@@ -16,3 +16,17 @@ HEADER:
 ADDRESSBOOK:
     DETAIL: detail
     ADD: add
+
+FORM:
+    ADDRESSBOOK:
+        FIRSTNAME: FIRSTNAME
+        LASTNAME: LASTNAME
+        SPECIALIZATION: SPECIALIZATION
+        TELWORK: TELWORK
+        TELPRIV: TELPRIV
+        MOBILE: MOBILE
+        EMAIL: EMAIL
+        FAX: FAX
+        LANGUAGE: Spoken language
+        TITLE: TITLE
+        ADDRESS: ADDRESS
