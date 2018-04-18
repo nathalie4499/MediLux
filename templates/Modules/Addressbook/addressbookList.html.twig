@@ -44,10 +44,45 @@
           <td>{{ value.lastname }}</td>
           <td>{{ value.firstname }}</td>
           <td>{{ value.telwork }}</td>
-          <td><a type="button" class="btn btn-success" href="{{ path('addressbook_detail', {'doctor': value.id}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
+{#           <td><a type="button" class="btn btn-success" href="{{ path('addressbook_detail', {'doctor': value.id}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>#}
+          <td>
+          <!-- Button trigger modal -->
+    	  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ value.id }}">
+          {{ 'ADDRESSBOOK.DETAIL'|trans }}
+          </button>
+          </td>
         </tr>
+        <!-- Modal -->
+        <div class="modal fade" id="{{ value.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLongTitle">{{ value.title }}{{ value.firstname }}{{ value.lastname }}</h1>
+                <h2>{{ value.specialization }}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <h6>{{ value.language }}</h6>
+              <h6>{{ value.mobile }}</h6>
+              <h6>{{ value.telwork }}</h6>
+              <h6>{{ value.telpriv }}</h6>
+              <h6>{{ value.email }}</h6>
+              <h6>{{ value.fax }}</h6>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         {% endfor %}
       </tbody>
 	</table>
 	
+	
+
+    
 {% endblock %}
