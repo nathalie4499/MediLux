@@ -12,22 +12,7 @@ HEADER:
   TRANSLATIONFR: Français
   DRUGSLIST: Drugs
   ADMINMAIN: Main
-<<<<<<< HEAD
-
-HEADER:
-  TRANSLATIONLIST: Language
-  SEARCHPATIENT: Search
-  PATIENTRECORD: Patient
-  ADDRESSBOOKLIST: Address Book
-  ADMIN: Admin
-  USER: User
-  LOGOUT: Logout
-  LOGIN: Login
-  TRANSLATIONEN: English
-  TRANSLATIONDE: Deutsch
-  TRANSLATIONFR: Français
-  DRUGSLIST: Drugs
-  ADMINMAIN: Main
+  USERLIST: User
 
 ADDRESSBOOK:
     DETAIL: detail
@@ -46,6 +31,5 @@ FORM:
         LANGUAGE: Spoken language
         TITLE: TITLE
         ADDRESS: ADDRESS
-=======
-  USERLIST: User
->>>>>>> development_phase_1
+
+
