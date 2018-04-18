@@ -54,88 +54,22 @@ class AddressbookController extends Controller
         )
     {
         $doctor = new Doctors();
-        $builder = $factory->createBuilder(FormType::class, $doctor);
+     
+        $addressDoctor = new AddressDoctors();
+        
+        $builder = $factory->createBuilder(FormType::class, $addressDoctor);
         $builder->add(
-                      'firstname', TextType::class,
-                         ['label' => 'FORM.ADDRESSBOOK.FIRSTNAME']
-                     )
-                ->add(
-                      'lastname', TextType::class,
-                         ['required' => false,
-                          'label' => 'FORM.ADDRESSBOOK.LASTNAME',
-                         ]
-                     )
-                ->add(
-                      'specialization', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.SPECIALIZATION']
-                     )
-                ->add(
-                      'telwork', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.TELWORK']
-                      )
-                ->add(
-                      'telpriv', TextType::class,
-                      ['required' => false,
-                          'label' => 'FORM.ADDRESSBOOK.TELPRIV',
-                      ]
-                      )
-                ->add(
-                      'mobile', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.MOBILE']
-                      )
-                ->add(
-                      'email', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.EMAIL']
-                      )
-                ->add(
-                      'fax', TextType::class,
-                      ['required' => false,
-                         'label' => 'FORM.ADDRESSBOOK.FAX',
-                      ]
-                      )
-                ->add(
-                      'language', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.LANGUAGE']
-                      )
-                ->add(
-                      'title', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.TITLE']
-                      )
-                  //fields for address table   
-                 ->add(
-                      'address', CollectionType::class,
-                      [
-                       'entry_type' => AddressDoctors::class,
-                       'entry_options' => ['label' => false]
-                      ]
-                      )
-                 //end address
-                ->add(
-                      'submit', SubmitType::class,
-                        ['attr' => [
-                                    'class' => 'btn btn-success btn-block',
-                                    'stateless' => true
-                                   ],
-                         'label' => 'FORM.ADDRESSBOOK.SUBMIT'
-                        ]
-                      );
+            'zip', TextType::class,
+            ['label' => 'FORM.ADDRESSBOOK.ZIP']
+            )
+            ->add(
+                'submit', SubmitType::class,
+                ['attr' => ['class' => 'btn btn-success btn-block'],
+                    'label' => 'FORM.ADDRESSBOOK.SUBMIT'
+                ]
+                );
         
-//         //form to fill the address
-//         $addressDoctor = new AddressDoctors();
-//         $builder = $factory->createBuilder(FormType::class, $addressDoctor);
-//         $builder->add(
-//             'zip', TextType::class,
-//             ['label' => 'FORM.ADDRESSBOOK.ZIP']
-//             )
-//             ->add(
-//                 'submit', SubmitType::class,
-//                 ['attr' => ['class' => 'btn btn-success btn-block'],
-//                     'label' => 'FORM.ADDRESSBOOK.SUBMIT'
-//                 ]
-//                 );
-//         //END form to fill the address
-        
-        $form = $builder->getForm();
+        $form = $this->createForm(AddressType::class, $doctor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
