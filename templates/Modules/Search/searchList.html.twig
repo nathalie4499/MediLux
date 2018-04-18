@@ -1,1 +1,182 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/css/search_style.css">
+{% endblock %}
+
+{% block body %}
+<div class="datacontainer">
+<br>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-3">
+            <form action="" class="search-form" method="post">
+            	<div class="form-group has-feedback">
+            		<label for="search" class="sr-only">Search</label>
+            		<input type="text" class="form-control" name="search" id="search" placeholder="search">
+              	
+            	</div>
+            </form>
+        </div>
+    </div>
+</div>
+  
+  
+  
+<br>
+      <div class="result" id="result">
+      
+    	<table class="table table-striped table-dark table-bordered table-sm table-hover">
+    		<thead>
+    			<tr>
+    				<th scope="col">number</th>
+    				<th scope="col">SSN</th>
+    				<th scope="col">Given Name</th>
+    				<th scope="col">Birth Name</th>
+    				<th scope="col">Marital Name</th>
+    				<th scope="col">Nationality</th>
+    				<th scope="col">Age</th>
+    				<th scope="col">Language</th>
+    				<th scope="col">Telephone</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<tr>
+    			<th scope="row">1</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">2</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">3</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">4</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">5</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">6</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">7</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">8</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">9</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		<tr>
+    			<th scope="row">10</th>
+    			<td><a href="#" class="list-group-item"></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td><button type="button" class="btn">More</button></a></td>
+    		</tr>
+    		</tbody>
+
+  		</table>
+  		
+  		
+  		
+  			
+    </div> </div>
+  <br>
+ </div>
+<br>
+{% endblock %}
+{% block javascripts %}
+
+	{{ parent() }}
+
+{% endblock %}
+        
+  
