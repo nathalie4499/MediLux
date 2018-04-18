@@ -12,4 +12,40 @@ HEADER:
   TRANSLATIONFR: Français
   DRUGSLIST: Drugs
   ADMINMAIN: Main
+<<<<<<< HEAD
+
+HEADER:
+  TRANSLATIONLIST: Language
+  SEARCHPATIENT: Search
+  PATIENTRECORD: Patient
+  ADDRESSBOOKLIST: Address Book
+  ADMIN: Admin
+  USER: User
+  LOGOUT: Logout
+  LOGIN: Login
+  TRANSLATIONEN: English
+  TRANSLATIONDE: Deutsch
+  TRANSLATIONFR: Français
+  DRUGSLIST: Drugs
+  ADMINMAIN: Main
+
+ADDRESSBOOK:
+    DETAIL: detail
+    ADD: add
+
+FORM:
+    ADDRESSBOOK:
+        FIRSTNAME: FIRSTNAME
+        LASTNAME: LASTNAME
+        SPECIALIZATION: SPECIALIZATION
+        TELWORK: TELWORK
+        TELPRIV: TELPRIV
+        MOBILE: MOBILE
+        EMAIL: EMAIL
+        FAX: FAX
+        LANGUAGE: Spoken language
+        TITLE: TITLE
+        ADDRESS: ADDRESS
+=======
   USERLIST: User
+>>>>>>> development_phase_1
