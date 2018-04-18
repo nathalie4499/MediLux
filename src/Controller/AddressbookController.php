@@ -23,6 +23,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Doctors;
 use App\Repository\DoctorsRepository;
+use App\Entity\AddressDoctors;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 class AddressbookController extends Controller
@@ -99,44 +101,66 @@ class AddressbookController extends Controller
                       'title', TextType::class,
                       ['label' => 'FORM.ADDRESSBOOK.TITLE']
                       )
-//                 ->add(
-//                       'address', TextType::class,
-//                       ['required' => false,
-//                          'label' => 'FORM.ADDRESSBOOK.ADDRESS',
-//                       ]
-//                       )
-                         
+                  //fields for address table   
+                 ->add(
+                      'address', CollectionType::class,
+                      [
+                       'entry_type' => AddressDoctors::class,
+                       'entry_options' => ['label' => false]
+                      ]
+                      )
+                 //end address
                 ->add(
                       'submit', SubmitType::class,
-                        ['attr' => ['class' => 'btn btn-success btn-block'],
-                            'label' => 'FORM.ADDRESSBOOK.SUBMIT'
+                        ['attr' => [
+                                    'class' => 'btn btn-success btn-block',
+                                    'stateless' => true
+                                   ],
+                         'label' => 'FORM.ADDRESSBOOK.SUBMIT'
                         ]
                       );
+        
+//         //form to fill the address
+//         $addressDoctor = new AddressDoctors();
+//         $builder = $factory->createBuilder(FormType::class, $addressDoctor);
+//         $builder->add(
+//             'zip', TextType::class,
+//             ['label' => 'FORM.ADDRESSBOOK.ZIP']
+//             )
+//             ->add(
+//                 'submit', SubmitType::class,
+//                 ['attr' => ['class' => 'btn btn-success btn-block'],
+//                     'label' => 'FORM.ADDRESSBOOK.SUBMIT'
+//                 ]
+//                 );
+//         //END form to fill the address
+        
+        $form = $builder->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            
+            
+            
+            $manager->persist($addressDoctor);
+            $manager->flush();
+            
+            $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
+            
+            return new RedirectResponse
+            (
+                $urlGenerator->generate('addressbook_list')
+                );
+        }
                     
-                    $form = $builder->getForm();
-                    
-                    
-                    $form->handleRequest($request);
-                    if ($form->isSubmitted() && $form->isValid())
-                    {
-                        $manager->persist($doctor);
-                        $manager->flush();
-                        
-                        $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
-                        
-                        return new RedirectResponse
-                        (
-                            $urlGenerator->generate('addressbook_list')
-                            );
-                    }
-                    
-                    return new Response
-                    (
-                        $twig->render(
-                            'Modules/Addressbook/addressbookAdd.html.twig',
-                            ['formular' => $form->createView()]
-                            )
-                        );
+        return new Response
+        (
+             $twig->render(
+                    'Modules/Addressbook/addressbookAdd.html.twig',
+                    [ 'doctorFormular' => $form->createView()]
+                    )
+         );
                     
     }
 }
