@@ -38,6 +38,7 @@
       </thead>
       <tbody>
       	{% for value in doctor %}
+      		
         <tr>
           <th scope="row">{{ value.id }}</th>
           <td>{{ value.specialization }}</td>
@@ -53,6 +54,7 @@
           </td>
         </tr>
         <!-- Modal -->
+        {% for addressValue in address %}
         <div class="modal fade" id="{{ value.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -70,6 +72,11 @@
               <h6>{{ value.telpriv }}</h6>
               <h6>{{ value.email }}</h6>
               <h6>{{ value.fax }}</h6>
+              <h5>Address</h5>
+              
+              <h6>{{ addressValue.id }}</h6>
+              <h6>{{ addressValue.zip }}</h6>
+              
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -77,6 +84,7 @@
             </div>
           </div>
         </div>
+        	{% endfor %}
         {% endfor %}
       </tbody>
 	</table>   

@@ -25,13 +25,15 @@ use App\Entity\Doctors;
 use App\Repository\DoctorsRepository;
 use App\Entity\AddressDoctors;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Repository\AddressDoctorsRepository;
 
 
 class AddressbookController extends Controller
 {
     public function addressbookList(
                                      Environment $twig,
-                                     DoctorsRepository $repository
+                                     DoctorsRepository $repository,
+                                     AddressDoctorsRepository $addressrepo
                                     )
     {
         return new Response(
@@ -39,7 +41,7 @@ class AddressbookController extends Controller
                 'Modules/Addressbook/addressbookList.html.twig', 
                 [
                     'doctor' => $repository->findAll(),
-                    
+                    'address' => $addressrepo->findAll()
                 ]
                 )
             );
@@ -73,10 +75,7 @@ class AddressbookController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
-        {
-            
-            
-            
+        { 
             $manager->persist($addressDoctor);
             $manager->flush();
             
