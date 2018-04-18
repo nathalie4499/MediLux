@@ -42,32 +42,7 @@ class AddressbookController extends Controller
                 )
             );
     }
-    
-//     public function addressbookDetail(
-//                                        Environment $twig,
-//                                        DoctorsRepository $repository,
-//                                        int $doctor
-//                                       )
-//     {
-//         $doctor = $repository->find($doctor);
-//         if (!$doctor) {
-//             throw new NotFoundHttpException();
-//         }
-
-//         return new Response
-//                    (
-//                        $twig->render
-//                               (
-//                                 'Modules/Addressbook/addressbookDetail.html.twig',
-//                                 [
-//                                     'doctor' => $doctor,
-//                                     'routeAttr' => ['doctor' => $doctor->getId()],
-//                                     //'form' => $form->createView()
-//                                 ]
-//                                )
-//                     );
-//     }
-    
+ 
     public function addDoctor(Environment $twig,
         FormFactoryInterface $factory,
         Request $request,
