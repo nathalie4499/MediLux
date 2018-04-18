@@ -1,1 +1,33 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="/css/Drugstyle.css">
+{% endblock %}
+
+{% block body %}
+
+<div class="datacontainer">
+  <div id="Drugsearch">
+    <input type="text" class="  search-query form-control" placeholder="Search" />
+    <button type="button">
+    <i class="fas fa-search"></i>
+    </button>
+    </div>
+    <a href="{{ path ('drugs_add') }}" class="button">Add medication</a>
+
+  <div id="Drugslist">
+    <ul>
+      <li>example</li>
+      <li>example</li>
+      <li>example</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+{% endblock %}

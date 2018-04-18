@@ -32,4 +32,13 @@ class DrugsController extends Controller
                 ])
             );
     }
+    public function drugsAdd(Environment $twig)
+    {
+        return new Response(
+            $twig->render(
+                'Modules/Drugs/drugsAdd.html.twig', [
+                    'controller_name' => 'PatientController',
+                ])
+            );
+    }
 }

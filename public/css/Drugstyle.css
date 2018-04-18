@@ -1,0 +1,30 @@
+#Drugsearch{
+left: 100px;
+display: flex;
+width: 250px;
+margin: 25px;
+padding: 25px;
+}
+#Drugsform{
+display: flex;
+margin: 25px;
+padding: 25px;
+width: calc( 100vw - 50px);
+}
+#Drugslist{
+display: flex;
+margin: 25px;
+padding: 25px;
+width: calc( 100vw - 50px);
+}
+.button{
+  position: static;
+  height: 80px;
+  width:  100px;
+  border-radius: 5px;
+  background-color: #323232;
+  color: #b2b2b2;
+  padding: 15px;
+  margin: 10px;
+  left: 100px;
+}
