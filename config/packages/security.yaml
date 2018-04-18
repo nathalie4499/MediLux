@@ -35,12 +35,18 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: "^/[a-zA-Z]+/search/patient", roles: "ROLE_USER" }
-        - { path: "^/[a-zA-Z]+/drugs/list", roles: "ROLE_USER" }  
-        - { path: "^/[a-zA-Z]+/addressbook/list", roles: "ROLE_USER" }  
-        - { path: "^/[a-zA-Z]+/admin/main", roles: "ROLE_USER" }
-        - { path: "^/[a-zA-Z]+/patient/record", roles: "ROLE_USER" }                    
+        - { path: "^/[a-zA-Z]+/search/patient", roles: "ROLE_ADMIN, ROLE_USER", requires_channel: https }
+        - { path: "^/[a-zA-Z]+/drugs/list", roles: "ROLE_ADMIN, ROLE_USER", requires_channel: https }  
+        - { path: "^/[a-zA-Z]+/addressbook/list", roles: "ROLE_ADMIN, ROLE_USER", requires_channel: https }  
+        - { path: "^/[a-zA-Z]+/patient/record", roles: "ROLE_ADMIN, ROLE_USER", requires_channel: https } 
+        
+        - { path: "^/[a-zA-Z]+/admin/user", roles: "ROLE_ADMIN", requires_channel: https }  
+        - { path: "^/[a-zA-Z]+/admin/main", roles: "ROLE_ADMIN", requires_channel: https }
+    
+    
 
+                           
+   
 
 
                      

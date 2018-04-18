@@ -1,1 +1,53 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/css/address_style.css">
+{% endblock %}
+
+{% block body %}
+	<table class="cardmedilux table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">
+          	#
+          </th>
+          <th scope="col">
+          	<div class="input-group">
+  				<input placeholder="speciality" type="text" class="form-control">
+			</div>
+          </th>
+          <th scope="col">
+          	<div class="input-group">
+  				<input placeholder="Lastname" type="text" class="form-control">
+			</div>
+          </th>
+          <th scope="col">
+          	<div class="input-group">
+  				<input placeholder="Firstname" type="text" class="form-control">
+			</div>
+          </th>
+          <th scope="col">
+          	<div class="input-group">
+  				<input placeholder="telephone" type="text" class="form-control">
+			</div>
+          </th>
+          <th>
+          	<a type="button" class="btn btn-primary" href="{{ path ('addressbook_add') }}">{{ 'ADDRESSBOOK.ADD'|trans }}</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      	{% for value in doctor %}
+        <tr>
+          <th scope="row">{{ value.id }}</th>
+          <td>{{ value.specialization }}</td>
+          <td>{{ value.lastname }}</td>
+          <td>{{ value.firstname }}</td>
+          <td>{{ value.telwork }}</td>
+          <td><a type="button" class="btn btn-success" href="{{ path ('addressbook_detail',{value.id}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+	</table>
+	
+{% endblock %}

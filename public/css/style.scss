@@ -121,4 +121,83 @@ input{
   width: 98%;
 }
 
-	
+.textwhite{
+  color: white;
+}
+
+.textblack{
+  color: white;
+}
+
+.mainbg{
+  background-color: #507cbe;
+}
+.table{
+  text-align: center;
+}
+
+.datacontainerbtngrp {
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+}
+
+.adminuserlist .btn {
+  color: #507cbe;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border-style: hidden;
+  font-size: 1.2em;
+}
+.adminuserlist .btn:hover {
+  color: #507cbe;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border-style: hidden;
+  font-size: 1.4em;
+}
+
+.adminuserlist .btn:active {
+  color: #507cbe;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border-style: hidden;
+  font-size: 1.2em;
+}
+
+.modal-body h5{
+  text-align: center;
+}
+
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
