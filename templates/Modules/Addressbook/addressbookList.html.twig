@@ -44,7 +44,7 @@
           <td>{{ value.lastname }}</td>
           <td>{{ value.firstname }}</td>
           <td>{{ value.telwork }}</td>
-          <td><a type="button" class="btn btn-success" href="{{ path ('addressbook_detail',{value.id}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
+          <td><a type="button" class="btn btn-success" href="{{ path('addressbook_detail', {'doctor': value.id}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>
         </tr>
         {% endfor %}
       </tbody>

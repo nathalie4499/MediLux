@@ -37,7 +37,7 @@ class AddressbookController extends Controller
                 'Modules/Addressbook/addressbookList.html.twig', 
                 [
                     'doctor' => $repository->findAll(),
-                    'doctorId' => $repository->findOneBy($id)
+                    
                 ]
                 )
             );
@@ -45,11 +45,12 @@ class AddressbookController extends Controller
     
     public function addressbookDetail(
                                        Environment $twig,
-                                       int $doctorID
-                                        )
+                                       DoctorsRepository $repository,
+                                       int $doctor
+                                      )
     {
-        $doctorID = $repository->find($doctorID);
-        if (!$doctorID) {
+        $doctor = $repository->find($doctor);
+        if (!$doctor) {
             throw new NotFoundHttpException();
         }
 
@@ -59,9 +60,9 @@ class AddressbookController extends Controller
                               (
                                 'Modules/Addressbook/addressbookDetail.html.twig',
                                 [
-                                    'doctorId' => $doctorID,
-                                    'routeAttr' => ['doctorId' => $doctorID->getId()],
-                                    'form' => $form->createView()
+                                    'doctor' => $doctor,
+                                    'routeAttr' => ['doctor' => $doctor->getId()],
+                                    //'form' => $form->createView()
                                 ]
                                )
                     );
