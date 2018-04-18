@@ -5,3 +5,10 @@ $(document).ready(function() {
   $('li.LanguageSelector').removeClass('active');
 });
 
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
