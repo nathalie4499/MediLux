@@ -8,15 +8,14 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180411073544 extends AbstractMigration
+class Version20180418100042 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE acl (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, search TINYINT(1) DEFAULT NULL, INDEX IDX_BC806D12A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE acl ADD CONSTRAINT FK_BC806D12A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE user DROP roles');
     }
 
     public function down(Schema $schema)
@@ -24,6 +23,6 @@ class Version20180411073544 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE acl');
+        $this->addSql('ALTER TABLE user ADD roles VARCHAR(255) NOT NULL COLLATE utf8_bin');
     }
 }

@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
 	$("#search").keyup(function(){
 		
 	var search = $(this).val();
@@ -6,21 +6,27 @@ $(function(){
 	
 	if (search.length>2){
 		
-		$.ajax({
-			type:"GET",
-			url: "patient.php",
-			data: patient,
-			success: function(server_response){
-				$("#result").html(server_response).fade();
-			
-		}
-		});
-	
 	}
+	else
+	{
+		$("#result").html('');
+		$.ajax({
+			url:"fetch.php",
+			method:"post",
+			data:{search:txt},
+			dataType:"text",
+			success: function(data)
+			{
+				$('result').html(data);
+			}
+		});
+	}
+		
+			
+
+		
+		});
+
 		
 	});
 	
-	
-	
-	
-});
