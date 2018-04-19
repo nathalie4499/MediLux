@@ -13,9 +13,7 @@ width: calc( 100vw - 50px);
 }
 #Drugslist{
 display: flex;
-margin: 25px;
-padding: 25px;
-width: calc( 100vw - 50px);
+
 }
 .button{
   position: static;
