@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\ActiveProblems;
 use App\Entity\Patient;
+use App\Entity\PatientAddress;
+use App\Repository\ActiveProblemsRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -24,14 +28,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class PatientController extends Controller
 {
     /**
-     * @Route("/patient", name="Patient")
+     * @Route("/patient/record", name="patient_record")
      */
     
     public function patientRecord(
         Environment $twig,     
         FormFactoryInterface $factory,
         Request $request,
-        ObjectManager $manager,
+
         SessionInterface $session,
         UrlGeneratorInterface $urlGenerator)
     {
@@ -39,268 +43,297 @@ class PatientController extends Controller
         $builder = $factory->createBuilder(FormType::class, $patient);
         $builder->add(           
                 'ssn',            
-                IntegerType::class,           
+                \Symfony\Component\Form\Extension\Core\Type\IntegerType::class,          
                 [               
-                'attr' => [
-                    'placeholder' => 'PATIENT_FORM.SSN'
-                    ]               
+                    'attr' => [
+                        'placeholder' => 'FORM.PATIENT.SSN',
+                        'class' => 'form-control'
+                        ]               
                 ]          
             )->add(
-                'birthdate',
+                'age',
                 BirthdayType::class,
                 [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.DOB'
-                    ]
+                    'label' => 'FORM.PATIENT.AGE'
                 ]
             )->add(
-                'birthplace',
+                'givenname',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.GIVENNAME',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.POB'
-                    ]
-                ]
-            )->add(
-                'gender',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.GENDER'
+                        'placeholder' => 'FORM.PATIENT.GIVENNAME',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
                 'birthname',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.BIRTHNAME',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.BIRTHNAME'
-                    ]
-                ]
-            )->add(
-                'givenname',
-                TextType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.GIVENNAME'
+                        'placeholder' => 'FORM.PATIENT.BIRTHNAME',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
                 'maritalname',
-                TextType::class,
+               TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.MARITALNAME',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.MARITALNAME'
-                    ]
-                ]
-            )->add(
-                'title',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.TITLE'
-                    ]
-                ]
-            )->add(
-                'insurance',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.INSURANCE'
-                    ]
-                ]
-            )->add(
-                'complementaryinsurance',
-                TextAreaType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.COMPLEMENTARYINSURANCE'
-                    ]
-                ]
-            )->add(
-                'maritalstatus',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.MARITALSTATUS'
-                    ]
-                ]
-            )->add(
-                'numberchildren',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.NUMBERCHILDREN'
-                    ]
-                ]
-            )->add(
-                'job',
-                TextType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.JOB'
+                        'placeholder' => 'FORM.PATIENT.MARITALNAME',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
                 'nationality',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.NATIONALITY',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.NATIONALITY'
+                        'placeholder' => 'FORM.PATIENT.NATIONALITY',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
                 'language',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.LANGUAGE',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.LANGUAGE'
+                        'placeholder' => 'FORM.PATIENT.LANGUAGE',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'picture',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.PICTURE'
-                    ]
-                ]
-            )->add(
-                'notes1',
+                'telephone',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.TELEPHONE',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.NOTES1'
+                        'placeholder' => 'FORM.PATIENT.TELEPHONE',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'notes2',
+                'activeproblems',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.ACTIVEPROBLEMS',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.NOTES2'
+                        'placeholder' => 'FORM.PATIENT.ACTIVEPROBLEMS',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'record',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.RECORD'
-                    ]
-                ]
-            )->add(
-                'family',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.FAMILY'
-                    ]
-                ]
-            )->add(
-                'otherphysicians',
-                IntegerType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.OTHERPHYSICIANS'
-                    ]
-                ]
-            )->add(
-                'creationdate',
-                DateType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.CREATIONDATE'
-                    ]
-                ]
-            )->add(
-                'modifieddate',
-                DateType::class,
-                [
-                    'attr' => [
-                        'placeholder' => 'PATIENT_FORM.MODIFIEDDATE'
-                    ]
-                ]
-            )->add(
-                'modifiedby',
+                'title',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.ACTIVEPROBLEMTITLE',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.MODIFIEDBY'
+                        'placeholder' => 'FORM.PATIENT.ACTIVEPROBLEMS',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'treatingphysician',
+                'streetnumber',
                 TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.STREETNUMBER',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.TREATINGPHYSICIAN'
+                        'placeholder' => 'FORM.PATIENT.STREETNUMBER',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'referringdoctorid',
-                IntegerType::class,
+                'street',
+                TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.STREET',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.REFERRINGDOCTORID'
+                        'placeholder' => 'FORM.PATIENT.STREET',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'risid',
-                IntegerType::class,
+                'locality',
+                TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.LOCALITY',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.RISID'
+                        'placeholder' => 'FORM.PATIENT.LOCALITY',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'luxembourgid',
-                IntegerType::class,
+                'country',
+                TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.COUNTRY',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.LUXEMBOURGID'
+                        'placeholder' => 'FORM.PATIENT.COUNTRY',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'otherid',
-                IntegerType::class,
+                'title',
+                TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.TITLE',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.OTHERID'
+                        'placeholder' => 'FORM.PATIENT.TITLE',
+                        'class' => 'form-control'
                     ]
                 ]
             )->add(
-                'mediluxid',
-                IntegerType::class,
+                'description',
+                TextType::class,
                 [
+                    'label' => 'FORM.PATIENT.DESCRIPTION',
                     'attr' => [
-                        'placeholder' => 'PATIENT_FORM.MEDILUXID'
+                        'placeholder' => 'FORM.PATIENT.DESCRIPTION',
+                        'class' => 'form-control'
                     ]
                 ]
-                )->add(
-                    
-                    'submit',
-                    
-                    SubmitType::class,
-                    
+            )
+            
+            /** ->add(
+                'activeproblems',
+                ActiveProblems::class
+            ) **/ ->add(
+        
+                'submit',                    
+                SubmitType::class,                   
+                [                        
+                    'attr' => [                           
+                        'class' => 'btn-lbock btn-success'                            
+                    ]                        
+        ]);
+                
+            $form = $builder->getForm();
+            $form->handleRequest($request);
+            
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $manager->persist($patient);
+                $manager->flush();
+                              
+            }
+            return new Response(
+                $twig->render(
+                    'Modules/Patient/Patient.html.twig',
                     [
-                        
-                        'attr' => [
-                            
-                            'class' => 'btn-lbock btn-success'
-                            
-                        ]
-                        
-                    ]);   
+                        'patientCreationFormular'=>  $form->createView()                       
+                    ]
+            )
+        );  
     
+
+
+    
+    /** public function patientCreation(
+        Environment $twig,
+        FormFactoryInterface $factory,
+        Request $request,
+        
+        SessionInterface $session,
+        UrlGeneratorInterface $urlGenerator)
+    {
+        $patient = new Patient();
+        $builder = $factory->createBuilder(FormType::class, $patient);
+        $builder->add(
+            'ssn',
+            IntegerType::class,
+            [
+                'required' => true,
+                'label' => 'SSN',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.SSN'
+                ]
+            ]
+            )->add(
+            'age',
+            BirthdayType::class,
+            [
+                'label' => 'FORM.PATIENT.AGE'
+            ]
+            )->add(
+            'givenname',
+            BirthdayType::class,
+            [
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.FIRSTNAME'
+                ]
+            ]
+            )->add(
+            'birthname',
+            TextType::class,
+            [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.LASTNAME'
+                ]
+            ]
+            )->add(
+            'maritalname',
+            IntegerType::class,
+            [
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.MARITALNAME'
+                ]
+            ]
+            )->add(
+            'nationality',
+            TextType::class,
+            [
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.NATIONALITY'
+                ]
+            ]
+            )->add(
+            'language',
+            TextType::class,
+            [
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.LANGUAGE'
+                ]
+            ]
+            )->add(
+            'telephone',
+            TextType::class,
+            [
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.TELEPHONE'
+                ]
+            ]
+            )->add(
+            'activeproblems',
+            IntegerType::class,
+            [
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.ACTIVEPROBLEMS'
+                ]
+            ]
+            )->add(
+                
+            'submit',           
+            SubmitType::class,
+            
+            [                
+                'attr' => [                   
+                    'class' => 'btn-lbock btn-success'                   
+                ]                                           
+            ]);
+        
         return new Response(
             $twig->render(
                 'Modules/Patient/patient.html.twig', [
-            'controller_name' => 'PatientController',
-        ])
-     );
-    
+                    'controller_name' => 'PatientController',
+                ])
+            ); **/ 
+        
+                                            
     }
-
 }
 
