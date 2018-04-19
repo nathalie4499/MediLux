@@ -8,9 +8,9 @@
     <h3>MediLux User</h3><br/>
     
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary">admin main</button>
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#adduser">add user</button>
-      <button type="button" class="btn btn-secondary">search settings</button>
+      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="admin home"><i class="fas fa-home"></i></button></a>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#adduser"><a data-toggle="popover" data-trigger="hover" data-content="add user"><i class="fas fa-user-plus"></i></button></a>
+      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="search settings"><i class="fas fa-search-plus"></i></button></a>
 
     </div>
 </div>
@@ -22,7 +22,7 @@
 
 
 	
-    <table class="table table-dark table-striped table-bordered table-hover adminuserlisttable">
+    <table id="users" class="table table-dark table-striped table-bordered table-hover adminuserlisttable">
         <tr class="tableHeader">
             <td>User Name</td>
 			<td>First Name</td>
@@ -39,15 +39,14 @@
 					<td>{{ mluser.lastname }}</td>
 			                 
   					<td>
-  					
+
   						<button type="button" class="btn" data-toggle="modal" data-target="#{{ mluser.username }}">
  							 <a data-toggle="popover" data-trigger="hover" data-content="user details"><i class="fas fa-info-circle"></i></a>
 						</button>
-  						<button type="button" class="btn" data-toggle="modal" data-target="#del{{ mluser.username }}">
- 							 
- 							 <a data-toggle="popover" data-trigger="hover" data-content="delete user"><i class="fas fa-minus-circle"></i></a>
-						</button>						
-												
+						
+						<a href="#" class="btn btn-danger delete-user" data-id="{{ mluser.id }}">delete</a>						
+						
+		
 					</td>
                 </tr>
             
@@ -70,12 +69,7 @@
           <!-- Modal body -->
           <div class="modal-body">
           <p class="alert alert-error">Are you sure to delete ?</p>
-          {{ form_start(formular_del_user) }}
-          
-          {{ form_widget(formular_del_user.username) }}
-                    
-          {{ form_rest(formular_del_user) }}
-          {{ form_end(formular_del_user)}}			  
+			  
           
           </div>
     

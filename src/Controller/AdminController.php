@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AdminController extends Controller
 {
@@ -123,20 +123,23 @@ class AdminController extends Controller
 
             }
         
+ 
+
+            
+            
+     //   $builder = $factory->createBuilder(FormType::class);
         
-        $builder = $factory->createBuilder(FormType::class);
-        
-        $builder->add('submit', SubmitType::class)
-                ->add('username', HiddenType::class);
+    //    $builder->add('submit', SubmitType::class)
+    //            ->add('username', HiddenType::class);
 
         
-        $formuserdel = $builder->getForm();
-        $formuserdel->handleRequest($request);
-        if($formuserdel->isSubmitted())
-        {
-            $manager->remove($user);
-            $manager->flush();
-        }
+    //    $formuserdel = $builder->getForm();
+    //    $formuserdel->handleRequest($request);
+    //   if($formuserdel->isSubmitted())
+    //    {
+   //         $manager->remove($user);
+    //        $manager->flush();
+   //     }
         
         
         $repository = $this->getDoctrine()
@@ -148,7 +151,6 @@ class AdminController extends Controller
                 [
                     'users' => $users,
                     'formular_add_user'=>  $form->createView(),
-                    'formular_del_user'=>  $formuserdel->createView(),
                     'isTrue'=> true
                     
                 ]
@@ -158,4 +160,17 @@ class AdminController extends Controller
             );
     }
 
+    
+    /**
+     * @Route("/user/delete/{id}")
+     * @Method({"DELETE"})
+     */
+    public function delete(Request $request, $id) {
+        
+        $deluser = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($deluser);
+        $entityManager->flush();
+        
+    }
 }

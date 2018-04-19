@@ -20,7 +20,7 @@ class Version20180417101419 extends AbstractMigration
         $this->addSql('CREATE TABLE doctors_address_doctors (doctors_id INT NOT NULL, address_doctors_id INT NOT NULL, INDEX IDX_DDF2D9C16425CC19 (doctors_id), INDEX IDX_DDF2D9C11CB84487 (address_doctors_id), PRIMARY KEY(doctors_id, address_doctors_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
         $this->addSql('ALTER TABLE doctors_address_doctors ADD CONSTRAINT FK_DDF2D9C16425CC19 FOREIGN KEY (doctors_id) REFERENCES doctors (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE doctors_address_doctors ADD CONSTRAINT FK_DDF2D9C11CB84487 FOREIGN KEY (address_doctors_id) REFERENCES address_doctors (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE user DROP roles');
+
     }
 
     public function down(Schema $schema)
