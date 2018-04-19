@@ -11,14 +11,6 @@ homepage:
         _locale: 'en'  
      requirements:
         _locale: 'en|fr|de'   
-        
-admin_user:
-     path: /{_locale}/admin/user
-     defaults:
-        _controller: App\Controller\AdminController:adminUser
-        _locale: 'en'  
-     requirements:
-        _locale: 'en|fr|de'           
           
 login:
     path: /{_locale}/login
@@ -38,7 +30,6 @@ search_patient_list:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'          
-
 
 username_available:
     path: /username/available
@@ -60,24 +51,7 @@ addressbook_list:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'  
-
-addressbook_detail:
-     path: /{_locale}/addressbook/detail/{doctorId}
-     controller: App\Controller\AddressbookController::addressbookDetail
-     defaults:
-          _locale: 'en'
-     requirements:
-          _locale: 'en|fr|de'
-          product: '^[0-9]+$' 
-
-addressbook_add:
-     path: /{_locale}/addressbook/add
-     controller: App\Controller\AddressbookController::addDoctor
-     defaults:
-          _locale: 'en'
-     requirements:
-          _locale: 'en|fr|de'
-                  
+                     
 admin_main:
      path: /{_locale}/admin/main
      controller: App\Controller\AdminController::adminMain
@@ -93,4 +67,3 @@ patient_record:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'   
-   

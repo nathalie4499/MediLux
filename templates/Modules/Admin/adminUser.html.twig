@@ -44,8 +44,9 @@
  							 <a data-toggle="popover" data-trigger="hover" data-content="user details"><i class="fas fa-info-circle"></i></a>
 						</button>
 						
-						<a href="#" class="btn btn-danger delete-user" data-id="{{ mluser.id }}">delete</a>						
-						
+						{% if is_granted('ROLE_ADMIN') %}
+                        	<a onclick="return confirm('Are your sure to delete the user {{ mluser.username }}?')" href="{{ path('userdelete', { 'userid': mluser.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a>
+						{% endif %}
 		
 					</td>
                 </tr>

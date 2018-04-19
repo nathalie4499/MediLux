@@ -13,4 +13,5 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     SunCat\MobileDetectBundle\MobileDetectBundle::class => ['all' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
+    Algolia\SearchBundle\AlgoliaSearchBundle::class => ['all' => true],
 ];
