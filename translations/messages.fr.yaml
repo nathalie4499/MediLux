@@ -9,3 +9,7 @@ HEADER:
   TRANSLATIONEN: English
   TRANSLATIONDE: Deutsch
   TRANSLATIONFR: Français
+
+ADDRESSBOOK:
+    DETAIL: détails
+    ADD: add
