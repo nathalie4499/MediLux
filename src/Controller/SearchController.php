@@ -19,16 +19,17 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\PatientRepository;
 
 
 class SearchController extends Controller
 {
-    public function searchPatientList(Environment $twig)
+    public function searchPatientList(Environment $twig, PatientRepository $repository)
 	{
 	    return new Response(
 	        $twig->render(
 	            'Modules/Search/searchList.html.twig', [
-	                'controller_name' => 'PatientController',
+	                'patient'=>$repository->findAll(),
 	            ])
 	        );
 	}
