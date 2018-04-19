@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180418203430 extends AbstractMigration
+class Version20180419092954 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -34,8 +34,7 @@ class Version20180418203430 extends AbstractMigration
         $this->addSql('ALTER TABLE patient_address ADD CONSTRAINT FK_502D3A6A6B899279 FOREIGN KEY (patient_id) REFERENCES patient (id)');
         $this->addSql('ALTER TABLE zip ADD CONSTRAINT FK_421D954688823A92 FOREIGN KEY (locality_id) REFERENCES locality (id)');
         $this->addSql('ALTER TABLE acl ADD addressbook TINYINT(1) DEFAULT NULL, ADD drugs TINYINT(1) DEFAULT NULL, ADD patient TINYINT(1) DEFAULT NULL, ADD admin TINYINT(1) DEFAULT NULL');
-        $this->addSql('ALTER TABLE patient ADD age INT DEFAULT NULL, DROP birthdate, DROP birthplace, DROP gender, DROP title, DROP insurance, DROP complementaryinsurance, DROP maritalstatus, DROP numberchildren, DROP job, DROP picture, DROP notes1, DROP notes2, DROP record, DROP family, DROP otherphysicians, DROP creationdate, DROP modifieddate, DROP treatingphysician, DROP referringdoctorid, DROP risid, DROP luxembourgid, DROP otherid, DROP mediluxid, CHANGE givenname givenname VARCHAR(255) DEFAULT NULL, CHANGE nationality nationality VARCHAR(255) DEFAULT NULL, CHANGE language language VARCHAR(255) DEFAULT NULL, CHANGE modifiedby telephone VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE user DROP roles');
+        $this->addSql('ALTER TABLE patient DROP activeproblems, CHANGE ssn ssn INT NOT NULL, CHANGE birthname birthname VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema)
@@ -60,7 +59,6 @@ class Version20180418203430 extends AbstractMigration
         $this->addSql('DROP TABLE patient_address');
         $this->addSql('DROP TABLE zip');
         $this->addSql('ALTER TABLE acl DROP addressbook, DROP drugs, DROP patient, DROP admin');
-        $this->addSql('ALTER TABLE patient ADD birthdate DATE NOT NULL, ADD birthplace VARCHAR(255) NOT NULL COLLATE utf8_bin, ADD gender INT NOT NULL, ADD title INT NOT NULL, ADD complementaryinsurance LONGTEXT DEFAULT NULL COLLATE utf8_bin, ADD maritalstatus INT NOT NULL, ADD numberchildren INT NOT NULL, ADD job VARCHAR(255) NOT NULL COLLATE utf8_bin, ADD picture INT NOT NULL, ADD notes1 LONGTEXT DEFAULT NULL COLLATE utf8_bin, ADD notes2 LONGTEXT DEFAULT NULL COLLATE utf8_bin, ADD record INT NOT NULL, ADD family INT DEFAULT NULL, ADD otherphysicians INT NOT NULL, ADD creationdate DATE NOT NULL, ADD modifieddate DATE DEFAULT NULL, ADD treatingphysician INT NOT NULL, ADD referringdoctorid INT NOT NULL, ADD risid INT NOT NULL, ADD luxembourgid INT DEFAULT NULL, ADD otherid INT DEFAULT NULL, ADD mediluxid INT NOT NULL, CHANGE givenname givenname VARCHAR(255) NOT NULL COLLATE utf8_bin, CHANGE nationality nationality VARCHAR(255) NOT NULL COLLATE utf8_bin, CHANGE language language VARCHAR(255) NOT NULL COLLATE utf8_bin, CHANGE age insurance INT DEFAULT NULL, CHANGE telephone modifiedby VARCHAR(255) DEFAULT NULL COLLATE utf8_bin');
-        $this->addSql('ALTER TABLE user ADD roles VARCHAR(255) NOT NULL COLLATE utf8_bin');
+        $this->addSql('ALTER TABLE patient ADD activeproblems VARCHAR(255) DEFAULT NULL COLLATE utf8_bin, CHANGE ssn ssn INT UNSIGNED DEFAULT NULL, CHANGE birthname birthname VARCHAR(255) DEFAULT NULL COLLATE utf8_bin');
     }
 }

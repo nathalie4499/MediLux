@@ -35,10 +35,8 @@ class Kernel extends BaseKernel
         }
     }
         
-    public function getCharset()
-        {
-            return 'utf8';
-        }
+
+
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
     {
