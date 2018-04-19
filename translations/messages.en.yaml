@@ -9,7 +9,7 @@ HEADER:
   LOGIN: Login
   TRANSLATIONEN: English
   TRANSLATIONDE: Deutsch
-  TRANSLATIONFR: FranÃ§ais
+  TRANSLATIONFR: Français
   DRUGSLIST: Drugs
   ADMINMAIN: Main
   USERLIST: User
@@ -31,5 +31,16 @@ FORM:
         LANGUAGE: Spoken language
         TITLE: TITLE
         ADDRESS: ADDRESS
-
+    PATIENT:
+        SSN: Social Security Number
+        FIRSTNAME: Given name
+        LASTNAME: Birth name
+        MARITALNAME: Marital name
+        TELEPHONE: Telephone
+        LANGUAGE: Spoken language
+        NUMBER: Street number
+        STREET: Street
+        
+        
+        
 
