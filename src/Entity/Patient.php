@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
  */
-class Patient
+class Patient extends PatientAddress
 {
     /**
      * @ORM\Id()

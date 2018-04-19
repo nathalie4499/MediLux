@@ -34,14 +34,23 @@ FORM:
 
     PATIENT:
         SSN: Social Security Number
-        FIRSTNAME: Given name
-        LASTNAME: Birth name
+        GIVENNAME: Given name
+        BIRTHNAME: Birth name
         MARITALNAME: Marital name
+        NATIONALITY: Nationality
         TELEPHONE: Telephone
         LANGUAGE: Spoken language
-        NUMBER: Street number
+        STREETNUMBER: Street number
         STREET: Street
+        LOCALITY: Locality
+        COUNTRY: Country
         ZIP: zip
         SUBMIT: add
+        AGE: age
+        TITLE: Active Problem Title
+        DESCRIPTION: Description
+        ACTIVEPROBLEMS: List of Active Problems
+        
+        
 
 
