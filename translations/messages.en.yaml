@@ -31,5 +31,6 @@ FORM:
         LANGUAGE: Spoken language
         TITLE: TITLE
         ADDRESS: ADDRESS
-
+        ZIP: zip
+        SUBMIT: add
 
