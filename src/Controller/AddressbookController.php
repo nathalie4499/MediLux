@@ -2,31 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\Patient;
+use App\Entity\Doctors;
+use App\Form\Type\AddressType;
+use App\Repository\AddressDoctorsRepository;
+use App\Repository\DoctorsRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Doctors;
-use App\Repository\DoctorsRepository;
-use App\Entity\AddressDoctors;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use App\Repository\AddressDoctorsRepository;
-use App\Form\Type\AddressType;
 
 
 class AddressbookController extends Controller
@@ -48,21 +39,24 @@ class AddressbookController extends Controller
             );
     }
  
-    public function addDoctor(Environment $twig,
-        FormFactoryInterface $factory,
-        Request $request,
-        //ObjectManager $manager,
-        SessionInterface $session,
-        UrlGeneratorInterface $urlGenerator
+    public function addDoctor(
+                                Environment $twig,
+                                FormFactoryInterface $factory,
+                                Request $request,
+                                SessionInterface $session,
+                                UrlGeneratorInterface $urlGenerator,
+                                ObjectManager $manager
+                               
+                              
         )
     {
         $doctor = new Doctors();
      
         $builder = $factory->createBuilder(FormType::class, $doctor);
         $builder->add(
-            'firstname', TextType::class,
-            ['label' => 'FORM.ADDRESSBOOK.FIRSTNAME']
-            )
+                      'firstname', TextType::class,
+                      ['label' => 'FORM.ADDRESSBOOK.FIRSTNAME']
+                    )
                 ->add(
                     'lastname', TextType::class,
                     ['required' => false,
@@ -105,16 +99,11 @@ class AddressbookController extends Controller
                     'title', TextType::class,
                     ['label' => 'FORM.ADDRESSBOOK.TITLE']
                     )
-                    //fields for address table
+                //fields for address table
                 ->add(
                     'address', AddressType::class
-//                     [
-//                         'entry_type' => AddressType::class,
-//                         'entry_options' => ['label' => false]
-//                     ]
                     )
-                    //end address
-        
+                //end address
                 ->add(
                     'submit', SubmitType::class,
                     ['attr' => [
@@ -134,11 +123,10 @@ class AddressbookController extends Controller
             $manager->flush();
             
             $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
-            
             return new RedirectResponse
             (
                 $urlGenerator->generate('addressbook_list')
-                );
+            );
         }
                     
         return new Response

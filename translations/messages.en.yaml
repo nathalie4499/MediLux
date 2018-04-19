@@ -31,6 +31,7 @@ FORM:
         LANGUAGE: Spoken language
         TITLE: TITLE
         ADDRESS: ADDRESS
+        SUBMIT: add
 
     PATIENT:
         SSN: Social Security Number

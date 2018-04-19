@@ -20,8 +20,7 @@ class AddressType extends AbstractType
                 ->add('canton')
                 ->add('locality')
                 ->add('municipality')
-                ->add('number')
-                ->add('canton');
+                ->add('number');
         
        $form = $builder->getForm();
    }
