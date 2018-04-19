@@ -1,15 +1,104 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/css/style_nath.css">
+
+{% endblock %}
+
 {% block body %}
 
+<div class="datacontainer" id="ssn">
+	<h1>Patient File</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<form>
+		<div class="form-row" id="ssnage" >
+			<div class="form-group col-md-3">
+				<label for="inputSsn">SSN</label>
+				<input type="text" class="form-control" id="inputSsn" placeholder="SSN" />
+			</div>
+			<span> {{ "AGE" }}</span>
+		</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>src/Controller/PatientController.php</code></li>
-        <li>Your template at <code>templates/Patient/patient.html.twig</code></li>
-    </ul>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="inputGivenname">Given Name</label>
+				<input type="text" class="form-control" id="inputGivenname" placeholder="Given Name" />
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputBirthname">Birth Name</label>
+				<input type="text" class="form-control" id="inputBirthname" placeholder="Birth Name" />		
+			</div>	
+			<div class="form-group col-md-4">
+				<label for="inputMaritalname">Marital Name</label>
+				<input type="text" class="form-control" id="inputMaritalname" placeholder="Marital Name" />			
+			</div>
+		</div>
+		
+		<div class="form-row" id="natlang">
+			<div class="form-group col-md-4">
+				<label for="inputNationality">Nationality</label>
+				<input type="text" class="form-control" id="inputNationality" placeholder="Nationality" />					
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputLanguage">Language</label>
+				<input type="text" class="form-control" id="inputLanguage" placeholder="Language" />
+			</div>
+		</div>
+		<div>
+			<div class="form-group col-md1">
+				<label for="inputNumber">Street Number</label>
+				<input type="text" class="form-control" id="inputNumber" placeholder="Number" />
+			</div>
+			<div>
+				
+			</div>
+		
+		
+		</div>
+		
+				
+					
+		
+		
+		
+		
+		
+		
+		</div		
+			
+			
+			
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+			</div>	
+		</div>
+	</form>
 </div>
 {% endblock %}

@@ -12,3 +12,36 @@ HEADER:
   TRANSLATIONFR: Français
   DRUGSLIST: Drugs
   ADMINMAIN: Main
+  USERLIST: User
+
+ADDRESSBOOK:
+    DETAIL: detail
+    ADD: add
+
+FORM:
+    ADDRESSBOOK:
+        FIRSTNAME: FIRSTNAME
+        LASTNAME: LASTNAME
+        SPECIALIZATION: SPECIALIZATION
+        TELWORK: TELWORK
+        TELPRIV: TELPRIV
+        MOBILE: MOBILE
+        EMAIL: EMAIL
+        FAX: FAX
+        LANGUAGE: Spoken language
+        TITLE: TITLE
+        ADDRESS: ADDRESS
+
+    PATIENT:
+        SSN: Social Security Number
+        FIRSTNAME: Given name
+        LASTNAME: Birth name
+        MARITALNAME: Marital name
+        TELEPHONE: Telephone
+        LANGUAGE: Spoken language
+        NUMBER: Street number
+        STREET: Street
+        ZIP: zip
+        SUBMIT: add
+
+

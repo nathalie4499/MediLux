@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/css/address_style.css">
+{% endblock %}
+
+{% block body %}
+	<h1>Add new doctor</h1>
+	<div class="cardmedilux">
+	{{ form(doctorFormular) }}
+	</div>
+{% endblock %}
