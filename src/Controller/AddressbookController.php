@@ -117,11 +117,18 @@ class AddressbookController extends Controller
         $form = $builder->getForm();
         $form->handleRequest($request);
         
+        var_dump($doctor);
+        var_dump($doctor->getAddress());
+        
         if ($form->isSubmitted() && $form->isValid())
         { 
-            var_dump($doctor);
+            
+            
+            
+            
             $manager->persist($doctor);
-            var_dump($doctor);
+//             var_dump($doctor);
+//             var_dump($doctor->getAddress());
             $manager->flush();
           
             $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
