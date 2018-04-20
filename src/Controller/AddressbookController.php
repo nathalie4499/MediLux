@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
+use App\Entity\AddressDoctors;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Form\Type\DoctorType;
 
 
 class AddressbookController extends Controller
@@ -51,87 +54,20 @@ class AddressbookController extends Controller
         )
     {
         $doctor = new Doctors();
-     
-        $builder = $factory->createBuilder(FormType::class, $doctor);
-        $builder->add(
-                      'firstname', TextType::class,
-                      ['label' => 'FORM.ADDRESSBOOK.FIRSTNAME']
-                    )
-                ->add(
-                    'lastname', TextType::class,
-                    ['required' => false,
-                        'label' => 'FORM.ADDRESSBOOK.LASTNAME',
-                    ]
-                    )
-                ->add(
-                    'specialization', TextType::class,
-                    ['label' => 'FORM.ADDRESSBOOK.SPECIALIZATION']
-                    )
-                ->add(
-                    'telwork', TextType::class,
-                    ['label' => 'FORM.ADDRESSBOOK.TELWORK']
-                    )
-                ->add(
-                    'telpriv', TextType::class,
-                    ['required' => false,
-                        'label' => 'FORM.ADDRESSBOOK.TELPRIV',
-                    ]
-                    )
-                ->add(
-                    'mobile', TextType::class,
-                    ['label' => 'FORM.ADDRESSBOOK.MOBILE']
-                    )
-                ->add(
-                    'email', TextType::class,
-                    ['label' => 'FORM.ADDRESSBOOK.EMAIL']
-                    )
-                ->add(
-                    'fax', TextType::class,
-                    ['required' => false,
-                        'label' => 'FORM.ADDRESSBOOK.FAX',
-                    ]
-                    )
-                ->add(
-                    'language', TextType::class,
-                    ['label' => 'FORM.ADDRESSBOOK.LANGUAGE']
-                    )
-                ->add(
-                    'title', TextType::class,
-                    ['label' => 'FORM.ADDRESSBOOK.TITLE']
-                    )
-                //fields for address table
-                ->add(
-                    'address', AddressType::class
-                    )
-                //end address
-                ->add(
-                    'submit', SubmitType::class,
-                    ['attr' => [
-                        'class' => 'btn btn-success btn-block',
-                        'stateless' => false
-                    ],
-                        'label' => 'FORM.ADDRESSBOOK.SUBMIT'
-                    ]
-                    );
+        $form = $factory->create
+                          (
+                              DoctorType::class,
+                              $doctor,
+                              ['stateless' => true]
+                           );
         
-        $form = $builder->getForm();
         $form->handleRequest($request);
-        
-        var_dump($doctor);
-        var_dump($doctor->getAddress());
-        
+
         if ($form->isSubmitted() && $form->isValid())
         { 
-            
-            
-            
-            
             $manager->persist($doctor);
-//             var_dump($doctor);
-//             var_dump($doctor->getAddress());
             $manager->flush();
-          
-            $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
+ 
             return new RedirectResponse
             (
                 $urlGenerator->generate('addressbook_list')
