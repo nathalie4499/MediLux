@@ -62,10 +62,12 @@ class AddressbookController extends Controller
                            );
         
         $form->handleRequest($request);
+        var_dump($doctor);
 
         if ($form->isSubmitted() && $form->isValid())
         { 
             $manager->persist($doctor);
+       
             $manager->flush();
  
             return new RedirectResponse
