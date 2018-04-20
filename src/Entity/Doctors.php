@@ -73,7 +73,7 @@ class Doctors
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\AddressDoctors")
      */
-    private $address;
+    private $address = [];
 
     public function __construct()
     {

@@ -21,6 +21,8 @@ use Twig\Environment;
 use App\Entity\AddressDoctors;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Form\Type\DoctorType;
+use App\Entity\Zip;
+use App\Entity\Country;
 
 
 class AddressbookController extends Controller
@@ -62,18 +64,22 @@ class AddressbookController extends Controller
                            );
         
         $form->handleRequest($request);
-        var_dump($doctor);
-
+        
         if ($form->isSubmitted() && $form->isValid())
         { 
+           
+            //$addressDoctor = new  AddressDoctors();
+            
+            
             $manager->persist($doctor);
-       
+
             $manager->flush();
  
             return new RedirectResponse
             (
                 $urlGenerator->generate('addressbook_list')
             );
+        
         }
                     
         return new Response
