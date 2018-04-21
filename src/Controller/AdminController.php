@@ -143,7 +143,11 @@ class AdminController extends Controller
                 $manager->flush();
 
             }
-       
+
+            
+        $repository = $this->getDoctrine()
+        ->getRepository(Role::class);
+        $role = $repository->findAll();
         
         $repository = $this->getDoctrine()
         ->getRepository(User::class);
@@ -153,6 +157,7 @@ class AdminController extends Controller
                 'Modules/Admin/adminUser.html.twig',
                 [
                     'users' => $users,
+                    'role' => $role,
                     'formular_add_user'=>  $form->createView(),
                     'isTrue'=> true
                     

@@ -173,6 +173,8 @@
  
           <!-- Modal body -->
           <div class="modal-body">
+           
+          
           <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -185,20 +187,22 @@
                       <th scope="col">{{ mluser.firstname }}</th>
                       <th scope="col">{{ mluser.lastname }}</th>
 					  <th scope="col">
-						
-						{{ dump(mluser.role) }}
-						virum for
-						
-					      {% for role in mluser.role %}
-					      hei kommen mer net hin
-					      	
-					      	{% if role == "ROLE_USER" %}
-            	                User
-            	            {% endif %}
-					      	{% if role == "ROLE_ADMIN" %}
-            	                Admin
-            	            {% endif %}            	            
-                          {% endfor %}
+                         {% for mlrole in role %}
+                        
+                            {% for role in mlrole.user %}
+                                {% if role.id == mluser.id %}
+                                    
+                                    {% if mlrole.label == "ROLE_USER" %}
+                    	                User
+                    	            {% endif %}
+        					      	{% if mlrole.label == "ROLE_ADMIN" %}
+                    	                Admin
+                    	            {% endif %}
+                                    
+                                {% endif %}
+                            {% endfor %}
+                        
+                        {% endfor %}
                       </th>            	
             	</tbody>        	
           </table>

@@ -183,11 +183,14 @@ class User implements UserInterface
         return;
     }
 
+    
     public function getRole(): ?Role
     {
         return $this->role;
     }
     
+    
+
     /**
      * @return array[]
      */
