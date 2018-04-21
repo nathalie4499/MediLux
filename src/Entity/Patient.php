@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
  */
-class Patient extends PatientAddress
+class Patient
 {
     /**
      * @ORM\Id()
@@ -53,11 +53,7 @@ class Patient extends PatientAddress
      */
     private $age;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $telephone;
-
+   
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ActiveProblems", mappedBy="patient")
      */
@@ -67,6 +63,11 @@ class Patient extends PatientAddress
      * @ORM\OneToMany(targetEntity="App\Entity\PatientAddress", mappedBy="relatedpatient")
      */
     private $patientaddress;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephone;
 
     public function __construct()
     {
@@ -164,17 +165,6 @@ class Patient extends PatientAddress
         return $this;
     }
 
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(?string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
 
     /**
      * @return Collection|ActiveProblems[]
@@ -234,6 +224,18 @@ class Patient extends PatientAddress
                 $patientaddress->setRelatedpatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

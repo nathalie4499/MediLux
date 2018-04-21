@@ -127,7 +127,7 @@ class PatientController extends Controller
                     ]
                 ]
             )->add(
-                'title',
+                'activeproblemtitle',
                 TextType::class,
                 [
                     'label' => 'FORM.PATIENT.ACTIVEPROBLEMTITLE',
@@ -222,7 +222,7 @@ class PatientController extends Controller
             }
             return new Response(
                 $twig->render(
-                    'Modules/Patient/Patient.html.twig',
+                    'Modules/Patient/patient.html.twig',
                     [
                         'patientCreationFormular'=>  $form->createView()                       
                     ]
