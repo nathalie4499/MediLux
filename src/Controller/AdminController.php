@@ -30,6 +30,10 @@ use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Acl;
 use Doctrine\DBAL\Types\ArrayType;
+use App\Repository\RoleRepository;
+
+
+
 
 class AdminController extends Controller
 {
@@ -44,7 +48,7 @@ class AdminController extends Controller
     }
 
     public function adminUser(Environment $twig, FormFactoryInterface $factory, Request $request, ObjectManager $manager,
-        SessionInterface $session, UrlGeneratorInterface $urlGenerator,  EncoderFactoryInterface $encoderFactory)
+        SessionInterface $session, UrlGeneratorInterface $urlGenerator,  EncoderFactoryInterface $encoderFactory, RoleRepository $roleRepository)
     {
         $user = new User();
 
@@ -102,37 +106,12 @@ class AdminController extends Controller
                     
                 ]
                 )
-            ->add(
-                'roles',
-                EntityType::class,
-                [
-                    'class'        => Role::class, //This existed usually in (AppBundle\Entity\Person)
-                    'choice_label' => 'label',
-                    'required' => false,
-                    'label' => 'FORM.USER.ROLE',
-                    'attr' => [
-                        'placeholder' => 'FORM.USER.PLACEHOLDER.ROLE',
-                        'class' => 'addrole'
-                    ]
-                    
-                ]
-                )
- 
-            ->add(
-                'acls',
-                EntityType::class,
-                [
-                    'class'        => Acl::class,
-                    'choice_label' => 'search',
-                    'required' => false,
-                    'label' => 'FORM.USER.ACL',
-                    'attr' => [
-                        'placeholder' => 'FORM.USER.PLACEHOLDER.ROLE',
-                        'class' => 'addrole'
-                    ]
-                    
-                ]
-                )
+
+            ->add('roleToAdd', EntityType::class, [
+                'class'        => Role::class,
+                'choice_label' => 'label',
+                'mapped'       => false,
+            ])
 
 
                 
@@ -153,6 +132,13 @@ class AdminController extends Controller
                     );
                 
                 $user->setPassword($password);
+                
+                $role = $form->get('roleToAdd')->getData();
+
+                $user->setRole($role);
+
+                
+                
                 $manager->persist($user);
                 $manager->flush();
 

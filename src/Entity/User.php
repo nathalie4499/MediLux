@@ -11,6 +11,8 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")�
  * @UniqueEntity(
@@ -55,20 +57,24 @@ class User implements UserInterface
      */
     private $acls;
     
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role")
-     */
-    private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $salt;
 
+    
+     /**
+     * 
+     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="user")
+     */
+    private $role;
+
+
     public function __construct()
     {
         $this->acls = new ArrayCollection();
-        $this->roles = new ArrayCollection();
+
     }
 
     public function getId()
@@ -124,37 +130,14 @@ class User implements UserInterface
         return $this;
     }
 
+        
+    
+    
+
     /**
-     * @return array[]
+     * @return Collection|Acls[]
      */
     
-    public function getRoles(): array
-    {
-        $strings = [];
-        foreach ($this->roles as $role) {
-            $strings[] = $role->getLabel();
-        }
-        
-        return $strings;
-    }
-    
-    public function addRole(Role $role): self
-    {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-        }
-        
-        return $this;
-    }
-    
-    public function removeRole(Role $role): self
-    {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-        }
-        
-        return $this;
-    }
     
     public function getAcls(): Collection
     {
@@ -199,4 +182,45 @@ class User implements UserInterface
     {
         return;
     }
+
+    public function getRole(): ?Role
+    {
+        return $this->role;
+    }
+    
+    /**
+     * @return array[]
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER', 'ROLE_ADMIN');
+    }
+
+    
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+        }
+        return $this;
+    }
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+        }
+        return $this;
+    }
+    
+    
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+ 
+
+
 }
