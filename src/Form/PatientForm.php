@@ -113,7 +113,7 @@ class PatientForm extends AbstractType {
                 'entry_options' => array('label' => false),
                 
         ));
-        /** $builder->add(
+        $builder->add(
             'submit',
             SubmitType::class,
             [
@@ -122,7 +122,7 @@ class PatientForm extends AbstractType {
                 ]
             ]
             )
-       ; **/
+       ;
     }
     public function configureOptions(OptionsResolver $resolver)
     {
