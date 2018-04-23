@@ -12,9 +12,11 @@
           	#
           </th>
           <th scope="col">
+          	<form method="post">
           	<div class="input-group">
   				<input id="specialization" for="specialization" placeholder="speciality" type="text" class="form-control">
 			</div>
+			</form>
           </th>
           <th scope="col">
           	<div class="input-group">
@@ -90,5 +92,6 @@
 	</table>   
 {% endblock %}
 {% block javascripts %}
+	{{ parent() }}
 	<script src="/js/searchDoctor.js"></script>
 {% endblock %}

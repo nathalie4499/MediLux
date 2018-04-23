@@ -43,16 +43,17 @@ class AddressbookController extends Controller
  
     public function searchDoctor
                     (
-                        UserRepository $repository,
+                        DoctorsRepository $repository,
                         Request $request
                      )
     {
         $specialization = $request->request->get('specialization');
+        var_dump($specialization);
         
         $unavailable = false;
         if (!empty($specialization))
         {
-            $unavailable = $repository->usernameExists($specialization);
+            $unavailable = $repository->specializationExists($specialization);
         }
         return new JsonResponse(
             ['available' => !$unavailable]
