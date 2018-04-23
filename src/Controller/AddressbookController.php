@@ -48,16 +48,25 @@ class AddressbookController extends Controller
                      )
     {
         $specialization = $request->request->get('specialization');
-        var_dump($specialization);
         
         $unavailable = false;
         if (!empty($specialization))
         {
-            $unavailable = $repository->specializationExists($specialization);
+        $unavailable = $repository->specializationExists($specialization);
         }
         return new JsonResponse(
             ['available' => !$unavailable]
             );
+
+//         return new Response(
+//             $twig->render(
+//                 'Modules/Addressbook/addressbookList.html.twig',
+//                 [
+//                     'specialization' => $repository->findAll()
+//                 ]
+//                 )
+//             );
+
     }
     
     public function addDoctor(

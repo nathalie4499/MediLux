@@ -22,13 +22,13 @@ class DoctorsRepository extends ServiceEntityRepository
     public function specializationExists(string $specialization)
     {
         $queryBuilder = $this->createQueryBuilder('u');
-        $queryBuilder->select('COUNT(u) AS count')
+        $queryBuilder->select('* FROM doctors')
         ->where('u.specialization = :specialization')
         ->setParameter('specialization', $specialization);
         
         $result = $queryBuilder->getQuery()->getOneOrNullResult();
         
-        return boolval($result['count']);
+        return $result;
     }
 
 //    /**
