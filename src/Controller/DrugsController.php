@@ -19,15 +19,25 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\DrugsRepository;
 
 
 class DrugsController extends Controller
 {
-    public function drugsList(Environment $twig)
+    public function drugsList(Environment $twig, DrugsRepository $repository)
     {
         return new Response(
             $twig->render(
                 'Modules/Drugs/drugsList.html.twig', [
+                    'drugs' => $repository->findAll(),
+                ])
+            );
+    }
+    public function drugsAdd(Environment $twig)
+    {
+        return new Response(
+            $twig->render(
+                'Modules/Drugs/drugsAdd.html.twig', [
                     'controller_name' => 'PatientController',
                 ])
             );

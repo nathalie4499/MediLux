@@ -5,11 +5,26 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
+ * @UniqueEntity(
+ *      fields={"ssn"},
+ *      errorPath="ssn",
+ *      message="This ssn is already in use"
+ * )           
  */
-class Patient extends PatientAddress
+
+class Patient
 {
     /**
      * @ORM\Id()
@@ -19,59 +34,72 @@ class Patient extends PatientAddress
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * 
      */
     private $ssn;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $givenname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * 
      */
     private $birthname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $maritalname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $language;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
+     * 
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $telephone;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ActiveProblems", mappedBy="patient")
+     * 
      */
-    private $activeproblems;
+    private $activeproblemslist;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PatientAddress", mappedBy="relatedpatient")
+     * 
      */
-    private $patientaddress;
+    private $patientaddresslist;
+
 
     public function __construct()
     {
-        $this->activeproblems = new ArrayCollection();
-        $this->patientaddress = new ArrayCollection();
+        $this->activeproblemslist = new ArrayCollection();
+        $this->patientaddresslist = new ArrayCollection();
     }
 
 
@@ -108,7 +136,6 @@ class Patient extends PatientAddress
     {
         return $this->birthname;
     }
-
     public function setBirthname(string $birthname): self
     {
         $this->birthname = $birthname;
@@ -164,6 +191,7 @@ class Patient extends PatientAddress
         return $this;
     }
 
+
     public function getTelephone(): ?string
     {
         return $this->telephone;
@@ -175,51 +203,54 @@ class Patient extends PatientAddress
 
         return $this;
     }
+    
 
     /**
      * @return Collection|ActiveProblems[]
      */
-    public function getActiveproblems(): Collection
+    public function getActiveproblemslist(): Collection
     {
-        return $this->activeproblems;
+        return $this->activeproblemslist;
     }
 
-    public function addActiveproblem(ActiveProblems $activeproblem): self
+    public function addActiveproblems(ActiveProblems $activeproblems): self
     {
-        if (!$this->activeproblems->contains($activeproblem)) {
-            $this->activeproblems[] = $activeproblem;
-            $activeproblem->setPatient($this);
+        if (!$this->activeproblemslist->contains($activeproblems)) {
+            $this->activeproblemslist[] = $activeproblems;
+            $activeproblems->setPatient($this);
         }
 
         return $this;
     }
 
-    public function removeActiveproblem(ActiveProblems $activeproblem): self
+    public function removeActiveproblems(ActiveProblems $activeproblems): self
     {
-        if ($this->activeproblems->contains($activeproblem)) {
-            $this->activeproblems->removeElement($activeproblem);
+        if ($this->activeproblemslist->contains($activeproblems)) {
+            $this->activeproblemslist->removeElement($activeproblems);
             // set the owning side to null (unless already changed)
-            if ($activeproblem->getPatient() === $this) {
-                $activeproblem->setPatient(null);
+            if ($activeproblems->getPatient() === $this) {
+                $activeproblems->setPatient(null);
             }
         }
 
         return $this;
     }
-
+    
+    
     /**
      * @return Collection|PatientAddress[]
      */
-    public function getPatientaddress(): Collection
+    
+    public function getPatientaddresslist(): Collection
     {
-        return $this->patientaddress;
+        return $this->patientaddresslist;
     }
-
-    public function addPatientaddress(PatientAddress $patientaddress): self
+    
+    public function addPatientAddress(PatientAddress $patientaddress): self
     {
-        if (!$this->patientaddress->contains($patientaddress)) {
-            $this->patientaddress[] = $patientaddress;
-            $patientaddress->setRelatedpatient($this);
+        if (!$this->patientaddresslist->contains($patientaddress)) {
+            $this->patientaddresslist[] = $patientaddress;
+            $patientaddress->setPatient($this);
         }
 
         return $this;
@@ -227,15 +258,17 @@ class Patient extends PatientAddress
 
     public function removePatientaddress(PatientAddress $patientaddress): self
     {
-        if ($this->patientaddress->contains($patientaddress)) {
-            $this->patientaddress->removeElement($patientaddress);
-            // set the owning side to null (unless already changed)
-            if ($patientaddress->getRelatedpatient() === $this) {
-                $patientaddress->setRelatedpatient(null);
+        if ($this->patientaddresslist->contains($patientaddress)) {
+            $this->patientaddresslist->removeElement($patientaddress);
+            if($patientaddress->getPatient() === $this) {
+                $patientaddress->setPatient(null);
             }
+
         }
 
         return $this;
     }
+
+
 
 }

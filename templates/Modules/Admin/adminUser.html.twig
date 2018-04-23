@@ -85,19 +85,19 @@
 {% endfor %} 
 
 
-    <!-- The Modal -->
-    <div class="modal fade" id="adduser">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content mainbg">
-    
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">add user</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-    
-          <!-- Modal body -->
-          <div class="modal-body">
+<!-- The Modal -->
+<div class="modal fade" id="adduser">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content mainbg">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">add user</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
              
 
 
@@ -138,27 +138,17 @@
 {{ form_rest(formular_add_user) }}
 {{ form_end(formular_add_user)}}
 
-
-
-
-
-
-
-
-
-
-
-            
-          </div>
-    
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-    
-        </div>
+       
       </div>
-    </div>	
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>	
 
 
 
@@ -180,9 +170,11 @@
             <h4 class="modal-title">Details for {{ mluser.username }}</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-    
+ 
           <!-- Modal body -->
           <div class="modal-body">
+           
+          
           <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -195,14 +187,22 @@
                       <th scope="col">{{ mluser.firstname }}</th>
                       <th scope="col">{{ mluser.lastname }}</th>
 					  <th scope="col">
-					      {% for role in mluser.roles %}
-					      	{% if role == "ROLE_USER" %}
-            	                User
-            	            {% endif %}
-					      	{% if role == "ROLE_ADMIN" %}
-            	                Admin
-            	            {% endif %}            	            
-                          {% endfor %}
+                         {% for mlrole in role %}
+                        
+                            {% for role in mlrole.user %}
+                                {% if role.id == mluser.id %}
+                                    
+                                    {% if mlrole.label == "ROLE_USER" %}
+                    	                User
+                    	            {% endif %}
+        					      	{% if mlrole.label == "ROLE_ADMIN" %}
+                    	                Admin
+                    	            {% endif %}
+                                    
+                                {% endif %}
+                            {% endfor %}
+                        
+                        {% endfor %}
                       </th>            	
             	</tbody>        	
           </table>
