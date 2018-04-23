@@ -95,6 +95,7 @@ class Patient
      */
     private $patientaddresslist;
 
+
     public function __construct()
     {
         $this->activeproblemslist = new ArrayCollection();
@@ -189,6 +190,7 @@ class Patient
 
         return $this;
     }
+
 
     public function getTelephone(): ?string
     {

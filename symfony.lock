@@ -1,4 +1,16 @@
 {
+    "algolia/algoliasearch-client-php": {
+        "version": "1.25.1"
+    },
+    "algolia/search-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "e4763dc0b1cb323ae78d414ded0cd1ae914fe205"
+        }
+    },
     "composer/installers": {
         "version": "v1.5.0"
     },
@@ -106,6 +118,15 @@
     },
     "ramsey/uuid": {
         "version": "3.7.3"
+    },
+    "sensio/framework-extra-bundle": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
+        }
     },
     "suncat/mobile-detect-bundle": {
         "version": "1.0",

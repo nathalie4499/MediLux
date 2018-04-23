@@ -52,7 +52,7 @@ class PatientController extends Controller
                     ]
                 ]
             )->add(
-                'title',
+                'activeproblemtitle',
                 TextType::class,
                 [
                     'label' => 'FORM.PATIENT.ACTIVEPROBLEMTITLE',
