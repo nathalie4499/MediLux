@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta property="og:title" content="MediLux Demo">
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://demo.medilux.doctor">
-        <meta property="og:image" content="">
-        <meta property="og:description" content="MediLux Demo">
-        <meta property="fb:admin" content="">
-        
-        <title>{% block title %}MediLux{% endblock %}</title>
-        
-        {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/style.min.css">
-        {% endblock %}
-        
-    </head>
+
 
 
 <header>
@@ -49,7 +29,7 @@
             		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.ADMIN'|trans }}</a>
             			<div class="dropdown-menu">
                           <a class="dropdown-item" href="{{ path ('admin_main') }}">{{ 'HEADER.ADMINMAIN'|trans }}</a>
-
+                          <a class="dropdown-item" href="{{ path ('admin_user') }}">{{ 'HEADER.ADMINUSER'|trans }}</a>
         
             			</div>
           		</li>
@@ -70,17 +50,28 @@
     	</div>
     	
     	
-    		<ul class="navbar-nav nav" id="LanguageSelector" >
+
+    	
+    	
+    	
+    	
+	
+    	    <ul class="navbar-nav nav" id="LanguageSelector" >
     	       	<li class="nav-item dropdown LanguageSelector">
             		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.TRANSLATIONLIST'|trans }}</a>
             			<div class="dropdown-menu">
-                          <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}">{{ 'HEADER.TRANSLATIONEN'|trans }}</a>
-                          <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}">{{ 'HEADER.TRANSLATIONFR'|trans }}</a>
-                          <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), {'_locale': 'de'}) }}">{{ 'HEADER.TRANSLATIONDE'|trans }}</a>
-        
+								{% set enRouteVar = {'_locale': 'en'}|merge(routeAttr|default([])) %}
+									<a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), enRouteVar) }}">{{ 'HEADER.TRANSLATIONEN'|trans }}</a>
+								{% set frRouteVar = {'_locale': 'fr'}|merge(routeAttr|default([])) %}
+									<a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), frRouteVar) }}">{{ 'HEADER.TRANSLATIONFR'|trans }}</a>
+								{% set deRouteVar = {'_locale': 'de'}|merge(routeAttr|default([])) %}
+									<a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), deRouteVar) }}">{{ 'HEADER.TRANSLATIONDE'|trans }}</a>
+            			
             			</div>
           		</li>
     		</ul>
+    	
+   	
     	
     </nav>
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,6 +20,20 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\Role;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Acl;
+use Doctrine\DBAL\Types\ArrayType;
+use App\Repository\RoleRepository;
+use Symfony\Component\Form\FormBuilderInterface;
+
+
 
 
 class AdminController extends Controller
@@ -32,4 +47,263 @@ class AdminController extends Controller
                 ])
             );
     }
+
+    public function adminUser(Environment $twig, FormFactoryInterface $factory, Request $request, ObjectManager $manager,
+        SessionInterface $session, UrlGeneratorInterface $urlGenerator,  EncoderFactoryInterface $encoderFactory,
+        RoleRepository $roleRepository)
+    {
+        $user = new User();
+
+        $builder = $factory->createBuilder(FormType::class, $user);
+        $builder->add(
+            'username',
+            TextType::class,
+            [
+                'required' => true,
+                'label' => 'FORM.USER.USERNAME',
+                'attr' => [
+                    'placeholder' => 'FORM.USER.PLACEHOLDER.USERNAME',
+                    'class' => 'addusername'
+                ]
+            ]
+            )
+            
+            ->add(
+                'firstname',
+                TextareaType::class,
+                [
+                    'required' => false,
+                    'label' => 'FORM.USER.FIRSTNAME',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.FIRSTNAME',
+                        'class' => 'addfirstname'
+                    ]
+                    
+                ]
+                )
+
+            ->add(
+                'lastname',
+                TextareaType::class,
+                [
+                    'required' => false,
+                    'label' => 'FORM.USER.LASTNAME',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.LASTNAME',
+                        'class' => 'addlastname'
+                    ]
+                    
+                ]
+                )
+            ->add(
+                'password',
+                PasswordType::class,
+                [
+                    'required' => true,
+                    'label' => 'FORM.USER.PASSWORD',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.PASSWORD',
+                        'class' => 'addpassword'
+                    ]
+                    
+                ]
+                )
+
+            ->add('roleToAdd', EntityType::class, [
+                'class'        => Role::class,
+                'choice_label' => 'label',
+                'mapped'       => false,
+            ])
+
+
+                
+            ->add('submit', SubmitType::class);
+            
+            $form = $builder->getForm();
+            $form->handleRequest($request);
+            
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $salt = md5($user->getUsername());
+                $user->setSalt($salt);
+                
+                $encoder = $encoderFactory->getEncoder(User::class);
+                $password = $encoder->encodePassword(
+                    $user->getPassword(),
+                    $salt
+                    );
+                
+                $user->setPassword($password);
+                
+                $role = $form->get('roleToAdd')->getData();
+
+                $user->setRole($role);
+
+                
+                
+                $manager->persist($user);
+                $manager->flush();
+
+            }
+
+            
+        $repository = $this->getDoctrine()
+        ->getRepository(Role::class);
+        $role = $repository->findAll();
+        
+        $repository = $this->getDoctrine()
+        ->getRepository(User::class);
+        $users = $repository->findAll();
+        return new Response(
+            $twig->render(
+                'Modules/Admin/adminUser.html.twig',
+                [
+                    'users' => $users,
+                    'role' => $role,
+                    'formular_add_user'=>  $form->createView(),
+                    'isTrue'=> true
+                    
+                ]
+                
+                
+                )
+            );
+    }
+
+    
+    
+    /**
+     * @param Request  $request
+     * @param User $userid
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/user/delete/{userid}", name="userdelete")
+     */
+
+    public function deleteAction(Request $request, User $userid)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        if ($userid === null) {
+            return $this->redirectToRoute('admin_user');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($userid);
+        $em->flush();
+        return $this->redirectToRoute('admin_user');
+    }
+    
+
+    /**
+     * @param Request  $request
+     * @param User $userid
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/user/edit/{userid}", name="useredit")
+     */
+    public function editUser(Request $request, User $userid, FormFactoryInterface $factory, ObjectManager $manager)
+    {
+    
+        $editUserId = $userid->getID();
+        
+        $this->get('form.factory')->createNamed($editUserId);
+ 
+        
+       
+        $builder = $factory->createBuilder(FormType::class, $userid);
+        $builder->add(
+            'username',
+            TextType::class,
+            [
+                'label_format' => 'edit.user.%id%',
+                'block_name' => 'edit_user',
+                'required' => true,
+                'label' => 'FORM.USER.USERNAME',
+                'attr' => [
+                    'placeholder' => 'FORM.USER.PLACEHOLDER.USERNAME',
+                    'class' => 'modifyuser'
+                    
+                ]
+            ]
+            )
+            
+            
+            
+            ->add(
+                'firstname',
+                TextType::class,
+                [
+                    'label_format' => 'edit.user.%id%',
+                    'block_name' => 'edit_user',
+                    'required' => true,
+                    'label' => 'FORM.USER.FIRSTNAME',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.FIRSTNAME',
+                        'class' => 'modifyuser'
+                    ]
+                ]
+                )
+            
+                
+            ->add(
+                'lastname',
+                TextType::class,
+                [
+                    'label_format' => 'edit.user.%id%',
+                    'block_name' => 'edit_user',
+                    'required' => true,
+                    'label' => 'FORM.USER.LASTNAME',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.LASTNAME',
+                        'class' => 'modifyuser'
+                    ]
+                ]
+                )
+
+            ->add('roleToModify',
+                EntityType::class,
+                [
+                'label_format' => 'edit.user.%id%',
+                'block_name' => 'edit_user',
+                'class'        => Role::class,
+                'choice_label' => 'label',
+                'mapped'       => false,
+            ])
+            ->add('id',
+                HiddenType::class
+                )
+            
+ 
+                
+            ->add('submit', SubmitType::class, [
+                'label_format' => 'edit.user.%id%',
+                'block_name' => 'edit_user',
+            ]);
+        $formedituser = $builder->getForm();
+        $formedituser->handleRequest($request);
+            
+        
+
+        
+        if ($formedituser->isSubmitted() && $formedituser->isValid()) {
+            
+            $role = $form->get('roleToModify')->getData();
+            
+            $userid->setRole($role);
+            
+            $manager->persist($userid);
+            $manager->flush();
+        }
+        
+        return $this->render('Modules/User/userEdit.html.twig', [
+            'useredit' => $formedituser->createView(),
+            'routeAttr' => ['userid' => $userid ->getId()
+            ]
+
+        ]);
+    }
+    
+
+    
 }

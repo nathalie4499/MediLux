@@ -2,11 +2,28 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
+ * @UniqueEntity(
+ *      fields={"ssn"},
+ *      errorPath="ssn",
+ *      message="This ssn is already in use"
+ * )           
  */
+
 class Patient
 {
     /**
@@ -17,154 +34,74 @@ class Patient
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="number")
+     * @Assert\NotBlank()
+     * 
      */
     private $ssn;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $birthdate;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $birthplace;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $gender;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $birthname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $givenname;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * 
+     */
+    private $birthname;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $maritalname;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $insurance;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $complementaryinsurance;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $maritalstatus;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $numberchildren;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $job;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $nationality;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $language;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="number", nullable=true)
+     * 
      */
-    private $picture;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $notes1;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $notes2;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $record;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $family;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $otherphysicians;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $creationdate;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $modifieddate;
+    private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
-    private $modifiedby;
+    private $telephone;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\ActiveProblems", mappedBy="patient")
+     * 
      */
-    private $treatingphysician;
+    private $activeproblemslist;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\PatientAddress", mappedBy="relatedpatient")
+     * 
      */
-    private $referringdoctorid;
+    private $patientaddresslist;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $risid;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $luxembourgid;
+    public function __construct()
+    {
+        $this->activeproblemslist = new ArrayCollection();
+        $this->patientaddresslist = new ArrayCollection();
+    }
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $otherid;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $mediluxid;
 
     public function getId()
     {
@@ -183,38 +120,14 @@ class Patient
         return $this;
     }
 
-    public function getBirthdate(): ?\DateTimeInterface
+    public function getGivenname(): ?string
     {
-        return $this->birthdate;
+        return $this->givenname;
     }
 
-    public function setBirthdate(\DateTimeInterface $birthdate): self
+    public function setGivenname(?string $givenname): self
     {
-        $this->birthdate = $birthdate;
-
-        return $this;
-    }
-
-    public function getBirthplace(): ?string
-    {
-        return $this->birthplace;
-    }
-
-    public function setBirthplace(string $birthplace): self
-    {
-        $this->birthplace = $birthplace;
-
-        return $this;
-    }
-
-    public function getGender(): ?int
-    {
-        return $this->gender;
-    }
-
-    public function setGender(int $gender): self
-    {
-        $this->gender = $gender;
+        $this->givenname = $givenname;
 
         return $this;
     }
@@ -223,22 +136,9 @@ class Patient
     {
         return $this->birthname;
     }
-
     public function setBirthname(string $birthname): self
     {
         $this->birthname = $birthname;
-
-        return $this;
-    }
-
-    public function getGivenname(): ?string
-    {
-        return $this->givenname;
-    }
-
-    public function setGivenname(string $givenname): self
-    {
-        $this->givenname = $givenname;
 
         return $this;
     }
@@ -255,84 +155,12 @@ class Patient
         return $this;
     }
 
-    public function getTitle(): ?int
-    {
-        return $this->title;
-    }
-
-    public function setTitle(int $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getInsurance(): ?int
-    {
-        return $this->insurance;
-    }
-
-    public function setInsurance(?int $insurance): self
-    {
-        $this->insurance = $insurance;
-
-        return $this;
-    }
-
-    public function getComplementaryinsurance(): ?string
-    {
-        return $this->complementaryinsurance;
-    }
-
-    public function setComplementaryinsurance(?string $complementaryinsurance): self
-    {
-        $this->complementaryinsurance = $complementaryinsurance;
-
-        return $this;
-    }
-
-    public function getMaritalstatus(): ?int
-    {
-        return $this->maritalstatus;
-    }
-
-    public function setMaritalstatus(int $maritalstatus): self
-    {
-        $this->maritalstatus = $maritalstatus;
-
-        return $this;
-    }
-
-    public function getNumberchildren(): ?int
-    {
-        return $this->numberchildren;
-    }
-
-    public function setNumberchildren(int $numberchildren): self
-    {
-        $this->numberchildren = $numberchildren;
-
-        return $this;
-    }
-
-    public function getJob(): ?string
-    {
-        return $this->job;
-    }
-
-    public function setJob(string $job): self
-    {
-        $this->job = $job;
-
-        return $this;
-    }
-
     public function getNationality(): ?string
     {
         return $this->nationality;
     }
 
-    public function setNationality(string $nationality): self
+    public function setNationality(?string $nationality): self
     {
         $this->nationality = $nationality;
 
@@ -344,190 +172,103 @@ class Patient
         return $this->language;
     }
 
-    public function setLanguage(string $language): self
+    public function setLanguage(?string $language): self
     {
         $this->language = $language;
 
         return $this;
     }
 
-    public function getPicture(): ?int
+    public function getAge(): ?int
     {
-        return $this->picture;
+        return $this->age;
     }
 
-    public function setPicture(int $picture): self
+    public function setAge(?int $age): self
     {
-        $this->picture = $picture;
+        $this->age = $age;
 
         return $this;
     }
 
-    public function getNotes1(): ?string
+
+    public function getTelephone(): ?string
     {
-        return $this->notes1;
+        return $this->telephone;
     }
 
-    public function setNotes1(?string $notes1): self
+    public function setTelephone(?string $telephone): self
     {
-        $this->notes1 = $notes1;
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+    
+
+    /**
+     * @return Collection|ActiveProblems[]
+     */
+    public function getActiveproblemslist(): Collection
+    {
+        return $this->activeproblemslist;
+    }
+
+    public function addActiveproblems(ActiveProblems $activeproblems): self
+    {
+        if (!$this->activeproblemslist->contains($activeproblems)) {
+            $this->activeproblemslist[] = $activeproblems;
+            $activeproblems->setPatient($this);
+        }
 
         return $this;
     }
 
-    public function getNotes2(): ?string
+    public function removeActiveproblems(ActiveProblems $activeproblems): self
     {
-        return $this->notes2;
-    }
+        if ($this->activeproblemslist->contains($activeproblems)) {
+            $this->activeproblemslist->removeElement($activeproblems);
+            // set the owning side to null (unless already changed)
+            if ($activeproblems->getPatient() === $this) {
+                $activeproblems->setPatient(null);
+            }
+        }
 
-    public function setNotes2(?string $notes2): self
+        return $this;
+    }
+    
+    
+    /**
+     * @return Collection|PatientAddress[]
+     */
+    
+    public function getPatientaddresslist(): Collection
     {
-        $this->notes2 = $notes2;
+        return $this->patientaddresslist;
+    }
+    
+    public function addPatientAddress(PatientAddress $patientaddress): self
+    {
+        if (!$this->patientaddresslist->contains($patientaddress)) {
+            $this->patientaddresslist[] = $patientaddress;
+            $patientaddress->setPatient($this);
+        }
 
         return $this;
     }
 
-    public function getRecord(): ?int
+    public function removePatientaddress(PatientAddress $patientaddress): self
     {
-        return $this->record;
-    }
+        if ($this->patientaddresslist->contains($patientaddress)) {
+            $this->patientaddresslist->removeElement($patientaddress);
+            if($patientaddress->getPatient() === $this) {
+                $patientaddress->setPatient(null);
+            }
 
-    public function setRecord(int $record): self
-    {
-        $this->record = $record;
+        }
 
         return $this;
     }
 
-    public function getFamily(): ?int
-    {
-        return $this->family;
-    }
 
-    public function setFamily(?int $family): self
-    {
-        $this->family = $family;
 
-        return $this;
-    }
-
-    public function getOtherphysicians(): ?int
-    {
-        return $this->otherphysicians;
-    }
-
-    public function setOtherphysicians(int $otherphysicians): self
-    {
-        $this->otherphysicians = $otherphysicians;
-
-        return $this;
-    }
-
-    public function getCreationdate(): ?\DateTimeInterface
-    {
-        return $this->creationdate;
-    }
-
-    public function setCreationdate(\DateTimeInterface $creationdate): self
-    {
-        $this->creationdate = $creationdate;
-
-        return $this;
-    }
-
-    public function getModifieddate(): ?\DateTimeInterface
-    {
-        return $this->modifieddate;
-    }
-
-    public function setModifieddate(?\DateTimeInterface $modifieddate): self
-    {
-        $this->modifieddate = $modifieddate;
-
-        return $this;
-    }
-
-    public function getModifiedby(): ?string
-    {
-        return $this->modifiedby;
-    }
-
-    public function setModifiedby(?string $modifiedby): self
-    {
-        $this->modifiedby = $modifiedby;
-
-        return $this;
-    }
-
-    public function getTreatingphysician(): ?int
-    {
-        return $this->treatingphysician;
-    }
-
-    public function setTreatingphysician(int $treatingphysician): self
-    {
-        $this->treatingphysician = $treatingphysician;
-
-        return $this;
-    }
-
-    public function getReferringdoctorid(): ?int
-    {
-        return $this->referringdoctorid;
-    }
-
-    public function setReferringdoctorid(int $referringdoctorid): self
-    {
-        $this->referringdoctorid = $referringdoctorid;
-
-        return $this;
-    }
-
-    public function getRisid(): ?int
-    {
-        return $this->risid;
-    }
-
-    public function setRisid(int $risid): self
-    {
-        $this->risid = $risid;
-
-        return $this;
-    }
-
-    public function getLuxembourgid(): ?int
-    {
-        return $this->luxembourgid;
-    }
-
-    public function setLuxembourgid(?int $luxembourgid): self
-    {
-        $this->luxembourgid = $luxembourgid;
-
-        return $this;
-    }
-
-    public function getOtherid(): ?int
-    {
-        return $this->otherid;
-    }
-
-    public function setOtherid(?int $otherid): self
-    {
-        $this->otherid = $otherid;
-
-        return $this;
-    }
-
-    public function getMediluxid(): ?int
-    {
-        return $this->mediluxid;
-    }
-
-    public function setMediluxid(int $mediluxid): self
-    {
-        $this->mediluxid = $mediluxid;
-
-        return $this;
-    }
 }
