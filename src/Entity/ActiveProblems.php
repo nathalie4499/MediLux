@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\AbstractType;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActiveProblemsRepository")
  */
-class ActiveProblems extends AbstractType
+class ActiveProblems
 {
     /**
      * @ORM\Id()
@@ -26,12 +32,15 @@ class ActiveProblems extends AbstractType
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+    
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="activeproblems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="ap")
+     * 
      */
+    
     private $patient;
-
+    
     public function getId()
     {
         return $this->id;
@@ -60,7 +69,7 @@ class ActiveProblems extends AbstractType
 
         return $this;
     }
-
+    
     public function getPatient(): ?Patient
     {
         return $this->patient;
@@ -72,4 +81,5 @@ class ActiveProblems extends AbstractType
 
         return $this;
     }
+
 }
