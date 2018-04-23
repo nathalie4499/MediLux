@@ -24,12 +24,13 @@ class PatientAddress
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $streetnumber;
     
     /**  
     * @ORM\OneToMany(targetEntity="App\Entity\Zip", mappedBy="patientaddress")  
+    * @ORM\Column(type="string", length=255, nullable=true)
     * @Assert\Valid()  
     */
     private $zips;
@@ -72,45 +73,6 @@ class PatientAddress
         return $this;
     }
     
-    
-    /**
-    
-    * @return Collection|Zip[]
-    
-    */
-    public function getZips(): Collection
-    {
-        return $this->zips;
-    }
-
-    public function addZip(Zip $zip): self
-    {
-        if(!$this->zips->contains($zip)) {
-            $this->zips[] = $zip;
-            $zip->setPatientAddress($this);
-        }
-
-        return $this;
-    }
-    
-    
-    
-    public function removeZip(Zip $zip): self    
-    {
-        
-        if ($this->zips->contains($zip)) {
-            
-            $this->zips->removeElement($zip);
-            
-            // set the owning side to null (unless already changed)
-            
-            if ($zip->getPatientAddress() === $this) {
-                
-                $zip->setPatientAddress(null);   
-            }
-        }
-        return $this;
-    }
 
     public function getPatient(): ?Patient
     {
@@ -124,3 +86,4 @@ class PatientAddress
         return $this;
     }
 }
+    

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\ActiveProblems;
 use App\Entity\Patient;
 use App\Entity\PatientAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,15 +17,22 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use App\Form\PatientForm;
+use App\Form\ActiveProblemsForm;
+use App\Form\PatientAddressType;
 use App\Repository\PatientRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Form\FormTypeInterface;
+use App\Repository\PatientAddressRepository;
+use App\Repository\ActiveProblemsRepository;
+use App\Manager\PatientManager;
+
 
 
 class PatientController extends Controller
 {
+    
     
     public function patientRecord(
         Environment $twig,     
@@ -34,92 +43,128 @@ class PatientController extends Controller
         UrlGeneratorInterface $urlGenerator)
     {
         $patient = new Patient();
-        $patientaddress = new PatientAddress();
+        //$patientaddress = new PatientAddress();
         
-        $patient->getPatientaddresslist();
-        $patient->getActiveproblemslist();
+        //$patient->getPatientaddresslist();
+        //$patient->getActiveproblemslist();
 
         
-        $builder = $factory->createBuilder(PatientForm::class, $patient);
-        /** ->add(
-                'activeproblems',
-                TextType::class,
-                [
-                    'label' => 'FORM.PATIENT.ACTIVEPROBLEMS',
-                    'attr' => [
-                        'placeholder' => 'FORM.PATIENT.ACTIVEPROBLEMS',
-                        'class' => 'form-control'
-                    ]
+        $builder = $factory->createBuilder(FormType::class, $patient);
+        $builder->add(
+            'ssn',
+            TextType::class,
+            [
+                'required' => true,
+                'label' => 'SSN',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.SSN',
+                    'class' => 'form-control'
                 ]
+            ]
             )->add(
-                'activeproblemtitle',
-                TextType::class,
-                [
-                    'label' => 'FORM.PATIENT.ACTIVEPROBLEMTITLE',
-                    'attr' => [
-                        'placeholder' => 'FORM.PATIENT.ACTIVEPROBLEMS',
-                        'class' => 'form-control'
-                    ]
+            'age',
+            TextType::class,
+            [
+                'label' => 'FORM.PATIENT.AGE',
+                'attr' => [
+                    'class' => 'form-control'
                 ]
-            ) **/ /**->add(
-                'streetnumber',
-                TextType::class,
-                [
-                    'label' => 'FORM.PATIENT.STREETNUMBER',
-                    'attr' => [
-                        'placeholder' => 'FORM.PATIENT.STREETNUMBER',
-                        'class' => 'form-control'
-                    ]
-                ]
+            ]
             )->add(
-                'street',
-                TextType::class,
-                [
-                    'label' => 'FORM.PATIENT.STREET',
-                    'attr' => [
-                        'placeholder' => 'FORM.PATIENT.STREET',
-                        'class' => 'form-control'
-                    ]
+            'givenname',
+            TextType::class,
+            [
+                'label' => 'FORM.PATIENT.GIVENNAME',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.GIVENNAME',
+                    'class' => 'form-control'
                 ]
+            ]
             )->add(
-                'locality',
-                TextType::class,
-                [
-                    'label' => 'FORM.PATIENT.LOCALITY',
-                    'attr' => [
-                        'placeholder' => 'FORM.PATIENT.LOCALITY',
-                        'class' => 'form-control'
-                    ]
+            'birthname',
+            TextType::class,
+            [
+                'required' => true,
+                'label' => 'FORM.PATIENT.BIRTHNAME',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.BIRTHNAME',
+                    'class' => 'form-control'
                 ]
-            )  ->add(
-                'country',
-                TextType::class,
-                [
-                    'label' => 'FORM.PATIENT.COUNTRY',
-                    'attr' => [
-                        'placeholder' => 'FORM.PATIENT.COUNTRY',
-                        'class' => 'form-control'
-                    ]
+            ]
+            )->add(
+            'maritalname',
+            TextType::class,
+            [
+                'label' => 'FORM.PATIENT.MARITALNAME',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.MARITALNAME',
+                    'class' => 'form-control'
                 ]
-            ) **/
-                        
-           /** ->add(
-                'activeproblems',
-                ActiveProblems::class
-                )            
-            ->add(
-                'patientaddress',
-                PatientAddress::class
-                ) **/
-
+            ]
+            )->add(
+            'nationality',
+            TextType::class,
+            [
+                'label' => 'FORM.PATIENT.NATIONALITY',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.NATIONALITY',
+                    'class' => 'form-control'
+                ]
+            ]
+            )->add(
+            'language',
+            TextType::class,
+            [
+                'label' => 'FORM.PATIENT.LANGUAGE',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.LANGUAGE',
+                    'class' => 'form-control'
+                ]
+            ]
+            )->add(
+            'telephone',
+            TextType::class,
+            [
+                'label' => 'FORM.PATIENT.TELEPHONE',
+                'attr' => [
+                    'placeholder' => 'FORM.PATIENT.TELEPHONE',
+                    'class' => 'form-control'
+                ]
+            ]
+           );        
                 
-            $form = $builder->getForm(PatientForm::class, $patient);
+            $builder->add(
+                'patientaddresslist', CollectionType::class, array
+                (
+                    'entry_type' => PatientAddressType::class,
+                    'entry_options' => array('label' => false),
+                    
+                ));
+            
+            $builder->add(
+                'activeproblemslist', CollectionType::class, array
+                (
+                    'entry_type' => ActiveProblemsForm::class,
+                    'entry_options' => array('label' => false),
+                    
+                ));
+            $builder->add(
+                'submit',
+                SubmitType::class,
+                [
+                    'attr' => [
+                        'class' => 'btn-lbock btn-success'
+                    ]
+                ]
+          );
+         
+            $form = $builder->getForm();
             $form->handleRequest($request);
             
             
             if($form->isSubmitted() && $form->isValid())
             {
-                $form->get($patient)->getData();
+               // $form->get($patient)->getData();
                 
                 $manager->persist($patient);
                 $manager->flush();
@@ -134,10 +179,22 @@ class PatientController extends Controller
                         'patientCreationFormular'=>  $form->createView()                       
                     ]
             )
-        );
+        ); 
     }
     
-    public function updatePatient(
+    public function listPatient(Environment $twig, PatientRepository $repository)
+    {
+        return new Response(
+            $twig->render(
+                'Modules/Patient/listPatients.html.twig',
+                [
+                    'listPatients' => $repository->findOneBySsn($ssn)
+                ]
+                )
+            );
+    }
+    
+    /** public function updatePatient(
         ObjectManager $manager,
         SessionInterface $session,
         UrlGeneratorInterface $urlGenerator,
@@ -166,32 +223,65 @@ class PatientController extends Controller
                             'patientCreationFormular'=>  $form->getView()
                         ]
                         )
-                    );
+                    ); 
             }
-        }
+        } **/
     public function displayPatient(
         Environment $twig,
-        PatientRepository $repository,
+        PatientRepository $patientRepository,
         int $patient,
+        PatientManager $patientmanager,
         UrlGeneratorInterface $urlGenerator,
         Request $request
         ) {
-            $patient = $repository->find($patient);
+            $patient = $patientRepository->find($patient);
+            //$patientaddress = $patientaddressRepository->find($patientaddress);
+            //$activeproblems = $activeproblemsRepository->find($activeproblems);
+            
             if (!$patient) {
-                $this->patientRecord();
+                throw new NotFoundHttpException();
             }
+            
+            $activeproblems = new ActiveProblems();
+            $form = $patientmanager->getBaseForm($activeproblems);
+            $patientmanager->handleRequest($form, $request);
+            
+            if ($form->isSubmitted() && $form->isValid()) {
+                $patientmanager->processform($activeproblems, $patient);
+            }
+            
             return new RedirectResponse($urlGenerator->generate('patient', ['patient' => $patient->getId()]));
+            /** return new Response(
+                $twig->render(
+                    'Modules/Patient/patient.html.twig',
+                    [
+                        'patient' => $patientRepository->find($patientaddress),
+                        'patientaddress' => $patientaddressRepository->find($patientaddress),
+                        'activeproblems' => $activeproblemsRepository->find($activeproblems)
+                    ]
+                    )
+                ); **/
 
-    return new Response(
+            return new Response(
+                $twig->render(
+                    'Modules/Patient/patient.html.twig',
+                    [
+                        'patient' => $patient,
+                        'routeAttr' => ['patient_record' => $patient->getId()],
+                        'form' => $form->createView()
+                    ]
+                    )
+                );
+            
+    /** return new Response(
         $twig->render(
-            'Modules/Patient/patient.html.twig',
+            'Modules/Addressbook/addressbookList.html.twig',
             [
-                'patient' => $patient,
-                'routeAttr' => ['patient_record' => $patient->getId()],
-                'form' => $form->createView()
+                'doctor' => $repository->findAll(),
+                'address' => $addressrepo->findAll()
             ]
             )
-        );
+        ); **/
             
     }
         

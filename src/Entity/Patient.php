@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
  * @UniqueEntity(
@@ -34,7 +35,7 @@ class Patient
     private $id;
 
     /**
-     * @ORM\Column(type="number")
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * 
      */
@@ -72,7 +73,7 @@ class Patient
     private $language;
 
     /**
-     * @ORM\Column(type="number", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * 
      */
     private $age;
@@ -108,12 +109,12 @@ class Patient
         return $this->id;
     }
 
-    public function getSsn(): ?int
+    public function getSsn(): ?string
     {
         return $this->ssn;
     }
 
-    public function setSsn(int $ssn): self
+    public function setSsn(string $ssn): self
     {
         $this->ssn = $ssn;
 
@@ -213,11 +214,10 @@ class Patient
         return $this->activeproblemslist;
     }
 
-    public function addActiveproblems(ActiveProblems $activeproblems): self
+    public function addActiveproblems(ActiveProblems $activeproblemslist): self
     {
-        if (!$this->activeproblemslist->contains($activeproblems)) {
-            $this->activeproblemslist[] = $activeproblems;
-            $activeproblems->setPatient($this);
+        if (!$this->activeproblemslist->contains($activeproblemslist)) {
+            $this->activeproblemslist[] = $activeproblemslist;
         }
 
         return $this;
@@ -225,12 +225,8 @@ class Patient
 
     public function removeActiveproblems(ActiveProblems $activeproblems): self
     {
-        if ($this->activeproblemslist->contains($activeproblems)) {
-            $this->activeproblemslist->removeElement($activeproblems);
-            // set the owning side to null (unless already changed)
-            if ($activeproblems->getPatient() === $this) {
-                $activeproblems->setPatient(null);
-            }
+        if ($this->activeproblemslist->contains($activeproblemslist)) {
+            $this->activeproblemslist->removeElement($activeproblemslist);
         }
 
         return $this;
@@ -246,11 +242,10 @@ class Patient
         return $this->patientaddresslist;
     }
     
-    public function addPatientAddress(PatientAddress $patientaddress): self
+    public function addPatientAddresslist(PatientAddress $patientaddresslist): self
     {
-        if (!$this->patientaddresslist->contains($patientaddress)) {
-            $this->patientaddresslist[] = $patientaddress;
-            $patientaddress->setPatient($this);
+        if (!$this->patientaddresslist->contains($patientaddresslist)) {
+            $this->patientaddresslist[] = $patientaddresslist;
         }
 
         return $this;
@@ -258,17 +253,12 @@ class Patient
 
     public function removePatientaddress(PatientAddress $patientaddress): self
     {
-        if ($this->patientaddresslist->contains($patientaddress)) {
-            $this->patientaddresslist->removeElement($patientaddress);
-            if($patientaddress->getPatient() === $this) {
-                $patientaddress->setPatient(null);
+        if ($this->patientaddresslist->contains($patientaddresslist)) {
+            $this->patientaddresslist->removeElement($patientaddresslist);
             }
 
-        }
 
         return $this;
-    }
 
-
-
+}
 }

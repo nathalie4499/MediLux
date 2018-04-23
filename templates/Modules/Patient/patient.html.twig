@@ -1,65 +1,19 @@
 {% extends 'base.html.twig' %}
-
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="/css/style_nath.css">
-
+<link rel="stylesheet" type="text/css" href="/css/style_nath.css">
 {% endblock %}
 
 {% block body %}
 
-{{ form_start(patientCreationFormular) }}	
-
-<div class="datacontainer" id="ssn">
-	<h1>Patient File</h1>
-
-	<form>
-		<div class="form-row" id="ssnage" >
-			<div class="form-group col-md-3">
-				{{ form_label(patientCreationFormular.ssn) }}
-				{{ form_widget(patientCreationFormular.ssn) }}					
-			</div>	
-			<div class="form-group col-md-3">
-				{{ form_label(patientCreationFormular.age) }}
-				{{ form_widget(patientCreationFormular.age) }}					
-			</div>
-		</div>
-
-		<div class="form-row">
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.givenname) }}
-    			{{ form_widget(patientCreationFormular.givenname) }}
-			</div>
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.birthname) }}
-    			{{ form_widget(patientCreationFormular.birthname) }}	
-			</div>	
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.maritalname) }}
-    			{{ form_widget(patientCreationFormular.maritalname) }}			
-			</div>
-		</div>
+	<div class="container tm-5">
+		<p class="bg-warning p-1 b-warning">
+			{{ 'ADD_PRODUCT.INFO'|trans }}
+		</p>
 		
-		<div class="form-row" id="natlang">
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.nationality) }}
-    			{{ form_widget(patientCreationFormular.nationality) }}					
-			</div>
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.language) }}
-    			{{ form_widget(patientCreationFormular.language) }}		
-			</div>
-		</div>
+		<div class="container-fluid tm-5 bm-5">
+            {{ form(patientCreationFormular) }}
+        </div>
+	</div>
 
-    <ul class="">
-        {# iterate over each existing tag and render its only field: name #}
-        {% for patientaddress in patientCreationFormular.patientaddresslist %}
-            <li>{{ form_row(patientaddress.country) }}</li>
-        {% endfor %}
-    </ul>				
-		</div>			
-
-	</form>
-</div>
-{{ form_end(patientCreationFormular) }}
 {% endblock %}
