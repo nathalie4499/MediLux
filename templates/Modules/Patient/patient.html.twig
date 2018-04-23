@@ -16,11 +16,13 @@
 	<form>
 		<div class="form-row" id="ssnage" >
 			<div class="form-group col-md-3">
-			{{ form_label(patientCreationFormular.ssn) }}
-			{{ form_widget(patientCreationFormular.ssn) }}
-						
-			<p> {{ 'AGE' }}</p>
+				{{ form_label(patientCreationFormular.ssn) }}
+				{{ form_widget(patientCreationFormular.ssn) }}					
 			</div>	
+			<div class="form-group col-md-3">
+				{{ form_label(patientCreationFormular.age) }}
+				{{ form_widget(patientCreationFormular.age) }}					
+			</div>
 		</div>
 
 		<div class="form-row">
@@ -48,44 +50,16 @@
     			{{ form_widget(patientCreationFormular.language) }}		
 			</div>
 		</div>
-		<div class="form-row">
-			<div class="form-group col-md-2">
-    			{{ form_label(patientCreationFormular.streetnumber) }}
-    			{{ form_widget(patientCreationFormular.streetnumber) }}		
-			</div>
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.street) }}
-    			{{ form_widget(patientCreationFormular.street) }}						
-			</div>
-			<div class="form-group col-md-3">
-    			{{ form_label(patientCreationFormular.locality) }}
-    			{{ form_widget(patientCreationFormular.locality) }}						
-			</div>
-			<div class="form-group col-md-3">
-    			{{ form_label(patientCreationFormular.country) }}
-    			{{ form_widget(patientCreationFormular.country) }}						
-			</div>
-				
-		</div>
-		<div class="form-row">
-			<div class="form-group col-md-3">
-    			{{ form_label(patientCreationFormular.title) }}
-    			{{ form_widget(patientCreationFormular.title) }}		
-			</div>
-			<div class="form-group col-md-6">
-    			{{ form_label(patientCreationFormular.description) }}
-    			{{ form_widget(patientCreationFormular.description) }}						
-			</div>
-			<div class="form-group col-md-3">
-    			{{ form_label(patientCreationFormular.activeproblems) }}
-    			{{ form_widget(patientCreationFormular.activeproblems) }}						
-			</div>
-				
-		</div>
 
-				
+    <ul class="">
+        {# iterate over each existing tag and render its only field: name #}
+        {% for patientaddress in patientCreationFormular.patientaddresslist %}
+            <li>{{ form_row(patientaddress.country) }}</li>
+        {% endfor %}
+    </ul>				
 		</div>			
 
 	</form>
 </div>
+{{ form_end(patientCreationFormular) }}
 {% endblock %}
