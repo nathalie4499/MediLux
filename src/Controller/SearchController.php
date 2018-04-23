@@ -37,6 +37,10 @@ class SearchController extends Controller
 	            ])
 	        );
 	}
-	
-	
-};
+
+	public function  searchBirthName(PatientRepository $repository, Request $request){
+	    
+	}
+	    
+
+    }

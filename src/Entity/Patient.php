@@ -164,6 +164,7 @@ class Patient
         return $this;
     }
 
+
     public function getTelephone(): ?string
     {
         return $this->telephone;
@@ -175,7 +176,7 @@ class Patient
 
         return $this;
     }
-
+  
     /**
      * @return Collection|ActiveProblems[]
      */
