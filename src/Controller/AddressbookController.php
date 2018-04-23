@@ -47,16 +47,18 @@ class AddressbookController extends Controller
                         Request $request
                      )
     {
+        //get data from jquery assign to $specialization
         $specialization = $request->request->get('specialization');
+        
         
         $unavailable = false;
         if (!empty($specialization))
         {
         $unavailable = $repository->specializationExists($specialization);
         }
-        return new JsonResponse(
-            ['available' => !$unavailable]
-            );
+//         return new JsonResponse(
+//             ['available' => !$unavailable]
+//             );
 
 //         return new Response(
 //             $twig->render(
