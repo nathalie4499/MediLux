@@ -18,6 +18,18 @@ class DoctorsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Doctors::class);
     }
+    
+    public function specializationExists(string $specialization)
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->select('COUNT(u) AS count')
+        ->where('u.specialization = :specialization')
+        ->setParameter('specialization', $specialization);
+        
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+        
+        return boolval($result['count']);
+    }
 
 //    /**
 //     * @return Doctors[] Returns an array of Doctors objects

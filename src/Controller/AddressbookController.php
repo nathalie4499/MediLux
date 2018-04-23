@@ -6,12 +6,14 @@ use App\Entity\Doctors;
 use App\Form\Type\AddressType;
 use App\Repository\AddressDoctorsRepository;
 use App\Repository\DoctorsRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +41,24 @@ class AddressbookController extends Controller
             );
     }
  
+    public function searchDoctor
+                    (
+                        UserRepository $repository,
+                        Request $request
+                     )
+    {
+        $specialization = $request->request->get('specialization');
+        
+        $unavailable = false;
+        if (!empty($specialization))
+        {
+            $unavailable = $repository->usernameExists($specialization);
+        }
+        return new JsonResponse(
+            ['available' => !$unavailable]
+            );
+    }
+    
     public function addDoctor(
                                 Environment $twig,
                                 FormFactoryInterface $factory,

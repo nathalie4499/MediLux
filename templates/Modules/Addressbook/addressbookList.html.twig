@@ -13,7 +13,7 @@
           </th>
           <th scope="col">
           	<div class="input-group">
-  				<input placeholder="speciality" type="text" class="form-control">
+  				<input id="specialization" for="specialization" placeholder="speciality" type="text" class="form-control">
 			</div>
           </th>
           <th scope="col">
@@ -88,4 +88,7 @@
         {% endfor %}
       </tbody>
 	</table>   
+{% endblock %}
+{% block javascripts %}
+	<script src="/js/searchDoctor.js"></script>
 {% endblock %}
