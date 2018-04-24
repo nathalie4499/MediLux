@@ -1,24 +1,28 @@
-function searchData(dataFromForm)
+$(document).ready(function()
 {
-	$.post
-	('/addressbook/search', // call function searchDoctor() in addresbookcontroller via routes.yaml
-		{
-			dataFromForm: $('#specialization').val() //send characters to searchDoctor()
-		}).done
-		   (
-			function(responseData) //receive json from searchDoctor()
+	
+	function searchData(dataFromForm)
+	{
+		$.post
+		('/addressbook/search', // call function searchDoctor() in addresbookcontroller via routes.yaml
 			{
-				console.log(responseData);
-			}
-		   ).fail(function(sam){
-			   console.log(sam);
-		   });
-	console.log(dataFromForm);
-}
-$('#specialization').on
-					(
-					  'keyup', function()
-					  		   {
-						  		searchData($(this).val());
-					  		   }
-					);
+				dataFromForm:  dataFromForm //send characters to searchDoctor()
+			}).done
+			   (
+				function(responseData) //receive json from searchDoctor()
+				{
+					console.log("response data: " + responseData);
+				}
+			   ).fail(function(sam){
+				   console.log(sam);
+			   });
+		//console.log("from form data" + dataFromForm);
+	}
+	$('#specialization').on
+						(
+						  'keyup', function()
+						  		   {
+							  		searchData($(this).val());
+						  		   }
+						);
+});

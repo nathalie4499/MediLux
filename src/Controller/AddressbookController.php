@@ -51,10 +51,10 @@ class AddressbookController extends Controller
         //get data from jquery assign to $datafromform
         $dataFromForm = $request->request->get('dataFromForm');
         
-        //var_dump($dataFromForm);
+        var_dump($dataFromForm);
         
         $foundData = $repository->dataExists($dataFromForm);
-        //var_dump($foundData);
+        var_dump($foundData);
       
         return new JsonResponse($foundData);
     }

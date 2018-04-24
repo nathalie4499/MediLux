@@ -30,7 +30,7 @@ class DoctorsRepository extends ServiceEntityRepository
         ->getQuery()
         ->getArrayResult()
         ;
-        
+        var_dump($expression)
     }
 
 //    /**
