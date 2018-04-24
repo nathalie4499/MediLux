@@ -44,30 +44,31 @@ class AddressbookController extends Controller
     public function searchDoctor
                     (
                         DoctorsRepository $repository,
-                        Request $request
+                        Request $request,
+                        Environment $twig
                      )
     {
         //get data from jquery assign to $specialization
         $specialization = $request->request->get('specialization');
         
         
-        $unavailable = false;
+        //$unavailable = false;
         if (!empty($specialization))
         {
-        $unavailable = $repository->specializationExists($specialization);
+        $spec = $repository->specializationExists($specialization);
         }
-//         return new JsonResponse(
-//             ['available' => !$unavailable]
-//             );
+        return new JsonResponse(
+            ['spec' => $spec]
+            );
 
-//         return new Response(
-//             $twig->render(
-//                 'Modules/Addressbook/addressbookList.html.twig',
+//         return new RedirectResponse
+//         (
+//             $urlGenerator->generate('addressbook_list',
 //                 [
 //                     'specialization' => $repository->findAll()
 //                 ]
-//                 )
-//             );
+//             )
+        
 
     }
     
