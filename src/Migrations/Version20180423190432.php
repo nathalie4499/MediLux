@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180423093940 extends AbstractMigration
+class Version20180423190432 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -26,8 +26,8 @@ class Version20180423093940 extends AbstractMigration
         $this->addSql('CREATE TABLE locality (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
         $this->addSql('CREATE TABLE locality_municipality (locality_id INT NOT NULL, municipality_id INT NOT NULL, INDEX IDX_DFFA4FB888823A92 (locality_id), INDEX IDX_DFFA4FB8AE6F181C (municipality_id), PRIMARY KEY(locality_id, municipality_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
         $this->addSql('CREATE TABLE municipality (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE patient (id INT AUTO_INCREMENT NOT NULL, ssn VARCHAR(255) DEFAULT NULL, givenname VARCHAR(255) DEFAULT NULL, birthname VARCHAR(255) NOT NULL, maritalname VARCHAR(255) DEFAULT NULL, nationality VARCHAR(255) DEFAULT NULL, language VARCHAR(255) DEFAULT NULL, age VARCHAR(255) DEFAULT NULL, telephone VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE patient_address (id INT AUTO_INCREMENT NOT NULL, country_id INT DEFAULT NULL, patient_id INT NOT NULL, streetnumber INT DEFAULT NULL, INDEX IDX_502D3A6AF92F3E70 (country_id), INDEX IDX_502D3A6A6B899279 (patient_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE patient (id INT AUTO_INCREMENT NOT NULL, ssn VARCHAR(255) NOT NULL, givenname VARCHAR(255) DEFAULT NULL, birthname VARCHAR(255) NOT NULL, maritalname VARCHAR(255) DEFAULT NULL, nationality VARCHAR(255) DEFAULT NULL, language VARCHAR(255) DEFAULT NULL, age VARCHAR(255) DEFAULT NULL, telephone VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE patient_address (id INT AUTO_INCREMENT NOT NULL, country_id INT DEFAULT NULL, patient_id INT NOT NULL, streetnumber VARCHAR(255) DEFAULT NULL, zips VARCHAR(255) DEFAULT NULL, INDEX IDX_502D3A6AF92F3E70 (country_id), INDEX IDX_502D3A6A6B899279 (patient_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
         $this->addSql('CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
         $this->addSql('CREATE TABLE zip (id INT AUTO_INCREMENT NOT NULL, locality_id INT DEFAULT NULL, name INT DEFAULT NULL, street VARCHAR(255) DEFAULT NULL, INDEX IDX_421D954688823A92 (locality_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ENGINE = InnoDB');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649D60322AC FOREIGN KEY (role_id) REFERENCES role (id)');

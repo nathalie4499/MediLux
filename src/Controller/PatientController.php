@@ -26,7 +26,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormTypeInterface;
 use App\Repository\PatientAddressRepository;
 use App\Repository\ActiveProblemsRepository;
-use App\Manager\PatientManager;
 
 
 
@@ -40,7 +39,8 @@ class PatientController extends Controller
         Request $request,
         ObjectManager $manager,
         SessionInterface $session,
-        UrlGeneratorInterface $urlGenerator)
+        UrlGeneratorInterface $urlGenerator,
+        PatientRepository $patientRepository)
     {
         $patient = new Patient();
         //$patientaddress = new PatientAddress();
@@ -57,7 +57,7 @@ class PatientController extends Controller
                 'required' => true,
                 'label' => 'SSN',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.SSN',
+                    'placeholder' => 'MLPATIENT.SSN',
                     'class' => 'form-control'
                 ]
             ]
@@ -65,8 +65,9 @@ class PatientController extends Controller
             'age',
             TextType::class,
             [
-                'label' => 'FORM.PATIENT.AGE',
+                'label' => 'MLPATIENT.AGE',
                 'attr' => [
+                    'placeholder' => 'MLPATIENT.AGE',
                     'class' => 'form-control'
                 ]
             ]
@@ -74,9 +75,9 @@ class PatientController extends Controller
             'givenname',
             TextType::class,
             [
-                'label' => 'FORM.PATIENT.GIVENNAME',
+                'label' => 'MLPATIENT.GIVENNAME',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.GIVENNAME',
+                    'placeholder' => 'MLPATIENT.GIVENNAME',
                     'class' => 'form-control'
                 ]
             ]
@@ -85,9 +86,9 @@ class PatientController extends Controller
             TextType::class,
             [
                 'required' => true,
-                'label' => 'FORM.PATIENT.BIRTHNAME',
+                'label' => 'MLPATIENT.BIRTHNAME',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.BIRTHNAME',
+                    'placeholder' => 'MLPATIENT.BIRTHNAME',
                     'class' => 'form-control'
                 ]
             ]
@@ -95,9 +96,9 @@ class PatientController extends Controller
             'maritalname',
             TextType::class,
             [
-                'label' => 'FORM.PATIENT.MARITALNAME',
+                'label' => 'MLPATIENT.MARITALNAME',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.MARITALNAME',
+                    'placeholder' => 'MLPATIENT.MARITALNAME',
                     'class' => 'form-control'
                 ]
             ]
@@ -105,9 +106,9 @@ class PatientController extends Controller
             'nationality',
             TextType::class,
             [
-                'label' => 'FORM.PATIENT.NATIONALITY',
+                'label' => 'MLPATIENT.NATIONALITY',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.NATIONALITY',
+                    'placeholder' => 'MLPATIENT.NATIONALITY',
                     'class' => 'form-control'
                 ]
             ]
@@ -115,25 +116,25 @@ class PatientController extends Controller
             'language',
             TextType::class,
             [
-                'label' => 'FORM.PATIENT.LANGUAGE',
+                'label' => 'MLPATIENT.LANGUAGE',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.LANGUAGE',
+                    'placeholder' => 'MLPATIENT.LANGUAGE',
                     'class' => 'form-control'
                 ]
             ]
-            )->add(
+            ) /** ->add(
             'telephone',
             TextType::class,
             [
-                'label' => 'FORM.PATIENT.TELEPHONE',
+                'label' => 'MLPATIENT.TELEPHONE',
                 'attr' => [
-                    'placeholder' => 'FORM.PATIENT.TELEPHONE',
+                    'placeholder' => 'MLPATIENT.TELEPHONE',
                     'class' => 'form-control'
                 ]
             ]
-           );        
+           ) **/;        
                 
-            $builder->add(
+           /**  $builder->add(
                 'patientaddresslist', CollectionType::class, array
                 (
                     'entry_type' => PatientAddressType::class,
@@ -147,7 +148,7 @@ class PatientController extends Controller
                     'entry_type' => ActiveProblemsForm::class,
                     'entry_options' => array('label' => false),
                     
-                ));
+                ));**/
             $builder->add(
                 'submit',
                 SubmitType::class,
@@ -172,11 +173,19 @@ class PatientController extends Controller
                 $session->getFlashBag()->add('info', 'Patient record was created/updated');
                               
             }
+            
+            $repository = $this->getDoctrine()
+            
+            ->getRepository(Patient::class);
+            
+            $ssns = $repository->findAll();
             return new Response(
                 $twig->render(
                     'Modules/Patient/patient.html.twig',
                     [
-                        'patientCreationFormular'=>  $form->createView()                       
+                        'ssns' => $ssns,                                              
+                        'patientCreationFormular'=>  $form->createView(),
+                        'isTrue'=> true                 
                     ]
             )
         ); 
@@ -226,7 +235,7 @@ class PatientController extends Controller
                     ); 
             }
         } **/
-    public function displayPatient(
+ /**   public function displayPatient(
         Environment $twig,
         PatientRepository $patientRepository,
         int $patient,
@@ -262,7 +271,7 @@ class PatientController extends Controller
                     )
                 ); **/
 
-            return new Response(
+            /** return new Response(
                 $twig->render(
                     'Modules/Patient/patient.html.twig',
                     [
@@ -271,21 +280,17 @@ class PatientController extends Controller
                         'form' => $form->createView()
                     ]
                     )
+                ); **/
+            
+     /**       return new Response(                
+                $twig->render(                    
+                    'Modules/Patient/patient.html.twig',                    
+                    [                        
+                        'patientCreationFormular'=>  $form->createView()
+                        
+                    ]                   
+                    )
                 );
+    } **/
             
-    /** return new Response(
-        $twig->render(
-            'Modules/Addressbook/addressbookList.html.twig',
-            [
-                'doctor' => $repository->findAll(),
-                'address' => $addressrepo->findAll()
-            ]
-            )
-        ); **/
-            
-    }
-        
-                                            
-
-}
-
+ }

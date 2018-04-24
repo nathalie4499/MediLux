@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/** $(document).ready(function(){
 	$("#search").keyup(function(){
 		
 	var search = $(this).val();
@@ -29,4 +29,4 @@ $(document).ready(function(){
 
 		
 	});
-	
+	**/

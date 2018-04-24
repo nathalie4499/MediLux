@@ -18,6 +18,29 @@ ADDRESSBOOK:
     DETAIL: detail
     ADD: add
 
+MLPATIENT:
+    TITLE: New MediLux Patient
+    SSN: Social Security Number
+    GIVENNAME: First Name
+    BIRTHNAME: Birth name
+    MARITALNAME: Marital Name
+    AGE: Age
+    NATIONALITY: Nationality
+    LANGUAGE: Spoken language
+    TELEPHONE: Telephone
+    STREETNUMBER: Street Number
+    STREET: Street
+    LOCALITY: Locality
+    MUNICIPALITY: Municipality
+    COUNTRY: Country
+    ZIP: Zip Code
+    SUBMIT: Add
+    DESCRIPTION: Description
+    ACTIVEPROBLEMS: List of Active Problems
+    
+    
+
+
 FORM:
     ADDRESSBOOK:
         FIRSTNAME: FIRSTNAME
@@ -33,25 +56,6 @@ FORM:
         ADDRESS: ADDRESS
         SUBMIT: add
 
-    PATIENT:
-        SSN: Social Security Number
-        GIVENNAME: Given name
-        BIRTHNAME: Birth name
-        MARITALNAME: Marital name
-        NATIONALITY: Nationality
-        TELEPHONE: Telephone
-        LANGUAGE: Spoken language
-        STREETNUMBER: Street number
-        STREET: Street
-        LOCALITY: Locality
-        COUNTRY: Country
-        ZIP: zip
-        SUBMIT: add
-        AGE: age
-        TITLE: Active Problem Title
-        DESCRIPTION: Description
-        ACTIVEPROBLEMS: List of Active Problems
-        
         
 
 
