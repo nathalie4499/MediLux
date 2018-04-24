@@ -40,7 +40,8 @@ class PatientController extends Controller
         ObjectManager $manager,
         SessionInterface $session,
         UrlGeneratorInterface $urlGenerator,
-        PatientRepository $patientRepository)
+        PatientRepository $patientRepository
+        )
     {
         $patient = new Patient();
         //$patientaddress = new PatientAddress();
@@ -122,17 +123,7 @@ class PatientController extends Controller
                     'class' => 'form-control'
                 ]
             ]
-            ) /** ->add(
-            'telephone',
-            TextType::class,
-            [
-                'label' => 'MLPATIENT.TELEPHONE',
-                'attr' => [
-                    'placeholder' => 'MLPATIENT.TELEPHONE',
-                    'class' => 'form-control'
-                ]
-            ]
-           ) **/;        
+            )    
                 
            /**  $builder->add(
                 'patientaddresslist', CollectionType::class, array
@@ -149,11 +140,13 @@ class PatientController extends Controller
                     'entry_options' => array('label' => false),
                     
                 ));**/
-            $builder->add(
+
+                ->add(
                 'submit',
                 SubmitType::class,
                 [
                     'attr' => [
+                        
                         'class' => 'btn-lbock btn-success'
                     ]
                 ]
@@ -162,46 +155,49 @@ class PatientController extends Controller
             $form = $builder->getForm();
             $form->handleRequest($request);
             
-            
-            if($form->isSubmitted() && $form->isValid())
+            if($form->isSubmitted())
             {
                // $form->get($patient)->getData();
-                
                 $manager->persist($patient);
                 $manager->flush();
-                
+                               
                 $session->getFlashBag()->add('info', 'Patient record was created/updated');
+                
+                return new RedirectResponse
+                (
+                    $urlGenerator->generate('patient_record')
+                    );
+
                               
             }
-            
-            $repository = $this->getDoctrine()
-            
-            ->getRepository(Patient::class);
-            
-            $ssns = $repository->findAll();
             return new Response(
                 $twig->render(
                     'Modules/Patient/patient.html.twig',
                     [
-                        'ssns' => $ssns,                                              
                         'patientCreationFormular'=>  $form->createView(),
-                        'isTrue'=> true                 
+                        'patients' => $patientRepository->findAll()
                     ]
-            )
-        ); 
+                    )
+                ); 
+            //$repository = $this->getDoctrine()
+            
+          //  ->getRepository(Patient::class);
+            
+           // $ssns = $repository->findAll();
+ 
     }
     
-    public function listPatient(Environment $twig, PatientRepository $repository)
-    {
-        return new Response(
-            $twig->render(
-                'Modules/Patient/listPatients.html.twig',
-                [
-                    'listPatients' => $repository->findOneBySsn($ssn)
-                ]
-                )
-            );
-    }
+//     public function findPatient(Environment $twig, PatientRepository $repository)
+//     {
+//         return new Response(
+//             $twig->render(
+//                 'Modules/Patient/Patient.html.twig',
+//                 [
+//                     'Patient' => $repository->findOneBySsn($ssn)
+//                 ]
+//                 )
+//             );
+//     }
     
     /** public function updatePatient(
         ObjectManager $manager,

@@ -102,3 +102,10 @@ patient_record:
      requirements:
           _locale: 'en|fr|de'
 
+select_patient:
+     path: /{_locale}/patient/record
+     controller: App\Controller\SelectPatientController::editPatient
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'

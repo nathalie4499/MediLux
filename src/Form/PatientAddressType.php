@@ -3,10 +3,10 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\PatientAddress;
 use Doctrine\DBAL\Types\StringType;
+use Doctrine\DBAL\Types\TextType;
 
 
 class PatientAddressType extends AbstractType
@@ -46,7 +46,17 @@ class PatientAddressType extends AbstractType
                          'class' => 'form-control'
                      ]
                  ]   
-           );
+             ) ->add(
+                 'telephone',
+                 TextType::class,
+                 [
+                     'label' => 'MLPATIENT.TELEPHONE',
+                     'attr' => [
+                         'placeholder' => 'MLPATIENT.TELEPHONE',
+                         'class' => 'form-control'
+                     ]
+                 ]
+                 ) ;
              $form = $builder->getForm();
     }
      public function configureOptions(OptionsResolver $resolver)
