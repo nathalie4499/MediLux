@@ -48,17 +48,15 @@ class AddressbookController extends Controller
                         Environment $twig
                      )
     {
-        //get data from jquery assign to $specialization
-        $specialization = $request->request->get('specialization');
+        //get data from jquery assign to $datafromform
+        $dataFromForm = $request->request->get('dataFromForm');
         
-        // send request to Doctorsrepository   
-        if (!empty($specialization))
-        {
-        $foundspecialization = $repository->specializationExists($specialization);
-        }
-        return new JsonResponse(
-            ['foundspecialization' => $foundspecialization]
-            );
+        //var_dump($dataFromForm);
+        
+        $foundData = $repository->dataExists($dataFromForm);
+        //var_dump($foundData);
+      
+        return new JsonResponse($foundData);
     }
     
     public function addDoctor(

@@ -1,31 +1,24 @@
-function searchSpecialization(specializationFromForm)
+function searchData(dataFromForm)
 {
-	
 	$.post
-	('/addressbook/search',
+	('/addressbook/search', // call function searchDoctor() in addresbookcontroller via routes.yaml
 		{
-			specialization: specializationFromForm
-		},
-		function(responseData)
-		{
-			//$(".dropdown").remove();
-			if(responseData.available)
+			dataFromForm: $('#specialization').val() //send characters to searchDoctor()
+		}).done
+		   (
+			function(responseData) //receive json from searchDoctor()
 			{
-				alert(responseData);
-				$( ".foundlist" ).append( responseData );
-				//$(".dropdown-toggle").dropdown("toggle");
-				return;
+				console.log(responseData);
 			}
-			$( ".foundlist" ).append( "<p>There is no response</p>" );
-			 
-			
-		}
-	);
+		   ).fail(function(sam){
+			   console.log(sam);
+		   });
+	console.log(dataFromForm);
 }
 $('#specialization').on
 					(
 					  'keyup', function()
 					  		   {
-						  		searchSpecialization($(this).val());
+						  		searchData($(this).val());
 					  		   }
 					);

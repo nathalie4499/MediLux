@@ -20,15 +20,16 @@ class DoctorsRepository extends ServiceEntityRepository
         parent::__construct($registry, Doctors::class);
     }
     
-    public function specializationExists(string $specialization)
+    public function dataExists(string $dataFromForm)
     {
-        $queryBuilder = $this->createQueryBuilder('u');
-        $queryBuilder->where('u.specialization = :val')
-                     ->setParameter('val', $specialization);
-        
-        $result = $queryBuilder->getQuery()->getResult();
-        
-        return $result;
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.specialization = :val')
+        ->setParameter('val', '%'.$dataFromForm.'%')
+        ->orderBy('d.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getArrayResult()
+        ;
         
     }
 
