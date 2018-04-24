@@ -11,10 +11,10 @@
 	<div class="datacontainerbtngrp">
     <h3>{{ 'MLPATIENT.TITLE'|trans }}</h3><br/>
     
-        <div class="btn-group" role="group" aria-label="Basic example">
-	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="admin home"><i class="fas fa-home"></i></button></a>
-	      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#adduser"><a data-toggle="popover" data-trigger="hover" data-content="add user"><i class="fas fa-user-plus"></i></button></a>
-	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="search settings"><i class="fas fa-search-plus"></i></button></a>
+        <div class="btn-group"  role="group" aria-label="Basic example">
+	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search " href="{{ path ('search_patient_list') }}"><i class="fas fa-home"></i></button></a>
+	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary" data-toggle="modal" data-target="#adduser"><a data-toggle="popover" data-trigger="hover" data-content="add user"><i class="fas fa-user-plus"></i></button></a>
+	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search" href="{{ path ('search_patient_list') }}"><i class="fas fa-search-plus"></i></button></a>
 		</div>
     </div>
 
