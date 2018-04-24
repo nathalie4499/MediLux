@@ -12,11 +12,11 @@ function searchSpecialization(specializationFromForm)
 			if(responseData.available)
 			{
 				alert(responseData);
-				$( ".dropdown" ).append( "<p>Okkkkkkkkkkkkk</p>" );
+				$( ".foundlist" ).append( "<p>Okkkkkkkkkkkkk</p>" );
 				//$(".dropdown-toggle").dropdown("toggle");
 				return;
 			}
-			$( ".dropdown" ).append( "<p>There is no response</p>" );
+			$( ".foundlist" ).append( "<p>There is no response</p>" );
 			 
 			
 		}

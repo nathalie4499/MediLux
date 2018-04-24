@@ -31,14 +31,14 @@ class AddressbookController extends Controller
                                     )
     {
         return new Response(
-            $twig->render(
-                'Modules/Addressbook/addressbookList.html.twig', 
-                [
-                    'doctor' => $repository->findAll(),
-                    'address' => $addressrepo->findAll()
-                ]
-                )
-            );
+                            $twig->render(
+                                            'Modules/Addressbook/addressbookList.html.twig', 
+                                            [
+                                                'doctor' => $repository->findAll(),
+                                                'address' => $addressrepo->findAll()
+                                            ]
+                                          )
+                            );
     }
  
     public function searchDoctor
@@ -51,25 +51,14 @@ class AddressbookController extends Controller
         //get data from jquery assign to $specialization
         $specialization = $request->request->get('specialization');
         
-        
-        //$unavailable = false;
+        // send request to Doctorsrepository   
         if (!empty($specialization))
         {
-        $spec = $repository->specializationExists($specialization);
+        $foundspecialization = $repository->specializationExists($specialization);
         }
         return new JsonResponse(
-            ['spec' => $spec]
+            ['foundspecialization' => $foundspecialization]
             );
-
-//         return new RedirectResponse
-//         (
-//             $urlGenerator->generate('addressbook_list',
-//                 [
-//                     'specialization' => $repository->findAll()
-//                 ]
-//             )
-        
-
     }
     
     public function addDoctor(
