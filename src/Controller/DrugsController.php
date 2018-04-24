@@ -34,6 +34,24 @@ class DrugsController extends Controller
                 ])
             );
     }
+    /** @Route("/drugs/get/{drugid}", name="drugget")*/
+    public function getDrugs( )
+    {
+        $searchTerm = $request->query->get('search');
+        
+        $em = $this->getDoctrine()->getManager();
+        $search = $em->getRepository('AppBundle:Classified')->searchClassifieds($searchTerm);
+        
+        $results = $query->getResult();
+        
+        $content = $this->renderView('search-result.html.twig', [
+            'results' => $results
+        ]);
+        
+        $response = new JsonResponse();
+        $response->setData(array('classifiedList' => $content));
+        return $response;
+    }
     public function drugsAdd(Environment $twig,
         FormFactoryInterface $factory,
         Request $request,
@@ -98,16 +116,16 @@ class DrugsController extends Controller
         
         if ($form->isSubmitted() && $form->isValid())
         {
-            var_dump($drug);
+//             var_dump($drug);
             $manager->persist($drug);
-            var_dump($drug);
+//             var_dump($drug);
             $manager->flush();
             
-            $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
-            return new RedirectResponse
-            (
-                $urlGenerator->generate('addressbook_list')
-                );
+//             $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
+//             return new RedirectResponse
+//             (
+//                 $urlGenerator->generate('drugs_list')
+//                 );
         }
         return new Response(
             $twig->render(
@@ -116,19 +134,27 @@ class DrugsController extends Controller
                 ])
             );
     }
+
     /**
-    public function deleteAction(Request $request, User $userid)
+     * @param Request  $request
+     * @param Drugs $drugid
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/drugs/delete/{drugid}", name="drugdelete")
+     */
+    
+    public function deleteAction(Request $request, Drugs $drugid)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         
-        if ($userid === null) {
-            return $this->redirectToRoute('admin_user');
+        if ($drugid === null) {
+            return $this->redirectToRoute('drugs_list');
         }
         
         $em = $this->getDoctrine()->getManager();
-        $em->remove($userid);
+        $em->remove($drugid);
         $em->flush();
-        return $this->redirectToRoute('admin_user');
+        return $this->redirectToRoute('drugs_list');
     }
-    **/
+
 }
