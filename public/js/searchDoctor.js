@@ -12,7 +12,7 @@ function searchSpecialization(specializationFromForm)
 			if(responseData.available)
 			{
 				alert(responseData);
-				$( ".foundlist" ).append( "<p>Okkkkkkkkkkkkk</p>" );
+				$( ".foundlist" ).append( responseData );
 				//$(".dropdown-toggle").dropdown("toggle");
 				return;
 			}

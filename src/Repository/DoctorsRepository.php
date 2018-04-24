@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Doctors;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @method Doctors|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,12 +23,13 @@ class DoctorsRepository extends ServiceEntityRepository
     public function specializationExists(string $specialization)
     {
         $queryBuilder = $this->createQueryBuilder('u');
-        $queryBuilder->where('u.specialization = :specialization')
-                     ->setParameter('specialization', $specialization);
+        $queryBuilder->where('u.specialization = :val')
+                     ->setParameter('val', $specialization);
         
-        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+        $result = $queryBuilder->getQuery()->getResult();
         
         return $result;
+        
     }
 
 //    /**
