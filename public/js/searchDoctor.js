@@ -4,8 +4,8 @@ $(document).ready(function()
 	(
 	  'input', function()
 	  {
-		  var notEmpty = $('#specialization').val().length;
-		  if (notEmpty > 0 )
+		  var isEmpty = $('#specialization').val().length;
+		  if (isEmpty > 0 )
   		   { 
 		  		searchData($(this).val())  
            }
@@ -23,11 +23,14 @@ $(document).ready(function()
 				function(responseData) //receive json from searchDoctor()
 				{	
 					$('.searchResults tr').remove();
-					var empty = $.isEmptyObject({responseData});
-					console.log(empty);
 					
-					if (!empty)
+					var empty = responseData.length;
+					console.log(empty);
+					console.log(responseData);
+					
+					if (empty > 0)
 					{
+						console.log('inside if');
 						for (i = 0; i < responseData.length; i++)
 						{
 							$('.searchResults').append
@@ -40,13 +43,15 @@ $(document).ready(function()
 							  '<td>' + responseData[i].telwork +'</td>' +
 							  '<td>' + 
 							  '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'+ responseData[i].id +'">' +
-					          '{{ \'ADDRESSBOOK.DETAIL\'|trans }}' +
+					          'detail' +
 					          '</button>' +
 							  '</td>' +
 							  '</tr>'
 							);
 						}
+					return;	
 					}
+					location.reload();
 					
 				}
 			   );
