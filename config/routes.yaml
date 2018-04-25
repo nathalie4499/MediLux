@@ -103,7 +103,7 @@ patient_record:
           _locale: 'en|fr|de'
 
 select_patient:
-     path: /{_locale}/patient/record
+     path: /{_locale}/patient/select
      controller: App\Controller\SelectPatientController::editPatient
      defaults:
           _locale: 'en'

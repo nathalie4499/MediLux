@@ -9,10 +9,12 @@ HEADER:
   LOGIN: Login
   TRANSLATIONEN: English
   TRANSLATIONDE: Deutsch
-  TRANSLATIONFR: Français
+  TRANSLATIONFR: FranÃƒÂ§ais
   DRUGSLIST: Drugs
   ADMINMAIN: Main
   USERLIST: User
+  NEWPATIENT: Create
+  SELECTPATIENT: Update
 
 ADDRESSBOOK:
     DETAIL: detail
@@ -55,9 +57,3 @@ FORM:
         TITLE: TITLE
         ADDRESS: ADDRESS
         SUBMIT: add
-
-
-        
-        
-
-
