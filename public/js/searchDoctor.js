@@ -10,19 +10,33 @@ $(document).ready(function()
 			}).done
 			   (
 				function(responseData) //receive json from searchDoctor()
-				{
-					console.log("response data: " + responseData);
+				{	
+					$('.searchResults ul li').remove();
+					
+					if (responseData)
+					{
+						for (i = 0; i < responseData.length; i++)
+						{
+							$('.searchResults ul').append
+							(
+							  '<li class="list-group-item"><a class="card-link" data-toggle="modal" data-target="#' + responseData[i].id + '">' + responseData[i].specialization +'<a><li>'
+							);
+						}
+					}
+						
 				}
-			   ).fail(function(sam){
-				   console.log(sam);
-			   });
-		console.log("from form data " + dataFromForm);
+			   );
 	}
-	$('#specialization').on
+	$('#specialization').bind
 						(
-						  'keyup', function()
-						  		   {
-							  		searchData($(this).val());
-						  		   }
+						  'input', function()
+						  {
+							  var notEmpty = $('#specialization').val().length;
+							  if (notEmpty > 0 )
+					  		   { 
+							  		searchData($(this).val())  
+					           }
+						  }
 						);
 });
+
