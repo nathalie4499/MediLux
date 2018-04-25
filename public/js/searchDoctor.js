@@ -16,7 +16,7 @@ $(document).ready(function()
 			   ).fail(function(sam){
 				   console.log(sam);
 			   });
-		//console.log("from form data" + dataFromForm);
+		console.log("from form data " + dataFromForm);
 	}
 	$('#specialization').on
 						(

@@ -23,14 +23,13 @@ class DoctorsRepository extends ServiceEntityRepository
     public function dataExists(string $dataFromForm)
     {
         return $this->createQueryBuilder('d')
-        ->andWhere('d.specialization = :val')
-        ->setParameter('val', '%'.$dataFromForm.'%')
+        ->andWhere('d.specialization LIKE :val')
+        ->setParameter('val', '%' . $dataFromForm . '%')
         ->orderBy('d.id', 'ASC')
         ->setMaxResults(10)
         ->getQuery()
-        ->getArrayResult()
-        ;
-        var_dump($expression)
+        ->getArrayResult();
+        
     }
 
 //    /**
