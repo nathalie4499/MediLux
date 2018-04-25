@@ -24,23 +24,24 @@ ADDRESSBOOK:
 
 MLPATIENT:
     TITLE: New MediLux Patient
-    SSN: Social Security Number
-    GIVENNAME: First Name
-    BIRTHNAME: Birth name
-    MARITALNAME: Marital Name
-    AGE: Age
-    NATIONALITY: Nationality
-    LANGUAGE: Spoken language
-    TELEPHONE: Telephone
-    STREETNUMBER: Street Number
-    STREET: Street
-    LOCALITY: Locality
-    MUNICIPALITY: Municipality
-    COUNTRY: Country
-    ZIP: Zip Code
+    SSN: Enter Social Security Number
+    GIVENNAME: Enter First Name
+    BIRTHNAME: Enter Birth name
+    MARITALNAME: Enter Marital Name
+    AGE: Enter Age
+    NATIONALITY: Enter Nationality
+    LANGUAGE: Enter Spoken language
+    TELEPHONE: Enter Telephone
+    STREETNUMBER: Enter Street Number
+    STREET: Enter Street
+    LOCALITY: Enter Locality
+    MUNICIPALITY: Enter Municipality
+    COUNTRY: Enter Country
+    ZIP: Enter Zip Code
     SUBMIT: Add
-    DESCRIPTION: Description
+    DESCRIPTION: Enter Description
     ACTIVEPROBLEMS: List of Active Problems
+    MODIFY: Modify MediLux Patient
  
 FORM:
   USER:
@@ -69,7 +70,7 @@ FORM:
       SUBMIT: add
   PATIENT:
       SSN: Social Security Number
-      GIVENNAME: Given name
+      GIVENNAME: First name
       BIRTHNAME: Birth name
       MARITALNAME: Marital name
       NATIONALITY: Nationality

@@ -63,6 +63,7 @@ class PatientAddressType extends AbstractType
      {
          $resolver->setDefaults(array(
              'data_class' => PatientAddress::class,
+             //'formular_patient_address' nom du formulaire
          ));
 
     }

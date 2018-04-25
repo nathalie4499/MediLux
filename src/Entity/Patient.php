@@ -12,11 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
- * @UniqueEntity(
- *      fields={"ssn"},
- *      errorPath="ssn",
- *      message="This ssn is already in use"
- * )
+ *
  */
 class Patient
 {

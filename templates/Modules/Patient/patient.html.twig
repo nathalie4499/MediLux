@@ -9,7 +9,7 @@
 {% block body %}
 
 	<div class="datacontainerbtngrp">
-    <h3>{{ 'MLPATIENT.TITLE'|trans }}</h3><br/>
+    <h3>{{ 'MLPATIENT.MODIFY'|trans }}</h3><br/>
     
     	{% set infoMessages = app.flashes('info') %}
     {% if infoMessages is not empty %}
@@ -65,8 +65,7 @@
     		  	<td></td>
 			  	<td>{{ form_row(patientCreationFormular.submit) }}</td> 
   			 </tr>	
-  			</table>
-  		</table>	 		 
+  		</table> 		 
   	  </div>
 	        
 {#         {% for MLPATIENT in ssns %}	     #}
@@ -80,115 +79,78 @@
           
 {# 	    {% endfor %}     #}
 
-<div class="datacontainer adminuserlist">
+<div class="modal fade" id="patientAddress">
+  <div class="modal-dialog modal-dialog-centered modal-lg" id="addPatientAddress">
+    <div class="modal-content mainbg" id="addPatientAddress">
 
-
-
-
-	
-    <table id="patients" class="table table-dark table-striped table-bordered table-hover">
-        <tr class="tableHeader">
-            <td>Given Name</td>
-			<td>Birth Name</td>
-			<td>Marital Name</td>
-			<td>More Options</td>
-			
-        </tr>
-        
-        {% for mlpatient in patients %}
-                <tr>
-
-                    <td>{{ mlpatient.givenname }}</td>
-                    <td>{{ mlpatient.birthname }}</td>
-					<td>{{ mlpatient.maritalname }}</td>
-			                 
-  					<td>
-
-  						<button type="button" class="btn" data-toggle="modal" data-target="#{{ mlpatient.givenname }}">
- 							 <a data-toggle="popover" data-trigger="hover" data-content="user details"><i class="fas fa-info-circle"></i></a>
-						</button>
-						
-						{% if is_granted('ROLE_ADMIN') %}
-                        	<a onclick="return confirm('Are your sure to delete the user {{ mlpatient.birthname }}?')" href="{{ path('userdelete', { 'userid': mlpatient.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a>
-						{% endif %}
-		
-						    <a href="{{ path('patient_record', { 'userid': mlpatient.getID() }) }}" class="btn btn-default btn-sm">Edit</a>
-	
-	
-  						<button type="button" class="btn" data-toggle="modal" data-target="#modify{{ mlpatient.givenname }}">
- 							 <a data-toggle="popover" data-trigger="hover" data-content="modify user">Modify the user</a>
-						</button>	
-	
-
-    <!-- The Modal -->
-    <div class="modal fade" id="modify{{ mlpatient.givenname }}">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content mainbg">
-    
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">modify the user {{ mlpatient.givenname }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-    
-          <!-- Modal body -->
-          <div class="modal-body">
-
-	    {{ render(controller(
-        'App\\Controller\\SelectPatientController::editPatient',
-        { 'patientid': mlpatient.id }
-    )) }}
-    				  
-          
-          </div>
-    
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-    
-        </div>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">add address</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-    </div>	
 
-	
-							                        	
-					</td>
-                </tr>
-            
-        {% endfor %}
-    </table>
+      <!-- Modal body -->
+      <div class="modal-body" id="addPatientAddress">
+             
+
+
+
+
+
+{{ form_start(formular_patient_address) }}
+<div class="table-responsive">	
+<table class="table add_user">
+  <tr>
+    <th>{{ form_label(formular_add_user.username) }}</th>
+    <th>{{ form_widget(formular_add_user.username) }}</th> 
+
+  </tr>
+  <tr>
+    <td>{{ form_label(formular_add_user.firstname) }}</td>
+    <td>{{ form_widget(formular_add_user.firstname) }}</td> 
+
+  </tr>
+
+  <tr>
+    <td>{{ form_label(formular_add_user.lastname) }}</td>
+    <td>{{ form_widget(formular_add_user.lastname) }}</td> 
+
+  </tr>
+  
+    <tr>
+    <td>{{ form_label(formular_add_user.password) }}</td>
+    <td>{{ form_widget(formular_add_user.password) }}</td> 
+
+  </tr>
+  
+      <tr>
+    <td>{{ form_label(formular_add_user.roleToAdd) }}</td>
+    <td>{{ form_widget(formular_add_user.roleToAdd) }}</td> 
+
+  </tr>
+
+  <tr>
+    <td></td>
+    <td>{{ form_row(formular_add_user.submit) }}</td> 
+
+  </tr>
+</table>
 </div>
+{{ form_rest(formular_add_user) }}
+{{ form_end(formular_add_user)}}
 
-{% for mlpatient in patients %}
-    <!-- The Modal -->
-    <div class="modal fade" id="del{{ mlpatient.givenname }}">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content mainbg">
-    
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">delete user {{ mlpatient.givenname }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-    
-          <!-- Modal body -->
-          <div class="modal-body">
-          <p class="alert alert-error">Are you sure to delete ?</p>
-			  
-          
-          </div>
-    
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-    
-        </div>
+       
       </div>
-    </div>	
-{% endfor %} 
 
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>	
 
 
 
