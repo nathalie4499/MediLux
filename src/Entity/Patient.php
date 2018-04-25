@@ -26,7 +26,7 @@ class Patient
      */
     private $id;
     /**
-     * @ORM\Column(type="number")
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      *
      */
@@ -58,7 +58,7 @@ class Patient
      */
     private $language;
     /**
-     * @ORM\Column(type="number", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      *
      */
     private $age;

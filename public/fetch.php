@@ -5,6 +5,7 @@ $sql = "Select * FROM mldemo WHERE patient LIKE '%".$_POST["search"]."%'";
 $result = mysqli_query($connect, $sql);
 if(mysqli_num_rows($result) > 0)
 {
+    include 'patient.php';
     $result .= '<h4 align="center">Search Result</h4>';
     $result .= '<div class=class="result" id="result">
         <table class="table table-striped table-dark table-bordered table-sm table-hover">

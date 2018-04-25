@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	$('.search-box input[type="text"]').on("keyup input", function(){
+	
+
 		
 	var inpuVal = $(this).val();
 	var resultDropdown = $(this).siblings("result");
@@ -21,4 +22,3 @@ $(document).ready(function(){
         $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
         $(this).parent(".result").empty();
     });
-});
