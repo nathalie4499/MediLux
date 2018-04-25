@@ -9,14 +9,39 @@ HEADER:
   LOGIN: Login
   TRANSLATIONEN: English
   TRANSLATIONDE: Deutsch
-  TRANSLATIONFR: Français
+  TRANSLATIONFR: FranÃƒÂ§ais
   DRUGSLIST: Drugs
   ADMINMAIN: Main
   USERLIST: User
+  NEWPATIENT: Create
+  SELECTPATIENT: Update
 
 ADDRESSBOOK:
     DETAIL: detail
     ADD: add
+
+MLPATIENT:
+    TITLE: New MediLux Patient
+    SSN: Social Security Number
+    GIVENNAME: First Name
+    BIRTHNAME: Birth name
+    MARITALNAME: Marital Name
+    AGE: Age
+    NATIONALITY: Nationality
+    LANGUAGE: Spoken language
+    TELEPHONE: Telephone
+    STREETNUMBER: Street Number
+    STREET: Street
+    LOCALITY: Locality
+    MUNICIPALITY: Municipality
+    COUNTRY: Country
+    ZIP: Zip Code
+    SUBMIT: Add
+    DESCRIPTION: Description
+    ACTIVEPROBLEMS: List of Active Problems
+    
+    
+
 
 FORM:
     ADDRESSBOOK:
@@ -32,6 +57,7 @@ FORM:
         TITLE: TITLE
         ADDRESS: ADDRESS
         SUBMIT: add
+
 
     PATIENT:
         SSN: Social Security Number
@@ -62,6 +88,4 @@ FORM:
         OVERDOSE: overdose
         COMPONENTS: components
         
-        
-
-
+       
