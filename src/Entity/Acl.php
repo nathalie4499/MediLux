@@ -26,6 +26,26 @@ class Acl
      */
     private $search;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $patient;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $address_book;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $drugs;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $admin;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +71,54 @@ class Acl
     public function setSearch(?bool $search): self
     {
         $this->search = $search;
+
+        return $this;
+    }
+
+    public function getPatient(): ?bool
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?bool $patient): self
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getAddressBook(): ?bool
+    {
+        return $this->address_book;
+    }
+
+    public function setAddressBook(?bool $address_book): self
+    {
+        $this->address_book = $address_book;
+
+        return $this;
+    }
+
+    public function getDrugs(): ?bool
+    {
+        return $this->drugs;
+    }
+
+    public function setDrugs(?bool $drugs): self
+    {
+        $this->drugs = $drugs;
+
+        return $this;
+    }
+
+    public function getAdmin(): ?bool
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?bool $admin): self
+    {
+        $this->admin = $admin;
 
         return $this;
     }

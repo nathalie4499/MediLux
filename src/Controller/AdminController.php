@@ -159,10 +159,9 @@ class AdminController extends Controller
 
             }
 
-            
-            
-
-            
+        $repository = $this->getDoctrine()
+        ->getRepository(Acl::class);
+        $acl = $repository->findAll();
             
         $repository = $this->getDoctrine()
         ->getRepository(Role::class);
@@ -177,6 +176,7 @@ class AdminController extends Controller
                 [
                     'users' => $users,
                     'role' => $role,
+                    'acl' => $acl,
                     'formular_add_user'=>  $form->createView(),
                     'isTrue'=> true
                     
