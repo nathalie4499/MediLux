@@ -21,6 +21,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\DrugsRepository;
 use App\Entity\Drugs;
+use App\Repository\DoctorsRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class DrugsController extends Controller
@@ -35,7 +37,7 @@ class DrugsController extends Controller
             );
     }
     /** @Route("/drugs/get/{drugid}", name="drugget")*/
-    public function getDrugs( )
+    public function drugsSearch( )
     {
         $searchTerm = $request->query->get('search');
         
@@ -52,6 +54,23 @@ class DrugsController extends Controller
         $response->setData(array('classifiedList' => $content));
         return $response;
     }
+//     public function drugsSearch
+//     (
+//         DoctorsRepository $repository,
+//         Request $request,
+//         Environment $twig
+//         )
+//     {
+//         //get data from jquery assign to $datafromform
+//         $dataFromForm = $request->request->get('dataFromForm');
+        
+//         //var_dump($dataFromForm);
+        
+//         $foundData = $repository->dataExists($dataFromForm);
+//         //var_dump($foundData);
+        
+//         return new JsonResponse($foundData);
+//     }
     public function drugsAdd(Environment $twig,
         FormFactoryInterface $factory,
         Request $request,
