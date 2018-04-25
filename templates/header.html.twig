@@ -16,7 +16,7 @@
           		<li class="nav-item">
             		<a class="nav-link" href="{{ path ('search_patient_list') }}" role="tab">{{ 'HEADER.SEARCHPATIENT'|trans }}</a>
           		</li>
-          		<li class="nav-item">
+          		<li class="nav-item dropdown">
             		    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button">{{ 'HEADER.PATIENTRECORD'|trans }}</a>
             		    <div class="dropdown-menu" id="patientdropdown">
                           <a class="dropdown-item" href="{{ path ('patient_record') }}">{{ 'HEADER.NEWPATIENT'|trans }}</a>
