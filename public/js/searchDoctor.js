@@ -1,5 +1,16 @@
 $(document).ready(function()
 {
+	$('#specialization').bind
+	(
+	  'input', function()
+	  {
+		  var notEmpty = $('#specialization').val().length;
+		  if (notEmpty > 0 )
+  		   { 
+		  		searchData($(this).val())  
+           }
+	  }
+	);
 	
 	function searchData(dataFromForm)
 	{
@@ -11,32 +22,34 @@ $(document).ready(function()
 			   (
 				function(responseData) //receive json from searchDoctor()
 				{	
-					$('.searchResults ul li').remove();
+					$('.searchResults tr').remove();
+					var empty = $.isEmptyObject({responseData});
+					console.log(empty);
 					
-					if (responseData)
+					if (!empty)
 					{
 						for (i = 0; i < responseData.length; i++)
 						{
-							$('.searchResults ul').append
+							$('.searchResults').append
 							(
-							  '<li class="list-group-item"><a class="card-link" data-toggle="modal" data-target="#' + responseData[i].id + '">' + responseData[i].specialization +'<a><li>'
+							  '<tr>' +
+							  '<th scope="row">'+ responseData[i].id +'</th>' +
+							  '<td>' + responseData[i].specialization +'</td>' +
+							  '<td>' + responseData[i].lastname +'</td>' +
+							  '<td>' + responseData[i].firstname +'</td>' +
+							  '<td>' + responseData[i].telwork +'</td>' +
+							  '<td>' + 
+							  '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'+ responseData[i].id +'">' +
+					          '{{ \'ADDRESSBOOK.DETAIL\'|trans }}' +
+					          '</button>' +
+							  '</td>' +
+							  '</tr>'
 							);
 						}
 					}
-						
+					
 				}
 			   );
 	}
-	$('#specialization').bind
-						(
-						  'input', function()
-						  {
-							  var notEmpty = $('#specialization').val().length;
-							  if (notEmpty > 0 )
-					  		   { 
-							  		searchData($(this).val())  
-					           }
-						  }
-						);
 });
 

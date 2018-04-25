@@ -45,14 +45,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-      <!-- Display search results -->
-      </div>
-      <div class="card searchResults" style="width: 18rem;">
-          <ul class="list-group list-group-flush">
-          </ul>
-      </div>
-      <!-- End of Display search results -->
+      <tbody class="searchResults">
       	{% for value in doctor %}
 
         <tr>
@@ -61,7 +54,6 @@
           <td>{{ value.lastname }}</td>
           <td>{{ value.firstname }}</td>
           <td>{{ value.telwork }}</td>
-{#           <td><a type="button" class="btn btn-success" href="{{ path('addressbook_detail', {'doctor': value.id}) }}">{{ 'ADDRESSBOOK.DETAIL'|trans }}</a></td>#}
           <td>
           <!-- Button trigger modal -->
     	  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ value.id }}">
