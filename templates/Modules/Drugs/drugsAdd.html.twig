@@ -10,17 +10,9 @@
 <div class="datacontainer">
     <a href="{{ path ('drugs_list') }}" class="button">Go Back</a>
     <div id="Drugsform">
-      <form class="" action="index.html" method="post">
-        <input type="text" name="Scientific name" value="Scientific name">
-        <input type="text" name="Commercial name" value="Commercial name(s)">
-        <input type="text" name="Producer" value="Producer">
-        <input type="text" name="Dosage" value="Dosage">
-        <input type="text" name="Counter indication" value="Counter indication(s)">
-        <input type="text" name="Side effects" value="Side effects">
-        <input type="text" name="Incompatibilities" value="Incompatibilities">
-        <input type="text" name="Overdose" value="Overdose">
-        <input type="text" name="Composition" value="Composition">
-        <input type="submit" name="Add to DB" value="">
-      </form>
-      </div>
+    	<h1>Add new doctor</h1>
+	<div class="cardmedilux">
+	{{ form(drugsFormular) }}
+	</div>
+    </div>
 {% endblock %}
