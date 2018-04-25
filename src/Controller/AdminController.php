@@ -24,13 +24,14 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Role;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Acl;
 use Doctrine\DBAL\Types\ArrayType;
 use App\Repository\RoleRepository;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 
@@ -48,14 +49,15 @@ class AdminController extends Controller
     }
 
     public function adminUser(Environment $twig, FormFactoryInterface $factory, Request $request, ObjectManager $manager,
-        SessionInterface $session, UrlGeneratorInterface $urlGenerator,  EncoderFactoryInterface $encoderFactory, RoleRepository $roleRepository)
+        SessionInterface $session, UrlGeneratorInterface $urlGenerator,  EncoderFactoryInterface $encoderFactory,
+        RoleRepository $roleRepository)
     {
         $user = new User();
 
         $builder = $factory->createBuilder(FormType::class, $user);
         $builder->add(
             'username',
-            TextType::class,
+            TextareaType::class,
             [
                 'required' => true,
                 'label' => 'FORM.USER.USERNAME',
@@ -108,6 +110,7 @@ class AdminController extends Controller
                 )
 
             ->add('roleToAdd', EntityType::class, [
+                'label' => 'FORM.USER.ROLETOADD',
                 'class'        => Role::class,
                 'choice_label' => 'label',
                 'mapped'       => false,
@@ -166,6 +169,9 @@ class AdminController extends Controller
                 
                 )
             );
+        
+     
+        
     }
 
     
@@ -192,6 +198,102 @@ class AdminController extends Controller
         return $this->redirectToRoute('admin_user');
     }
     
+
+    /**
+     * @param Request  $request
+     * @param User $userid
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/user/edit/{userid}", name="useredit")
+     */
+    public function editUser(Request $request, User $userid, FormFactoryInterface $factory, ObjectManager $manager,  UrlGeneratorInterface $urlGenerator )
+    {
     
+        $editUserId = $userid->getID();
+        
+        $this->get('form.factory')->createNamed($editUserId);
+ 
+        
+       
+        $builder = $factory->createBuilder(FormType::class, $userid);
+        $builder->add(
+            'username',
+            TextType::class,
+            [
+                'required' => true,
+                'label' => 'FORM.USER.USERNAME',
+                'attr' => [
+                    'placeholder' => 'FORM.USER.PLACEHOLDER.USERNAME',
+                    'class' => 'modifyuser'
+                    
+                ]
+            ]
+            )
+            
+            
+            
+            ->add(
+                'firstname',
+                TextType::class,
+                [
+                    'required' => true,
+                    'label' => 'FORM.USER.FIRSTNAME',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.FIRSTNAME',
+                        'class' => 'modifyuser'
+                    ]
+                ]
+                )
+            
+                
+            ->add(
+                'lastname',
+                TextType::class,
+                [
+                    'required' => true,
+                    'label' => 'FORM.USER.LASTNAME',
+                    'attr' => [
+                        'placeholder' => 'FORM.USER.PLACEHOLDER.LASTNAME',
+                        'class' => 'modifyuser'
+                    ]
+                ]
+                )
+
+            ->add('roleToModify',
+                EntityType::class,
+                [
+                'class'        => Role::class,
+                'choice_label' => 'label',
+                'mapped'       => false,
+            ])
+                
+            ->add('save', SubmitType::class, array('label' => 'Modify the user'));
+            
+        $formedituser = $builder->getForm();
+        $formedituser->handleRequest($request);
+            
+        
+
+        
+        if ($formedituser->isSubmitted() && $formedituser->isValid()) {
+            
+            $role = $formedituser->get('roleToModify')->getData();
+            
+            $userid->setRole($role);
+            
+            $manager->persist($userid);
+            $manager->flush();
+            return new RedirectResponse($urlGenerator->generate('admin_user'));
+        }
+        
+        return $this->render('Modules/User/userEdit.html.twig', [
+            'useredit' => $formedituser->createView(),
+            'routeAttr' => ['userid' => $userid ->getId()
+            ],
+            'currentuser' => $userid ->getId()
+        ]);
+    }
+    
+
     
 }

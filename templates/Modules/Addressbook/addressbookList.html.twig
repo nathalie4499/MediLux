@@ -5,16 +5,23 @@
 {% endblock %}
 
 {% block body %}
+
+<div class="datacontainer">
 	<table class="cardmedilux table table-hover table-striped">
+
       <thead>
         <tr>
           <th scope="col">
           	#
           </th>
           <th scope="col">
+          	<form method="post">
           	<div class="input-group">
-  				<input placeholder="speciality" type="text" class="form-control">
+
+  				<input id="specialization" for="specialization" placeholder="speciality" type="text" class="form-control">
 			</div>
+			</form>
+			<div class="foundlist"></div>
           </th>
           <th scope="col">
           	<div class="input-group">
@@ -38,7 +45,7 @@
       </thead>
       <tbody>
       	{% for value in doctor %}
-      		
+
         <tr>
           <th scope="row">{{ value.id }}</th>
           <td>{{ value.specialization }}</td>
@@ -73,10 +80,10 @@
               <h6>{{ value.email }}</h6>
               <h6>{{ value.fax }}</h6>
               <h5>Address</h5>
-              
+
               <h6>{{ addressValue.id }}</h6>
               <h6>{{ addressValue.zip }}</h6>
-              
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -87,5 +94,10 @@
         	{% endfor %}
         {% endfor %}
       </tbody>
-	</table>   
+	</table>
+</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="/js/searchDoctor.js"></script>
 {% endblock %}
