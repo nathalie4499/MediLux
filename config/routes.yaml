@@ -13,12 +13,20 @@ homepage:
         _locale: 'en|fr|de'
         
 admin_user:
-     path: /{_locale}/admin/user
+     path: /{_locale}/administration/user
      defaults:
-        _controller: App\Controller\AdminController:adminUser
+        _controller: App\Controller\AdminController::adminUser
         _locale: 'en'  
      requirements:
-        _locale: 'en|fr|de'           
+        _locale: 'en|fr|de'       
+        
+register_user:
+     path: /{_locale}/register/user
+     defaults:
+        _controller: App\Controller\UserController::registerUser
+        _locale: 'en'  
+     requirements:
+        _locale: 'en|fr|de'              
 
 login:
     path: /{_locale}/login
@@ -90,9 +98,14 @@ addressbook_add:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'
+
+addressbook_search:
+    path: /addressbook/search
+    controller: App\Controller\AddressbookController::searchDoctor
+    methods: ['POST']
                   
 admin_main:
-     path: /{_locale}/admin/main
+     path: /{_locale}/administration/main
      controller: App\Controller\AdminController::adminMain
      defaults:
           _locale: 'en'
@@ -107,3 +120,10 @@ patient_record:
      requirements:
           _locale: 'en|fr|de'
 
+select_patient:
+     path: /{_locale}/patient/select
+     controller: App\Controller\SelectPatientController::editPatient
+     defaults:
+          _locale: 'en'
+     requirements:
+          _locale: 'en|fr|de'
