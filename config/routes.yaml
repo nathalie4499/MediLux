@@ -20,6 +20,16 @@ admin_user:
      requirements:
         _locale: 'en|fr|de'           
 
+
+useredit:
+     path: /{_locale}/user/edit/{userid}
+     defaults:
+        _controller: App\Controller\AdminController:editUser
+        _locale: 'en'  
+     requirements:
+        _locale: 'en|fr|de'     
+
+
 login:
     path: /{_locale}/login
     controller: App\Controller\UserController::login

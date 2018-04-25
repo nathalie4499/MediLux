@@ -52,6 +52,16 @@ FORM:
         DESCRIPTION: Description
         ACTIVEPROBLEMS: List of Active Problems
         
+    DRUGS:
+        NAME: Name
+        SUPPLIER: supplier
+        DOSAGE: dosage
+        CONTRAINDICATIONS: contraindications
+        SIDEEFFECTS: sideeffects
+        INCOMPATIBILITIES: incompatibilities
+        OVERDOSE: overdose
+        COMPONENTS: components
+        
         
 
 
