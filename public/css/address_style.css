@@ -8,3 +8,15 @@
 	padding: 10px;
 	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
+
+.ssssearchResults{
+  background-color: white;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  position: absolute;
+  top:200px;
+  z-index: 1;
+}
+
+ul{
+  list-style-type: none;
+}

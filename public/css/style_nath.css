@@ -1,17 +1,22 @@
-h1{
-	text-align:center;
-	color: white;
-	font-size: 1.4em;
-	margin-bottom: 25px;
+@charset "ISO-8859-1";
+
+.btn {
+	float: right;
+	padding: 8px;
 }
 
-#ssnage{
-	display: flex;
-	justify-content: center;
+.list-group-item{
+  background-color: transparent;
+  width:100%;
+  padding: 5px;
+  height: 5%;
+  border-radius: 5px;
 }
 
-
-#natlang{
-	display: flex;
-	justify-content: center;
+#patientdropdown{
+	padding: 2px;
+	width: 50px;
+	left: 35%;
+	top: 45px;
 }
+
