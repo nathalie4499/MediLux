@@ -6,12 +6,14 @@ use App\Entity\Doctors;
 use App\Form\Type\AddressType;
 use App\Repository\AddressDoctorsRepository;
 use App\Repository\DoctorsRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,16 +31,34 @@ class AddressbookController extends Controller
                                     )
     {
         return new Response(
-            $twig->render(
-                'Modules/Addressbook/addressbookList.html.twig', 
-                [
-                    'doctor' => $repository->findAll(),
-                    'address' => $addressrepo->findAll()
-                ]
-                )
-            );
+                            $twig->render(
+                                            'Modules/Addressbook/addressbookList.html.twig', 
+                                            [
+                                                'doctor' => $repository->findAll(),
+                                                'address' => $addressrepo->findAll()
+                                            ]
+                                          )
+                            );
     }
  
+    public function searchDoctor
+                    (
+                        DoctorsRepository $repository,
+                        Request $request,
+                        Environment $twig
+                     )
+    {
+        //get data from jquery assign to $datafromform
+        $dataFromForm = $request->request->get('dataFromForm');
+        
+        //var_dump($dataFromForm);
+        
+        $foundData = $repository->dataExists($dataFromForm);
+        //var_dump($foundData);
+      
+        return new JsonResponse($foundData);
+    }
+    
     public function addDoctor(
                                 Environment $twig,
                                 FormFactoryInterface $factory,
@@ -117,7 +137,7 @@ class AddressbookController extends Controller
         $form = $builder->getForm();
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid())
+        if ($form->isSubmitted() /**&& $form->isValid() **/)
         { 
             var_dump($doctor);
             $manager->persist($doctor);

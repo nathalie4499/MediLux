@@ -20,7 +20,7 @@
 
 
 
-
+<div class="table-responsive">
 	
     <table id="users" class="table table-dark table-striped table-bordered table-hover adminuserlisttable">
         <tr class="tableHeader">
@@ -48,44 +48,16 @@
                         	<a onclick="return confirm('Are your sure to delete the user {{ mluser.username }}?')" href="{{ path('userdelete', { 'userid': mluser.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a>
 						{% endif %}
 		
-						    <a href="{{ path('useredit', { 'userid': mluser.getID() }) }}" class="btn btn-default btn-sm">Edit</a>
-	
-	
-  						<button type="button" class="btn" data-toggle="modal" data-target="#modify{{ mluser.username }}">
- 							 <a data-toggle="popover" data-trigger="hover" data-content="modify user">Modify the user</a>
-						</button>	
-	
+						    <a href="{{ path('useredit', { 'userid': mluser.getID() }) }}" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a>
 
-    <!-- The Modal -->
-    <div class="modal fade" id="modify{{ mluser.username }}">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content mainbg">
-    
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">modify the user {{ mluser.username }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-    
-          <!-- Modal body -->
-          <div class="modal-body">
+<a href="#password-reset-popup-{{ mluser.username }}" class="open-popup-link"><i class="fas fa-key"></i></a>	
+ 
+<div id="password-reset-popup-{{ mluser.username }}" class="white-popup mfp-hide">
+  Password reset for user {{ mluser.username }}
+  <br/>
+  ASAP
+</div>
 
-	    {{ render(controller(
-        'App\\Controller\\AdminController::editUser',
-        { 'userid': mluser.id }
-    )) }}
-    				  
-          
-          </div>
-    
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-    
-        </div>
-      </div>
-    </div>	
 
 	
 							                        	
@@ -94,6 +66,7 @@
             
         {% endfor %}
     </table>
+</div>
 </div>
 
 {% for mluser in users %}
@@ -128,8 +101,8 @@
 
 <!-- The Modal -->
 <div class="modal fade" id="adduser">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content mainbg">
+  <div class="modal-dialog modal-dialog-centered modal-lg" id="adduser2">
+    <div class="modal-content mainbg" id="adduser2">
 
       <!-- Modal Header -->
       <div class="modal-header">
@@ -138,15 +111,16 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+      <div class="modal-body" id="adduser2">
              
 
 
 
 
 
-{{ form_start(formular_add_user) }}	
-<table class="add_user">
+{{ form_start(formular_add_user) }}
+<div class="table-responsive">	
+<table class="table add_user">
   <tr>
     <th>{{ form_label(formular_add_user.username) }}</th>
     <th>{{ form_widget(formular_add_user.username) }}</th> 
@@ -182,11 +156,13 @@
 
   </tr>
 </table>
+</div>
 {{ form_rest(formular_add_user) }}
 {{ form_end(formular_add_user)}}
 
        
       </div>
+
 
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -196,7 +172,6 @@
     </div>
   </div>
 </div>	
-
 
 
 
@@ -221,7 +196,7 @@
           <!-- Modal body -->
           <div class="modal-body">
            
-          
+<div class="table-responsive">          
           <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -253,11 +228,12 @@
                       </th>            	
             	</tbody>        	
           </table>
-    
+</div>
             {% for acl in mluser.ACLs %}
             
             <br/>
             <h5>ACL - Modules</h5>
+            <div class="table-responsive">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -313,6 +289,7 @@
             		</tr>
             	</tbody>
             </table>
+            </div>
 
             {% endfor %} 
             
