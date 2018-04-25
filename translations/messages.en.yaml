@@ -67,8 +67,6 @@ FORM:
       TITLE: TITLE
       ADDRESS: ADDRESS
       SUBMIT: add
-
-
   PATIENT:
       SSN: Social Security Number
       GIVENNAME: Given name
@@ -87,8 +85,7 @@ FORM:
       TITLE: Active Problem Title
       DESCRIPTION: Description
       ACTIVEPROBLEMS: List of Active Problems
-        
-    DRUGS:
+  DRUGS:
         NAME: Name
         SUPPLIER: supplier
         DOSAGE: dosage
