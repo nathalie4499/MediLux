@@ -8,16 +8,14 @@
 
 <div class="datacontainerbtngrp">
     <h3>Doctors</h3><br/>
-    
     <div class="btn-group" role="group" aria-label="Basic example">
       <a type="button" class="btn btn-secondary" href="{{ path ('addressbook_add') }}"><i class="fas fa-user-plus"></i></a>
-
     </div>
 </div>
 
 <div class="datacontainer">
 	<div class="table-responsive">
-    	<table class="cardmedilux table-bordered table-hover adminuserlisttable table table-striped table-dark">
+    	<table class=" cardmedilux table-bordered table-hover adminuserlisttable table table-striped table-dark">
           <thead>
               <form method="post">
                 <tr>
@@ -63,30 +61,90 @@
               </button>
               </td>
             </tr>
-            <!-- Modal -->
+            
+            	
+            {% endfor %}
+          </tbody>
+    	</table>
+	</div>
+</div>
+<!-- Modal -->
+			{% for value in doctor %}
             {% for addressValue in address %}
             <div class="modal fade" id="{{ value.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
+              <div class="modal-dialog-centered modal-dialog" role="document">
+                <div id="doctormodal" class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLongTitle">{{ value.title }}{{ value.firstname }}{{ value.lastname }}</h1>
+                    <h1 class="modal-title">{{ value.title }}</h1>
+                    <h1>{{ value.firstname }}</h1>
+                    <h1>{{ value.lastname }}</h1><br>
                     <h2>{{ value.specialization }}</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                  <h6>{{ value.language }}</h6>
-                  <h6>{{ value.mobile }}</h6>
-                  <h6>{{ value.telwork }}</h6>
-                  <h6>{{ value.telpriv }}</h6>
-                  <h6>{{ value.email }}</h6>
-                  <h6>{{ value.fax }}</h6>
-                  <h5>Address</h5>
-    
-                  <h6>{{ addressValue.id }}</h6>
-                  <h6>{{ addressValue.zip }}</h6>
-    
+                     <div class="table-responsive">
+                     	 <table>
+                     	 	 <thead></thead>
+                         	 <tbody>
+                          	<tr>
+                          		<td>Language</td>
+                          		<td><h6>{{ value.language }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Mobile</td>
+                          		<td><h6>{{ value.mobile }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Tel. work</td>
+                          		<td><h6>{{ value.telwork }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Tel.priv</td>
+                          		<td><h6>{{ value.telpriv }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>email</td>
+                          		<td><h6>{{ value.email }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>fax</td>
+                          		<td><h6>{{ value.fax }}</h6></td>
+                          	</tr>
+                          	</tbody>
+                          </table>
+                          <h5>Address</h5>
+                          <table>
+                          <thead></thead>
+                          <tbody>
+                          	<tr>
+                          		<td>ZIP</td>
+                          		<td><h6>{{ addressValue.zip }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Country</td>
+                          		<td><h6>{{ addressValue.country }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Locality</td>
+                          		<td><h6>{{ addressValue.locality }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Municipality</td>
+                          		<td><h6>{{ addressValue.municipality }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Canton</td>
+                          		<td><h6>{{ addressValue.canton }}</h6></td>
+                          	</tr>
+                          	<tr>
+                          		<td>Number</td>
+                          		<td><h6>{{ addressValue.number }}</h6></td>
+                          	</tr>
+                          	</tbody>
+                      </table>
+                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -94,13 +152,8 @@
                 </div>
               </div>
             </div>
-            
-            	{% endfor %}
             {% endfor %}
-          </tbody>
-    	</table>
-	</div>
-</div>
+            {% endfor %}
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}

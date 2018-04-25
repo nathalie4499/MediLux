@@ -1,12 +1,21 @@
+{% use "bootstrap_4_layout.html.twig" %}
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="/css/address_style.css">
 {% endblock %}
 
+
 {% block body %}
-	<h1>Add new doctor</h1>
-	<div class="cardmedilux">
-	{{ form(doctorFormular) }}
+	<div class="datacontainerbtngrp">
+        <h3>Add new doctor</h3><br/>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a type="button" class="btn btn-secondary" href="{{ path ('addressbook_add') }}"><i class="fas fa-user-plus"></i></a>
+        </div>
+	</div>
+	<div class="datacontainer">
+    	<div class="cardmedilux table-dark">
+    	    {{ form(doctorFormular) }}
+    	</div>
 	</div>
 {% endblock %}
