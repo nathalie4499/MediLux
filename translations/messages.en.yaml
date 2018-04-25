@@ -9,7 +9,7 @@ HEADER:
   LOGIN: Login
   TRANSLATIONEN: English
   TRANSLATIONDE: Deutsch
-  TRANSLATIONFR: FranÃƒÂ§ais
+  TRANSLATIONFR: FranĂ�Ć’Ă‚Â§ais
   DRUGSLIST: Drugs
   ADMINMAIN: Main
   USERLIST: User
@@ -20,7 +20,7 @@ HEADER:
 
 ADDRESSBOOK:
     DETAIL: detail
-    ADD: add
+    RESET: reset
 
 MLPATIENT:
     TITLE: New MediLux Patient

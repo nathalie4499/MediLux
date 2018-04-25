@@ -35,16 +35,15 @@ $(document).ready(function()
 						{
 							$('.searchResults').append
 							(
-							  '<tr>' +
-							  '<th scope="row">'+ responseData[i].id +'</th>' +
+							  '<tr>' +							  
 							  '<td>' + responseData[i].specialization +'</td>' +
 							  '<td>' + responseData[i].lastname +'</td>' +
 							  '<td>' + responseData[i].firstname +'</td>' +
 							  '<td>' + responseData[i].telwork +'</td>' +
 							  '<td>' + 
-							  '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'+ responseData[i].id +'">' +
-					          'detail' +
-					          '</button>' +
+							  '<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#'+ responseData[i].id +'">' +
+					          '<i class="fas fa-info-circle"></i>' +
+					          '</a>' +
 							  '</td>' +
 							  '</tr>'
 							);
