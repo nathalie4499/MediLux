@@ -57,3 +57,35 @@ FORM:
         TITLE: TITLE
         ADDRESS: ADDRESS
         SUBMIT: add
+
+
+    PATIENT:
+        SSN: Social Security Number
+        GIVENNAME: Given name
+        BIRTHNAME: Birth name
+        MARITALNAME: Marital name
+        NATIONALITY: Nationality
+        TELEPHONE: Telephone
+        LANGUAGE: Spoken language
+        STREETNUMBER: Street number
+        STREET: Street
+        LOCALITY: Locality
+        COUNTRY: Country
+        ZIP: zip
+        SUBMIT: add
+        AGE: age
+        TITLE: Active Problem Title
+        DESCRIPTION: Description
+        ACTIVEPROBLEMS: List of Active Problems
+        
+    DRUGS:
+        NAME: Name
+        SUPPLIER: supplier
+        DOSAGE: dosage
+        CONTRAINDICATIONS: contraindications
+        SIDEEFFECTS: sideeffects
+        INCOMPATIBILITIES: incompatibilities
+        OVERDOSE: overdose
+        COMPONENTS: components
+        
+       

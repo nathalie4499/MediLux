@@ -48,6 +48,47 @@
                         	<a onclick="return confirm('Are your sure to delete the user {{ mluser.username }}?')" href="{{ path('userdelete', { 'userid': mluser.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a>
 						{% endif %}
 		
+						    <a href="{{ path('useredit', { 'userid': mluser.getID() }) }}" class="btn btn-default btn-sm">Edit</a>
+	
+	
+  						<button type="button" class="btn" data-toggle="modal" data-target="#modify{{ mluser.username }}">
+ 							 <a data-toggle="popover" data-trigger="hover" data-content="modify user">Modify the user</a>
+						</button>	
+	
+
+    <!-- The Modal -->
+    <div class="modal fade" id="modify{{ mluser.username }}">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content mainbg">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">modify the user {{ mluser.username }}</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+
+	    {{ render(controller(
+        'App\\Controller\\AdminController::editUser',
+        { 'userid': mluser.id }
+    )) }}
+    				  
+          
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+    
+        </div>
+      </div>
+    </div>	
+
+	
+							                        	
 					</td>
                 </tr>
             
@@ -126,6 +167,12 @@
     <tr>
     <td>{{ form_label(formular_add_user.password) }}</td>
     <td>{{ form_widget(formular_add_user.password) }}</td> 
+
+  </tr>
+  
+      <tr>
+    <td>{{ form_label(formular_add_user.roleToAdd) }}</td>
+    <td>{{ form_widget(formular_add_user.roleToAdd) }}</td> 
 
   </tr>
 
