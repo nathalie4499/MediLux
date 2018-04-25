@@ -1,0 +1,34 @@
+{% block body %}
+
+
+
+<div class="datacontainer edituser">
+
+
+{% set fieldidentifier = form_widget(useredit.id) %}
+{{ dump(fieldidentifier) }}
+{{ form_start(useredit, {'attr': {'id': fieldidentifier }})  }}	
+	
+
+{{ form_label(useredit.username) }}
+{{ form_widget(useredit.username, {'id':'username-' ~ fieldidentifier }) }}
+{{ form_label(useredit.firstname) }}
+{{ form_widget(useredit.firstname, {'id':'firstname-' ~ fieldidentifier }) }}
+{{ form_label(useredit.lastname) }}
+{{ form_widget(useredit.lastname, {'id':'lastname-' ~ fieldidentifier }) }}
+{{ form_label(useredit.roleToModify) }}
+{{ form_widget(useredit.roleToModify, {'id':'roleToModify-' ~ fieldidentifier }) }}
+{{ form_label(useredit.submit) }}
+{{ form_widget(useredit.submit, {'id':'submit-' ~ fieldidentifier }) }}
+
+{{ form_rest(useredit) }}
+{{ form_end(useredit)}}
+</div>
+
+
+
+{% endblock %}
+
+
+
+

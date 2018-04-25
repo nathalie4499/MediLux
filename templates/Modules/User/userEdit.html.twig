@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+<div class="datacontainer edituser">
+
+
+
+{{ form_start(useredit)  }}	
+
+
+{{ form_label(useredit.username) }}
+{{ form_widget(useredit.username, {'id':'username-' ~ currentuser }) }}
+{{ form_label(useredit.firstname) }}
+{{ form_widget(useredit.firstname, {'id':'firstname-' ~ currentuser }) }}
+{{ form_label(useredit.lastname) }}
+{{ form_widget(useredit.lastname, {'id':'lastname-' ~ currentuser }) }}
+{{ form_label(useredit.roleToModify) }}
+{{ form_widget(useredit.roleToModify, {'id':'roleToModify-' ~ currentuser }) }}
+
+{{ form_widget(useredit._token, {'id':'token-' ~ currentuser })}}
+
+
+
+
+
+
+{{ form_label(useredit.save) }}
+{{ form_widget(useredit.save, {'id':'save-' ~ currentuser }) }}
+
+
+{{ form_rest(useredit) }}
+{{ form_end(useredit)}}
+</div>
+
+
+
+{% endblock %}
+
+
+
+
