@@ -122,3 +122,9 @@ select_patient:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'
+          
+patient_search:
+    path: /patient/search
+    controller: App\Controller\SearchController::searchPatient
+    methods: ['POST']
+                  
