@@ -43,7 +43,8 @@ security:
         - { path: "^/[a-zA-Z]+/admin/user", roles: "ROLE_ADMIN", requires_channel: https }  
         - { path: "^/[a-zA-Z]+/admin/main", roles: "ROLE_ADMIN", requires_channel: https }
     
-    
+        - { path: "^/[a-zA-Z]+/administration/user", roles: "ROLE_ADMIN", requires_channel: https }  
+        - { path: "^/[a-zA-Z]+/administration/main", roles: "ROLE_ADMIN", requires_channel: https }    
 
                            
    

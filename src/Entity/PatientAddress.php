@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\ActiveProblems;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientAddressRepository")
  */
-class PatientAddress extends ActiveProblems
+class PatientAddress
 {
     /**
      * @ORM\Id()
@@ -18,34 +24,16 @@ class PatientAddress extends ActiveProblems
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $streetnumber;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $street;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $locality;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $municipality;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $canton;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $zip;
+    
+    /**  
+    * @ORM\OneToMany(targetEntity="App\Entity\Zip", mappedBy="patientaddress")  
+    * @ORM\Column(type="string", length=255, nullable=true)
+    * @Assert\Valid()  
+    */
+    private $zips;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Country")
@@ -62,67 +50,17 @@ class PatientAddress extends ActiveProblems
     {
         return $this->id;
     }
-
-    public function getStreetnumber(): ?int
+    
+    public function getStreetnumber(): ?NumberType
     {
-        return $this->streetnumber;
+        return $this->streetumber;
     }
-
-    public function setStreetnumber(?int $streetnumber): self
+    
+    public function setStreetnumber(?NumberType $streetnumber): self
     {
         $this->streetnumber = $streetnumber;
-
-        return $this;
     }
-
-    public function getStreet(): ?string
-    {
-        return $this->street;
-    }
-
-    public function setStreet(?string $street): self
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    public function getLocality(): ?string
-    {
-        return $this->locality;
-    }
-
-    public function setLocality(?string $locality): self
-    {
-        $this->locality = $locality;
-
-        return $this;
-    }
-
-    public function getMunicipality(): ?string
-    {
-        return $this->municipality;
-    }
-
-    public function setMunicipality(?string $municipality): self
-    {
-        $this->municipality = $municipality;
-
-        return $this;
-    }
-
-    public function getCanton(): ?string
-    {
-        return $this->canton;
-    }
-
-    public function setCanton(?string $canton): self
-    {
-        $this->canton = $canton;
-
-        return $this;
-    }
-
+    
     public function getCountry(): ?string
     {
         return $this->country;
@@ -134,28 +72,18 @@ class PatientAddress extends ActiveProblems
 
         return $this;
     }
-
-    public function getZip(): ?int
-    {
-        return $this->zip;
-    }
-
-    public function setZip(?int $zip): self
-    {
-        $this->zip = $zip;
-
-        return $this;
-    }
+    
 
     public function getPatient(): ?Patient
     {
         return $this->patient;
     }
 
-    public function setRelatedpatient(?Patient $patient): self
+    public function setPatient(?Patient $patient): self
     {
         $this->patient = $patient;
 
         return $this;
     }
 }
+    

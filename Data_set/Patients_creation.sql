@@ -1,0 +1,6 @@
+INSERT INTO patient (`ssn`, `givenname`, `birthname`, `maritalname`, `nationality`, `language`, `age`, `telephone`) VALUE ('55454555', 'Laura', 'Halliday', 'Smet', 'French', 'French', '35', '691444666');
+INSERT INTO patient (`ssn`, `givenname`, `birthname`, `maritalname`, `nationality`, `language`, `age`, `telephone`) VALUE ('78632117', 'Paul', 'Auster', 'relate', 'American', 'English', '55', '691222784');
+INSERT INTO patient (`ssn`, `givenname`, `birthname`, `maritalname`, `nationality`, `language`, `age`, `telephone`) VALUE ('63227415', 'Marco', 'Margine', 'Balk', 'German', 'German', '50', '691532744');
+INSERT INTO patient (`ssn`, `givenname`, `birthname`, `maritalname`, `nationality`, `language`, `age`, `telephone`) VALUE ('37281462', 'Elisa', 'Gainsbourg', 'Paris', 'Norvegian', 'English', '25', '691887544');
+INSERT INTO patient (`ssn`, `givenname`, `birthname`, `maritalname`, `nationality`, `language`, `age`, `telephone`) VALUE ('26873544', 'Igor', 'Marty', 'Marty', 'French', 'French', '29', '69158772');
+INSERT INTO patient (`ssn`, `givenname`, `birthname`, `maritalname`, `nationality`, `language`, `age`, `telephone`) VALUE ('46825543', 'Brigitte', 'Nordel', 'Lepage', 'French', 'French', '42', '691789334');

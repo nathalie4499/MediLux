@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Doctors;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @method Doctors|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,18 @@ class DoctorsRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Doctors::class);
+    }
+    
+    public function dataExists(string $dataFromForm)
+    {
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.specialization LIKE :val')
+        ->setParameter('val', '%' . $dataFromForm . '%')
+        ->orderBy('d.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getArrayResult();
+        
     }
 
 //    /**
