@@ -17,50 +17,18 @@ class Acl
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $search;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="acls")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="acl", cascade={"persist", "remove"})
      */
     private $user;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $addressbook;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $drugs;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $patient;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $admin;
+    private $search;
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getSearch(): ?bool
-    {
-        return $this->search;
-    }
-
-    public function setSearch(?bool $search): self
-    {
-        $this->search = $search;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -75,50 +43,14 @@ class Acl
         return $this;
     }
 
-    public function getAddressbook(): ?bool
+    public function getSearch(): ?bool
     {
-        return $this->addressbook;
+        return $this->search;
     }
 
-    public function setAddressbook(?bool $addressbook): self
+    public function setSearch(?bool $search): self
     {
-        $this->addressbook = $addressbook;
-
-        return $this;
-    }
-
-    public function getDrugs(): ?bool
-    {
-        return $this->drugs;
-    }
-
-    public function setDrugs(?bool $drugs): self
-    {
-        $this->drugs = $drugs;
-
-        return $this;
-    }
-
-    public function getPatient(): ?bool
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?bool $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
-
-    public function getAdmin(): ?bool
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(?bool $admin): self
-    {
-        $this->admin = $admin;
+        $this->search = $search;
 
         return $this;
     }

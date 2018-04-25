@@ -11,8 +11,6 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")�
  * @UniqueEntity(
@@ -52,29 +50,25 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Acl", mappedBy="user")
-     */
-    private $acls;
+
     
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role")
+     */
+    private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $salt;
 
-    
-     /**
-     * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="user")
-     */
-    private $role;
+
+
 
 
     public function __construct()
     {
-        $this->acls = new ArrayCollection();
-
+       
     }
 
     public function getId()
@@ -130,42 +124,50 @@ class User implements UserInterface
         return $this;
     }
 
-        
+    public function getRole(): ?Role
+    {
+        return $this->role;
+    }
     
     
-
+    
     /**
-     * @return Collection|Acls[]
+     * @return array[]
      */
     
+    public function getRoles()
+    {
+        return array('ROLE_USER', 'ROLE_ADMIN');
+    }
     
-    public function getAcls(): Collection
+    
+    
+    public function addRole(Role $role): self
     {
-        return $this->acls;
-    }
-
-    public function addAcl(Acl $acl): self
-    {
-        if (!$this->acls->contains($acl)) {
-            $this->acls[] = $acl;
-            $acl->setUser($this);
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
         }
-
+        
         return $this;
     }
-
-    public function removeAcl(Acl $acl): self
+    
+    public function removeRole(Role $role): self
     {
-        if ($this->acls->contains($acl)) {
-            $this->acls->removeElement($acl);
-            // set the owning side to null (unless already changed)
-            if ($acl->getUser() === $this) {
-                $acl->setUser(null);
-            }
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
         }
-
+        
         return $this;
     }
+    
+    
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
+        
+        return $this;
+    }
+    
 
     public function getSalt(): ?string
     {
@@ -183,47 +185,7 @@ class User implements UserInterface
         return;
     }
 
-    
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
-    
-    
-
-    /**
-     * @return array[]
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER', 'ROLE_ADMIN');
-    }
-
-    
-    public function addRole(Role $role): self
-    {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-        }
-        return $this;
-    }
-    public function removeRole(Role $role): self
-    {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-        }
-        return $this;
-    }
-    
-    
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
- 
 
 
+    
 }
