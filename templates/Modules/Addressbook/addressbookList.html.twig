@@ -14,16 +14,17 @@
 	<table class="cardmedilux table table-hover table-striped">
 
       <thead>
+      <form method="post">
         <tr>
           <th scope="col">
           	#
           </th>
           <th scope="col">
-          	<form method="post">
+          	
           	<div class="input-group">
   				<input id="specialization" for="specialization" placeholder="speciality" type="text" class="form-control">
 			</div>
-			</form>
+			
           </th>
           <th scope="col">
           	<div class="input-group">
@@ -44,6 +45,7 @@
           	<a type="button" class="btn btn-primary" href="{{ path ('addressbook_add') }}">{{ 'ADDRESSBOOK.ADD'|trans }}</a>
           </th>
         </tr>
+      </form>
       </thead>
       <tbody class="searchResults">
       	{% for value in doctor %}
