@@ -93,6 +93,11 @@ addressbook_add:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'
+
+addressbook_search:
+    path: /addressbook/search
+    controller: App\Controller\AddressbookController::searchDoctor
+    methods: ['POST']
                   
 admin_main:
      path: /{_locale}/administration/main
