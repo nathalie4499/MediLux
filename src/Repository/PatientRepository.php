@@ -25,7 +25,7 @@ class PatientRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
         ->andWhere('d.birthname LIKE :val')
         ->setParameter('val', '%' . $dataFromTable . '%')
-        ->orderBy('d.id', 'ASC')
+        ->orderBy('d.birthname', 'ASC')
         ->setMaxResults(10)
         ->getQuery()
         ->getArrayResult();

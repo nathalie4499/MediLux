@@ -1,99 +1,97 @@
 HEADER:
-  TRANSLATIONLIST: Language
-  SEARCHPATIENT: Search
+  TRANSLATIONLIST: Langues
+  SEARCHPATIENT: Recherche
   PATIENTRECORD: Patient
-  ADDRESSBOOKLIST: Address Book
+  ADDRESSBOOKLIST: Liste d'adresses
   ADMIN: Administration
-  USER: User
+  USER: Utilisateur
   LOGOUT: Logout
   LOGIN: Login
-  TRANSLATIONEN: English
-  TRANSLATIONDE: Deutsch
+  TRANSLATIONEN: Anglais
+  TRANSLATIONDE: Allemand
   TRANSLATIONFR: Français
-  DRUGSLIST: Drugs
-  ADMINMAIN: Main
-  USERLIST: User
-  ADMINUSER: User Management
-  NEWPATIENT: Create
-  SELECTPATIENT: Update
+  DRUGSLIST: Médicaments
+  ADMINMAIN: Menu principal
+  USERLIST: Liste des utilisateurs
+  ADMINUSER: Gestion des utilisateurs
+  NEWPATIENT: Création
+  SELECTPATIENT: Modification
 
 ADDRESSBOOK:
-    DETAIL: detail
-    ADD: add
+    DETAIL: détails
+    ADD: Ajouter
 
 MLPATIENT:
-    TITLE: MediLux Nouveau Patient
-    SSN: Saisir numéro de Sécurité Sociale
-    GIVENNAME: Saisir Prénom
-    BIRTHNAME: Saisir Nom de Naissance
-    MARITALNAME: Saisir Nom Matrimonial
-    AGE: Saisir Age
-    NATIONALITY: Saisir Nationalité
-    LANGUAGE: Saisir Langue Maternelle
-    TELEPHONE: Saisir Téléphone
-    STREETNUMBER: Saisir Numéro de rue
-    STREET: Saisir Nom de Rue
-    LOCALITY: SaisirLocalité
-    MUNICIPALITY: Saisir Municipalité
-    COUNTRY: Saisir Pays
-    ZIP: Saisir Code Postal
-    SUBMIT: Créer
-    DESCRIPTION: Saisir Description
-    ACTIVEPROBLEMS: Liste des Pathologies
-    MODIFY: MediLux Modifier Patient    
+    TITLE: Nouveau Patient MediLux 
+    SSN: Numéro de sécurité sociale
+    GIVENNAME: Prénom
+    BIRTHNAME: Nom de naissance
+    MARITALNAME: Nom marital
+    AGE: Age
+    NATIONALITY: Nationalité
+    LANGUAGE: Langue
+    TELEPHONE: Téléphone
+    STREETNUMBER: Numéro de rue
+    STREET: Rue
+    LOCALITY: Localité
+    MUNICIPALITY: Ville
+    COUNTRY: Pays
+    ZIP: Code postal
+    SUBMIT: Ajouter
+    DESCRIPTION: Description
+    ACTIVEPROBLEMS: Liste des pathologies
 
 FORM:
   USER:
-    USERNAME: username (required)
-    FIRSTNAME: first name
-    LASTNAME: last name
-    PASSWORD: password (required)
-    ROLETOADD: role to add
+    USERNAME: Nom d'utilisateur (obligatoire)
+    FIRSTNAME: Prénom
+    LASTNAME: Nom
+    PASSWORD: Mot de passe (obligatoire)
+    ROLETOADD: Statut à ajouter
     PLACEHOLDER:
-      USERNAME: enter the username
-      FIRSTNAME: enter the first name
-      LASTNAME: enter the last name
-      PASSWORD: enter the password
+      USERNAME: entrer le nom d'utilisateur
+      FIRSTNAME: entrer le prénom
+      LASTNAME: entrer le nom
+      PASSWORD: entrer le Mot de passe
   ADDRESSBOOK:
-    FIRSTNAME: FIRSTNAME
-    LASTNAME: LASTNAME
-    SPECIALIZATION: SPECIALIZATION
-    TELWORK: TELWORK
+    FIRSTNAME: Prénom
+    LASTNAME: Nom
+    SPECIALIZATION: Spécialité
+    TELWORK: TELPRO
     TELPRIV: TELPRIV
     MOBILE: MOBILE
     EMAIL: EMAIL
     FAX: FAX
-    LANGUAGE: Spoken language
-    TITLE: TITLE
-    ADDRESS: ADDRESS
-    SUBMIT: add
+    LANGUAGE: Langue
+    TITLE: TITRE
+    ADDRESS: ADDRESSE
+    SUBMIT: ajouter
   PATIENT:
-    SSN: Numéro de Sécurité Sociale
+    SSN: Numéro de sécurité sociale
     GIVENNAME: Prénom
     BIRTHNAME: Nom de naissance
-    MARITALNAME: Nom Marital
+    MARITALNAME: Nom marital
     NATIONALITY: Nationalité
     TELEPHONE: Téléphone
-    LANGUAGE: Langue Maternelle
+    LANGUAGE: Langue
     STREETNUMBER: Numéro de rue
     STREET: Rue
     LOCALITY: Localité
-    MUNICIPALITY: Municipalité
-    COUNTRY: Country
-    ZIP: Code Postal
-    SUBMIT: Ajouter
+    COUNTRY: Pays
+    ZIP: Code postal
+    SUBMIT: ajouter
     AGE: Age
-    TITLE: Nom de la Pathologie
+    TITLE: Pathologies
     DESCRIPTION: Description
-    ACTIVEPROBLEMS: Liste des Pathologies
+    ACTIVEPROBLEMS: Liste des pathologies
   DRUGS:
-      NAME: Nom
-      SUPPLIER: Laboratoire
-      DOSAGE: Dosage
-      CONTRAINDICATIONS: Contre-indications
-      SIDEEFFECTS: Effets Secondaires
-      INCOMPATIBILITIES: Incompatibilités
-      OVERDOSE: Overdose
-      COMPONENTS: Components
-      
+    NAME: Nom
+    SUPPLIER: fabricant
+    DOSAGE: dosage
+    CONTRAINDICATIONS: contre-indications
+    SIDEEFFECTS: effets secondaires
+    INCOMPATIBILITIES: incompatibilités
+    OVERDOSE: surdose
+    COMPONENTS: composants
+
        
