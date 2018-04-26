@@ -32,6 +32,7 @@ use Doctrine\DBAL\Types\ArrayType;
 use App\Repository\RoleRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 
@@ -117,7 +118,18 @@ class AdminController extends Controller
             ])
 
 
-                
+//            ->add('aclToAdd', EntityType::class, [
+//                'label' => 'FORM.USER.ACLTOADD',
+//                'class'        => ACL::class,
+//               'choice_label' => false,
+//                'mapped'       => false,
+//                'expanded'     => true,
+//               'multiple'     => true,
+//            ])
+            
+
+            
+
             ->add('submit', SubmitType::class);
             
             $form = $builder->getForm();
@@ -147,6 +159,9 @@ class AdminController extends Controller
 
             }
 
+        $repository = $this->getDoctrine()
+        ->getRepository(Acl::class);
+        $acl = $repository->findAll();
             
         $repository = $this->getDoctrine()
         ->getRepository(Role::class);
@@ -161,6 +176,7 @@ class AdminController extends Controller
                 [
                     'users' => $users,
                     'role' => $role,
+                    'acl' => $acl,
                     'formular_add_user'=>  $form->createView(),
                     'isTrue'=> true
                     
