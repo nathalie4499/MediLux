@@ -97,61 +97,6 @@
 
 
 
-{{ form_start(formular_patient_address) }}
-<div class="table-responsive">	
-<table class="table add_user">
-  <tr>
-    <th>{{ form_label(formular_add_user.username) }}</th>
-    <th>{{ form_widget(formular_add_user.username) }}</th> 
-
-  </tr>
-  <tr>
-    <td>{{ form_label(formular_add_user.firstname) }}</td>
-    <td>{{ form_widget(formular_add_user.firstname) }}</td> 
-
-  </tr>
-
-  <tr>
-    <td>{{ form_label(formular_add_user.lastname) }}</td>
-    <td>{{ form_widget(formular_add_user.lastname) }}</td> 
-
-  </tr>
-  
-    <tr>
-    <td>{{ form_label(formular_add_user.password) }}</td>
-    <td>{{ form_widget(formular_add_user.password) }}</td> 
-
-  </tr>
-  
-      <tr>
-    <td>{{ form_label(formular_add_user.roleToAdd) }}</td>
-    <td>{{ form_widget(formular_add_user.roleToAdd) }}</td> 
-
-  </tr>
-
-  <tr>
-    <td></td>
-    <td>{{ form_row(formular_add_user.submit) }}</td> 
-
-  </tr>
-</table>
-</div>
-{{ form_rest(formular_add_user) }}
-{{ form_end(formular_add_user)}}
-
-       
-      </div>
-
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>	
-
 
 
 {% endblock %}
