@@ -19,7 +19,7 @@ HEADER:
 
 ADDRESSBOOK:
     DETAIL: detail
-    ADD: add
+    RESET: RESET
 
 MLPATIENT:
     TITLE: New MediLux Patient
@@ -36,6 +36,7 @@ MLPATIENT:
     LOCALITY: Enter Locality
     MUNICIPALITY: Enter Municipality
     COUNTRY: Enter Country
+    CANTON: Enter Canton    
     ZIP: Enter Zip Code
     SUBMIT: Add
     DESCRIPTION: Enter Description
@@ -78,6 +79,8 @@ FORM:
     STREETNUMBER: Street number
     STREET: Street
     LOCALITY: Locality
+    MUNICIPALITY: Municipality   
+    CANTON: Canton     
     COUNTRY: Country
     ZIP: zip
     SUBMIT: add

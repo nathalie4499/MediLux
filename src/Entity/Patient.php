@@ -23,7 +23,7 @@ class Patient
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      *
      */
@@ -55,12 +55,7 @@ class Patient
      */
     private $language;
     /**
-<<<<<<< HEAD
-     * @ORM\Column(type="string", nullable=true)
-=======
-
      * @ORM\Column(type="string", length=255, nullable=true)
->>>>>>> 1371b580f081dc0793b3146dfb4d5f1f409d9834
      * 
      */
     private $age;
@@ -75,10 +70,13 @@ class Patient
      */
     private $activeproblemslist;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PatientAddress", mappedBy="relatedpatient")
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PatientAddress", mappedBy="patient")
+     * @ORM\JoinTable(name="patient_address",
+     *      joinColumns={@ORM\JoinColumn(name="patient_id", referencedColumnName="id")})
      */
+
     private $patientaddresslist;
+    
     public function __construct()
     {
         $this->activeproblemslist = new ArrayCollection();
@@ -146,11 +144,11 @@ class Patient
         $this->language = $language;
         return $this;
     }
-    public function getAge(): ?int
+    public function getAge(): ?string
     {
         return $this->age;
     }
-    public function setAge(?int $age): self
+    public function setAge(?string $age): self
     {
         $this->age = $age;
         return $this;

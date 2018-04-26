@@ -85,13 +85,13 @@ FORM:
     DESCRIPTION: Description
     ACTIVEPROBLEMS: Liste des pathologies
   DRUGS:
-      NAME: Nom
-      SUPPLIER: fabricant
-      DOSAGE: dosage
-      CONTRAINDICATIONS: contre-indications
-      SIDEEFFECTS: effets secondaires
-      INCOMPATIBILITIES: incompatibilités
-      OVERDOSE: surdose
-      COMPONENTS: composants
-      
+    NAME: Nom
+    SUPPLIER: fabricant
+    DOSAGE: dosage
+    CONTRAINDICATIONS: contre-indications
+    SIDEEFFECTS: effets secondaires
+    INCOMPATIBILITIES: incompatibilités
+    OVERDOSE: surdose
+    COMPONENTS: composants
+
        
