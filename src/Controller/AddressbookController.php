@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
+use App\Entity\AddressDoctors;
 
 
 class AddressbookController extends Controller
@@ -137,9 +138,13 @@ class AddressbookController extends Controller
         
         if ($form->isSubmitted() /**&& $form->isValid() **/)
         { 
-            var_dump($doctor);
+            
+            $address = $form->get('address')->getData();
+            
+          
+
             $manager->persist($doctor);
-            var_dump($doctor);
+
             $manager->flush();
           
             $session->getFlashBag()->add('info', 'Ok, New contact is registered!');
