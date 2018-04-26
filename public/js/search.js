@@ -1,27 +1,32 @@
-$(document).ready(function(){
+$(document).ready(function()
+{
 	
-		
-	var inpuVal = $(this).val();
-	var resultDropdown = $(this).siblings("result");
-	
-	if (inputVal.length>=2){
-		$.get("fetch.php", {term:
-			inputVal}).done(function(data){
-				resultDropdown.html(data);
-			});
-			
-		
-	}
-	else
+	function searchPatient(dataFromTable)
 	{
-		resultDropdown.empty();
+
+		$.post
+		('/patient/search', // call function searchPatient() in searchcontroller via routes.yaml
+			{
+			dataFromTable: dataFromTable 
+ //send characters to searchPatient()
+			}).done
+			   (
+				
+			   ).fail(function(sam){
+				   console.log(sam);
+
+
+			 
+			  });
+		console.log("data form rable " + dataFromTable);
+
 	}
-	
-		});
+		$('#birthname').on
+						(
+						  'keyup', function()
+						  		   {
+							  		searchData($(this).val());
+						  		   }
+						);
+});
 
-
-
-	$(document).on("click", ".result p", function(){
-        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-        $(this).parent(".result").empty();
-    });
