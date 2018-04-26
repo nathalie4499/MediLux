@@ -1,7 +1,4 @@
 
-$(document).ready(function()
-{
-	
 	function searchData(dataFromForm)
 	{
 		$.post
@@ -12,16 +9,47 @@ $(document).ready(function()
 			   (
 				function(responseData) //receive json from searchDoctor()
 				{	
-					$('.searchResults ul li').remove();
-					
 					if (responseData)
 					{
+						$('#displaytable tr').remove()
 						for (i = 0; i < responseData.length; i++)
 						{
-							$('.searchResults ul').append
+//							var line = $('<tr></tr>');
+//							$(line).append(
+//								$('<td></td>').html(responseData[i].name)
+//							);
+//							$(line).append(
+//								$('<td></td>').html(responseData[i].supplier)
+//							);
+//							$(line).append(
+//								$('<td></td>').html(responseData[i].dosage)
+//							);
+//							$(line).append(
+//								$('<td></td>').append(
+//									$('<button></button>').attr('type', 'button').addClass('btn').attr('data-toggle', 'modal').attr('data-target', '#modal' + responseData[i].id)
+//								).append(
+//									$('<a></a>').attr('type', 'button').addClass('btn').attr('data-toggle', 'modal').data('trigger', 'click').data('content', 'drug details').append(
+//										$('<i></i>').addClass('fas fa-info-circle')
+//									)
+//								)
+//							);
+//							$('#displaytable').append(line);
+							 $('#displaytable').append
 							(
-							  '<li class="list-group-item"><a class="card-link" data-toggle="modal" data-target="#' + responseData[i].id + '">' + responseData[i].specialization +'<a><li>'
+									'<tr>' +							  
+									  '<td>' + responseData[i].name +'</td>' +
+									  '<td>' + responseData[i].supplier +'</td>' +
+									  '<td>' + responseData[i].dosage +'</td>' +
+									  '<td>' + 
+									  '<button type="button" class="btn" data-toggle="modal" data-target="#modal' + responseData[i].id + '">' + 
+									  '<a data-toggle="popover" data-trigger="hover" data-content="drug details"><i class="fas fa-info-circle"></i></a>' +
+									  "</button>" + 
+									  "<a onclick=\"return confirm('Are your sure to delete the drug ?')\" href=\"\" class=\"btn btn-danger btn-sm\"><i class=\"fas fa-user-times\"></i></a>",
+									  "</td>" + 
+									  "</tr>"								 
 							);
+							 //<a onclick="return confirm('Are your sure to delete the drug {{ drug.name }}?')" href="{{ path('drugdelete', { 'drugid': drug.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a>
+						//'<a onclick="return confirm('Are your sure to delete the drug ' + responseData[i].name + '?')" href="/drugs/Delete' + responseData[i].id + '" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a></td>
 						}
 					}
 						
@@ -32,6 +60,7 @@ $(document).ready(function()
 						(
 						  'input', function()
 						  {
+							  //console.log($('#search').val());
 							  var notEmpty = $('#search').val().length;
 							  if (notEmpty > 0 )
 					  		   { 
@@ -39,4 +68,3 @@ $(document).ready(function()
 					           }
 						  }
 						);
-});

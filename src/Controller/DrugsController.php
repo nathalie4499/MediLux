@@ -36,23 +36,17 @@ class DrugsController extends Controller
                 ])
             );
     }
-    /** @Route("/drugs/get/{drugid}", name="drugget")*/
-    public function drugsSearch( )
+    public function drugsSearch(
+        DrugsRepository $repository,
+        Request $request,
+        Environment $twig
+        )
     {
-        $searchTerm = $request->query->get('search');
+        $dataFromForm = $request->request->get('dataFromForm');
         
-        $em = $this->getDoctrine()->getManager();
-        $search = $em->getRepository('AppBundle:Classified')->searchClassifieds($searchTerm);
-        
-        $results = $query->getResult();
-        
-        $content = $this->renderView('search-result.html.twig', [
-            'results' => $results
-        ]);
-        
-        $response = new JsonResponse();
-        $response->setData(array('classifiedList' => $content));
-        return $response;
+        $data = $repository->DrugData($dataFromForm);
+
+        return new JsonResponse($data);
     }
 //     public function drugsSearch
 //     (
