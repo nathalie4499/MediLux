@@ -46,7 +46,7 @@ class SearchController extends Controller
 	    
 	    $dataFromTable = $request->request->get('dataFromTable');
 	    
-	    $foundData = $repository->DataExists($dataFromTable);
+	    $foundData = $repository->dataExists($dataFromTable);
 	    
 	    return new JsonResponse($foundData);
     }
