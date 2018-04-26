@@ -4,11 +4,7 @@ $(document).ready(function()
 	(
 	  'input', function()
 	  {
-		  var isEmpty = $('#specialization').val().length;
-		  if (isEmpty > 0 )
-  		   { 
-		  		searchData($(this).val())  
-           }
+		  searchData($(this).val())  
 	  }
 	);
 	
@@ -18,19 +14,16 @@ $(document).ready(function()
 		('/addressbook/search', // call function searchDoctor() in addresbookcontroller via routes.yaml
 			{
 				dataFromForm:  dataFromForm //send characters to searchDoctor()
-			}).done
-			   (
+			}
+		).done
+		   (
 				function(responseData) //receive json from searchDoctor()
 				{	
 					$('.searchResults tr').remove();
 					
 					var empty = responseData.length;
-					console.log(empty);
-					console.log(responseData);
-					
 					if (empty > 0)
 					{
-						console.log('inside if');
 						for (i = 0; i < responseData.length; i++)
 						{
 							$('.searchResults').append
@@ -50,10 +43,10 @@ $(document).ready(function()
 						}
 					return;	
 					}
-					location.reload();
+					//location.reload();
 					
 				}
-			   );
+		   );
 	}
 });
 

@@ -55,8 +55,6 @@ class Patient
      */
     private $language;
     /**
-
-
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      */
