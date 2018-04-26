@@ -35,9 +35,8 @@
     				<th scope="col">Given Name</th>
     				<th scope="col">Birth Name</th>
     				<th scope="col">Marital Name</th>
-    				<th scope="col">Nationality</th>
     				<th scope="col">Telephone</th>
-    				<th scope="col">Age</th>
+
     				<th><i class="fas fa-info-circle"></i></th> 
     			</tr>
     		</thead>
@@ -50,10 +49,8 @@
     			<td>{{ patient.givenname }}</td>
     			<td>{{ patient.birthname }}</td>
     			<td>{{ patient.maritalname }}</td>
-    			<td>{{ patient.nationality }}</td>
     			<td>{{ patient.telephone }}</td>
-    			<td>{{ patient.age }}</td>
-    			<td><a href="{{ path('useredit', { 'userid': patient.getID() }) }}" data-toggle="popover" data-trigger="hover" data-content="patient details"><i class="fas fa-info-circle"></i></a></td>
+    			<td><a href="{{ path('patientedit', { 'patientid': patient.getID() }) }}" data-toggle="popover" data-trigger="hover" data-content="patient details"><i class="fas fa-notes-medical"></i></a></td>
 
 </tr>
 {% endfor %}

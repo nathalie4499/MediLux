@@ -25,6 +25,7 @@ use App\Form\Type\DoctorType;
 use App\Entity\Zip;
 use App\Entity\Country;
 
+
 class AddressbookController extends Controller
 {
 
@@ -56,6 +57,7 @@ class AddressbookController extends Controller
         
         $form->handleRequest($request);
         
+
         if ($form->isSubmitted()) /**
          * && $form->isValid() *
          */
@@ -67,6 +69,7 @@ class AddressbookController extends Controller
             }
             $manager->persist($doctor);
             
+
             $manager->flush();
             
             return new RedirectResponse($urlGenerator->generate('addressbook_list'));
