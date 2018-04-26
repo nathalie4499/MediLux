@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -23,19 +24,31 @@ use App\Repository\PatientAddressRepository;
 
 
 class SearchController extends Controller
+
 {
+    
     public function searchPatientList(Environment $twig, PatientRepository $repository)
+    {
+        $repository = $this->getDoctrine()
+        ->getRepository(Patient::class);
+        $patients = $repository->findAll();
+        return new Response(
+            $twig->render(
+                'Modules/Search/searchList.html.twig', [
+                    'patients'=> $patients,
+                ])
+            );
+    }
+    
+    public function searchPatient (Environment $twig, PatientRepository $repository, Request $request)
 	{
-	    $repository = $this->getDoctrine()
-	    ->getRepository(Patient::class);
-	    $patients = $repository->findAll();
-	    return new Response(
-	        $twig->render(
-	            'Modules/Search/searchList.html.twig', [
-	                'patients'=> $patients,
-	            ])
-	        );
-	}
-	
-	
-};
+	    //get data from jquery assign to $dataFromTable
+	    
+	    $dataFromTable = $request->request->get('dataFromTable');
+	    
+	    $foundData = $repository->DataExists($dataFromTable);
+	    
+	    return new JsonResponse($foundData);
+    }
+
+}

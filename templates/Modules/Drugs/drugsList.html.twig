@@ -9,11 +9,17 @@
 
 <div class="datacontainer">
   <div id="Drugsearch">
-    <input type="text" class="  search-query form-control" placeholder="Search" />
+    <input id= "search" type="text" class="  search-query form-control" placeholder="Search" />
     <button type="button">
     <i class="fas fa-search"></i>
     </button>
     </div>
+    <div class="searchResults">
+    <ul>
+    <li>hi</li>
+    </ul>
+    </div>
+    <br>
     <a href="{{ path ('drugs_add') }}" class="button">Add medication</a>
 
   <div id="Drugslist">
@@ -28,20 +34,51 @@
       <th scope="col">name</th>
       <th scope="col">supplier</th>
       <th scope="col">dosage</th>
+      <th scope="col">special options</th>
     </tr>
   </thead>
   <tbody>
 
 
-{% for value in drugs %}
+{% for drug in drugs %}
 
     <tr>
-      <th scope="row">{{ value.name }}</th>
-      <td>{{ value.name }}</td>
-      <td>{{ value.supplier }}</td>
-      <td>{{ value.dosage }}</td>
+      <th scope="row">{{ drug.id }}</th>
+      <td>{{ drug.name }}</td>
+      <td>{{ drug.supplier }}</td>
+      <td>{{ drug.dosage }}</td>
+      <td>
+     	<button type="button" class="btn" data-toggle="modal" data-target="#modal{{ drug.id }}">
+ 			<a data-toggle="popover" data-trigger="hover" data-content="drug details"><i class="fas fa-info-circle"></i></a>
+		</button>
+      <a onclick="return confirm('Are your sure to delete the drug {{ drug.name }}?')" href="{{ path('drugdelete', { 'drugid': drug.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a></td>
     </tr>
     <tr>
+    
+    <!-- Modal -->
+<div id="modal{{ drug.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{ drug.name }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Supplier : </h4>{{ drug.supplier }}</p>
+        <p>Dosage : {{ drug.dosage }}</p>
+        <p>Counter-indications : {{ drug.contraindications }}</p>
+        <p>Side-effects : {{ drug.sideeffects }}</p>
+        <p>Incompatibilities : {{ drug.incompatibilities }}</p>
+        <p>Overdose : {{ drug.overdose }}</p>
+        <p>Components : {{ drug.components }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 {% endfor %}
 
@@ -50,10 +87,13 @@
 
   </div>
 </div>
+
 {% endblock %}
 
 {% block javascripts %}
 
 {{ parent() }}
+
+<script src="/js/drugs.js"></script>
 
 {% endblock %}

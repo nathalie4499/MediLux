@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %} - Patient Module{% endblock %}
+
+{% block body %}
+
+	<div class="datacontainerbtngrp">
+    <h3>{{ 'MLPATIENT.MODIFY'|trans }}</h3><br/>
+    
+    	{% set infoMessages = app.flashes('info') %}
+    {% if infoMessages is not empty %}
+    <div class="container">
+    	{% for message in infoMessages %}
+    		<p class="bg-success p-1">{{ message }}</p>
+    	{% endfor %}
+    </div>
+    {% endif %}
+    
+        <div class="btn-group"  role="group" aria-label="Basic example">
+	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Fill Address " href="{{ path ('search_patient_list') }}"><i class="fa fa-address-book-o"></i></button></a>
+	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary" data-toggle="modal" data-target="#adduser"><a data-toggle="popover" data-trigger="hover" data-content="add pathology"><i class="fa fa-medkit"></i></button></a>
+	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search" href="{{ path ('search_patient_list') }}"><i class="fas fa-search-plus"></i></button></a>
+		</div>
+    </div>
+
+	<div class="datacontainer patientregistration">
+    {{ form_start(patientedit) }}
+    
+	    <table id="patients" class="table table-dark table-striped table-bordered table-hover">		
+		  <tr>
+		    <td>{{ form_label(patientedit.ssn) }}</td>
+		    <td>{{ form_widget(patientedit.ssn) }}</td> 
+		  </tr>
+		  <tr>	
+    	    <td>{{ form_label(patientedit.age) }}</td>
+    	    <td>{{ form_widget(patientedit.age) }}</td> 
+    	  </tr>
+    	  <tr>
+		    <td>{{ form_label(patientedit.givenname) }}</td>
+		    <td>{{ form_widget(patientedit.givenname) }}</td> 
+		  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.birthname) }}</td>
+    	    <td>{{ form_widget(patientedit.birthname) }}</td> 
+    	  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.maritalname) }}</td>
+    	    <td>{{ form_widget(patientedit.maritalname) }}</td> 
+    	  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.nationality) }}</td>
+    	    <td>{{ form_widget(patientedit.nationality) }}</td> 
+    	  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.language) }}</td>
+    	    <td>{{ form_widget(patientedit.language) }}</td> 
+    	  </tr>    	      	      	  		  
+	  	  <tr>
+		  	<td></td>
+		  	<td>{{ form_row(patientedit.save) }}</td> 
+		  </tr>	
+
+  		</table> 		 
+  	  </div> 
+
+
+    {{ form_end(patientedit) }}
+    
+
+
+{% endblock %}

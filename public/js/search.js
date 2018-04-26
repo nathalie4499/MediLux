@@ -1,32 +1,32 @@
-$(document).ready(function(){
-	$("#search").keyup(function(){
-		
-	var search = $(this).val();
-	var data = 'patient' + search;
+$(document).ready(function()
+{
 	
-	if (search.length>2){
-		
-	}
-	else
+	function searchPatient(dataFromTable)
 	{
-		$("#result").html('');
-		$.ajax({
-			url:"fetch.php",
-			method:"post",
-			data:{search:txt},
-			dataType:"text",
-			success: function(data)
+
+		$.post
+		('/patient/search', // call function searchPatient() in searchcontroller via routes.yaml
 			{
-				$('result').html(data);
-			}
-		});
+			dataFromTable: dataFromTable 
+ //send characters to searchPatient()
+			}).done
+			   (
+				
+			   ).fail(function(sam){
+				   console.log(sam);
+
+
+			 
+			  });
+		console.log("data form rable " + dataFromTable);
+
 	}
-		
-			
+		$('#birthname').on
+						(
+						  'keyup', function()
+						  		   {
+							  		searchData($(this).val());
+						  		   }
+						);
+});
 
-		
-		});
-
-		
-	});
-	

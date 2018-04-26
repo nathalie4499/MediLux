@@ -3,20 +3,22 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\PatientAddress;
 use Doctrine\DBAL\Types\StringType;
-use PhpParser\Node\Stmt\UseUse;
+use Doctrine\DBAL\Types\TextType;
 
 
 class PatientAddressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        
+        $patientaddress = new PatientAddress();
+        
         $builder
             ->add(
                 'streetnumber',
-                NumberType::class,
+                StringType::class,
                 [
                     'label' => 'FORM.PATIENTADDRESS.STREETNUMBER',
                     'attr' => [
@@ -26,7 +28,7 @@ class PatientAddressType extends AbstractType
                 ]
             )->add(
                 'zips',
-                NumberType::class,
+                StringType::class,
                 [
                     'label' => 'FORM.PATIENTADDRESS.ZIP',
                     'attr' => [
@@ -44,12 +46,24 @@ class PatientAddressType extends AbstractType
                          'class' => 'form-control'
                      ]
                  ]   
-           );
+             ) ->add(
+                 'telephone',
+                 TextType::class,
+                 [
+                     'label' => 'MLPATIENT.TELEPHONE',
+                     'attr' => [
+                         'placeholder' => 'MLPATIENT.TELEPHONE',
+                         'class' => 'form-control'
+                     ]
+                 ]
+                 ) ;
+             $form = $builder->getForm();
     }
      public function configureOptions(OptionsResolver $resolver)
      {
          $resolver->setDefaults(array(
              'data_class' => PatientAddress::class,
+             //'formular_patient_address' nom du formulaire
          ));
 
     }
