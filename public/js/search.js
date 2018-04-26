@@ -33,10 +33,13 @@
 							'<td>'  + responseData[i].telephone + '</td>' +
 							'<td>'  + responseData[i].age + '</td>' +
 							'<td>'  +
-							'<i class="fas fa-info-circle"></i>' + '</td>' +
+							'<a href="/en/patient/select/' + responseData[i].id  +'">' +
+							'<i class="fas fa-info-circle"></i>' +
+							'</a>' +
+							'</td>' +
 							'</tr>'
 						);
-
+						
 					}
 					return;
 				}

@@ -55,7 +55,7 @@
     			<td>{{ patient.nationality }}</td>
     			<td>{{ patient.telephone }}</td>
     			<td>{{ patient.age }}</td>
-    			<td><a href="{{ path('useredit', { 'userid': patient.getID() }) }}" data-toggle="popover" data-trigger="hover" data-content="patient details"><i class="fas fa-info-circle"></i></a></td>
+    			<td><a href="{{ path('patientedit', { 'patientid': patient.getID() }) }}" data-toggle="popover" data-trigger="hover" data-content="patient details"><i class="fas fa-info-circle"></i></a></td>
 
 </tr>
 {% endfor %}
