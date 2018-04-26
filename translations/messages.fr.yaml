@@ -22,24 +22,25 @@ ADDRESSBOOK:
     ADD: add
 
 MLPATIENT:
-    TITLE: New MediLux Patient
-    SSN: Social Security Number
-    GIVENNAME: First Name
-    BIRTHNAME: Birth name
-    MARITALNAME: Marital Name
-    AGE: Age
-    NATIONALITY: Nationality
-    LANGUAGE: Spoken language
-    TELEPHONE: Telephone
-    STREETNUMBER: Street Number
-    STREET: Street
-    LOCALITY: Locality
-    MUNICIPALITY: Municipality
-    COUNTRY: Country
-    ZIP: Zip Code
-    SUBMIT: Add
-    DESCRIPTION: Description
-    ACTIVEPROBLEMS: List of Active Problems
+    TITLE: MediLux Nouveau Patient
+    SSN: Saisir numéro de Sécurité Sociale
+    GIVENNAME: Saisir Prénom
+    BIRTHNAME: Saisir Nom de Naissance
+    MARITALNAME: Saisir Nom Matrimonial
+    AGE: Saisir Age
+    NATIONALITY: Saisir Nationalité
+    LANGUAGE: Saisir Langue Maternelle
+    TELEPHONE: Saisir Téléphone
+    STREETNUMBER: Saisir Numéro de rue
+    STREET: Saisir Nom de Rue
+    LOCALITY: SaisirLocalité
+    MUNICIPALITY: Saisir Municipalité
+    COUNTRY: Saisir Pays
+    ZIP: Saisir Code Postal
+    SUBMIT: Créer
+    DESCRIPTION: Saisir Description
+    ACTIVEPROBLEMS: Liste des Pathologies
+    MODIFY: MediLux Modifier Patient    
 
 FORM:
   USER:
@@ -67,31 +68,32 @@ FORM:
     ADDRESS: ADDRESS
     SUBMIT: add
   PATIENT:
-    SSN: Social Security Number
-    GIVENNAME: Given name
-    BIRTHNAME: Birth name
-    MARITALNAME: Marital name
-    NATIONALITY: Nationality
-    TELEPHONE: Telephone
-    LANGUAGE: Spoken language
-    STREETNUMBER: Street number
-    STREET: Street
-    LOCALITY: Locality
+    SSN: Numéro de Sécurité Sociale
+    GIVENNAME: Prénom
+    BIRTHNAME: Nom de naissance
+    MARITALNAME: Nom Marital
+    NATIONALITY: Nationalité
+    TELEPHONE: Téléphone
+    LANGUAGE: Langue Maternelle
+    STREETNUMBER: Numéro de rue
+    STREET: Rue
+    LOCALITY: Localité
+    MUNICIPALITY: Municipalité
     COUNTRY: Country
-    ZIP: zip
-    SUBMIT: add
-    AGE: age
-    TITLE: Active Problem Title
+    ZIP: Code Postal
+    SUBMIT: Ajouter
+    AGE: Age
+    TITLE: Nom de la Pathologie
     DESCRIPTION: Description
-    ACTIVEPROBLEMS: List of Active Problems
+    ACTIVEPROBLEMS: Liste des Pathologies
   DRUGS:
-      NAME: Name
-      SUPPLIER: supplier
-      DOSAGE: dosage
-      CONTRAINDICATIONS: contraindications
-      SIDEEFFECTS: sideeffects
-      INCOMPATIBILITIES: incompatibilities
-      OVERDOSE: overdose
-      COMPONENTS: components
+      NAME: Nom
+      SUPPLIER: Laboratoire
+      DOSAGE: Dosage
+      CONTRAINDICATIONS: Contre-indications
+      SIDEEFFECTS: Effets Secondaires
+      INCOMPATIBILITIES: Incompatibilités
+      OVERDOSE: Overdose
+      COMPONENTS: Components
       
        

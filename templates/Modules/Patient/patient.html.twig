@@ -9,7 +9,7 @@
 {% block body %}
 
 	<div class="datacontainerbtngrp">
-    <h3>{{ 'MLPATIENT.MODIFY'|trans }}</h3><br/>
+    <h3>{{ 'MLPATIENT.TITLE'|trans }}</h3><br/>
     
     	{% set infoMessages = app.flashes('info') %}
     {% if infoMessages is not empty %}
@@ -21,16 +21,16 @@
     {% endif %}
     
         <div class="btn-group"  role="group" aria-label="Basic example">
-	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Fill Address " href="{{ path ('search_patient_list') }}"><i class="fa fa-address-book-o"></i></button></a>
-	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary" data-toggle="modal" data-target="#adduser"><a data-toggle="popover" data-trigger="hover" data-content="add pathology"><i class="fa fa-medkit"></i></button></a>
-	      <button type="button" style="background-color:darkgrey" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search" href="{{ path ('search_patient_list') }}"><i class="fas fa-search-plus"></i></button></a>
+	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Fill Address " href="{{ path ('search_patient_list') }}"><i class="fas fa-home"></i></button></a>
+	      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#"><a data-toggle="modal" data-trigger="hover" data-content="add pathology"><i class="fas fa-user-plus"></i></button></a>
+	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search" href="{{ path ('search_patient_list') }}"><i class="fas fa-search-plus"></i></button></a>
 		</div>
     </div>
 
 
 
 	<div class="datacontainer patientregistration">
-	{{ form_start(patientCreationFormular) }}
+	{{ form_start(patientCreationFormular) }} 
 
 	    <table id="patients" class="table table-dark table-striped table-bordered table-hover">		
 			  <tr>
@@ -61,41 +61,18 @@
 			    <th>{{ form_label(patientCreationFormular.language) }}</th> 
 			    <th>{{ form_widget(patientCreationFormular.language) }}</th> 
 			  </tr>
+			  <tr>  
+			    <th>{{ form_label(patientCreationFormular.patientaddresslist) }}</th> 
+			    <th>{{ form_widget(patientCreationFormular.patientaddresslist) }}</th> 
+			  </tr>
 			  <tr>
     		  	<td></td>
 			  	<td>{{ form_row(patientCreationFormular.submit) }}</td> 
   			 </tr>	
-  		</table> 		 
+  		</table> 
+	{{ form_end(patientCreationFormular) }} 		 
   	  </div>
 	        
-{#         {% for MLPATIENT in ssns %}	     #}
-{#   						<button type="button" class="btn" data-toggle="modal" data-target="#{{ MLPATIENT.SSN }}">#}
-{# 	 							 <a data-toggle="popover" data-trigger="hover" data-content="Add Address"><i id="addressicon" class="fas fa-address-book"></i></a>#}
-{# 							</button>#}
-							
-{# 	  						<button type="button" class="btn" data-toggle="modal" data-target="#{{ MLPATIENT.SSN }}">#}
-{# 	 							 <a data-toggle="popover" data-trigger="hover" data-content="Add Pathology"><i class="fas fa-file-medical-alt"></i></a>#}
-{# 							</button>#}
-          
-{# 	    {% endfor %}     #}
-
-<div class="modal fade" id="patientAddress">
-  <div class="modal-dialog modal-dialog-centered modal-lg" id="addPatientAddress">
-    <div class="modal-content mainbg" id="addPatientAddress">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">add address</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body" id="addPatientAddress">
-             
-
-
-
-
 
 
 
