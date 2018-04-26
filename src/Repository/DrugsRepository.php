@@ -19,6 +19,16 @@ class DrugsRepository extends ServiceEntityRepository
         parent::__construct($registry, Drugs::class);
     }
 
+    public function DrugData(string $dataFromForm)
+    {
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.name LIKE :val')
+        ->setParameter('val', '%'. $dataFromForm . '%')
+        ->orderBy('d.name', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getArrayResult();
+    }
 //    /**
 //     * @return Drugs[] Returns an array of Drugs objects
 //     */
