@@ -61,7 +61,7 @@ class AddressbookController extends Controller
          */
         {
             
-            // $addressDoctor = new AddressDoctors();
+            
             foreach ($doctor->getAddress() as $address) {
                 $manager->persist($address);
             }

@@ -90,7 +90,7 @@ class DoctorType extends AbstractType
     */
    public function configureOptions(OptionsResolver $resolver)
    {
-       $resolver->setDefault('data_type', Doctors::class);
+       $resolver->setDefault('data_class', Doctors::class);
        $resolver->setDefault('stateless', false);
        
    }
