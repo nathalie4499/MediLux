@@ -125,22 +125,6 @@ class PatientController extends Controller
                 ]
             ]
             )    
-                
-           /**  $builder->add(
-                'patientaddresslist', CollectionType::class, array
-                (
-                    'entry_type' => PatientAddressType::class,
-                    'entry_options' => array('label' => false),
-                    
-                ));
-            
-            $builder->add(
-                'activeproblemslist', CollectionType::class, array
-                (
-                    'entry_type' => ActiveProblemsForm::class,
-                    'entry_options' => array('label' => false),
-                    
-                ));**/
 
                 ->add(
                 'submit',
