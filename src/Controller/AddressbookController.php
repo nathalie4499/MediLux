@@ -52,7 +52,7 @@ class AddressbookController extends Controller
         $dataFromForm = $request->request->get('dataFromForm');
         
         $foundData = $repository->dataExists($dataFromForm);
-        //var_dump($foundData);
+        
       
         return new JsonResponse($foundData);
     }

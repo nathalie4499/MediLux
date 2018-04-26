@@ -19,7 +19,7 @@ HEADER:
 
 ADDRESSBOOK:
     DETAIL: detail
-    ADD: add
+    RESET: RESET
 
 MLPATIENT:
     TITLE: New MediLux Patient
