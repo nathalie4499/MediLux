@@ -122,7 +122,7 @@ patient_record:
 
 select_patient:
      path: /{_locale}/patient/select
-     controller: App\Controller\SelectPatientController::editPatient
+     controller: App\Controller\PatientController::editPatient
      defaults:
           _locale: 'en'
      requirements:
