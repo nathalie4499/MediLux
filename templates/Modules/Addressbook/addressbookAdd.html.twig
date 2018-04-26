@@ -19,3 +19,7 @@
     	</div>
 	</div>
 {% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="/js/AddressDoctorAdder.js" type="text/javascript"></script>
+{% endblock %}

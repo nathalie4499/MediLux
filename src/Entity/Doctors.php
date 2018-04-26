@@ -72,6 +72,10 @@ class Doctors
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\AddressDoctors")
+     * @ORM\JoinTable(name="doctors_address_doctors",
+     *      joinColumns={@ORM\JoinColumn(name="doctor_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="address_doctor_id", referencedColumnName="id")}
+     *      )
      */
     private $address;
 
