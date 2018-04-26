@@ -56,7 +56,7 @@ class AddressDoctors
         return $this->zip;
     }
 
-    public function setZip(int $zip): self
+    public function setZip($zip): self
     {
         $this->zip = $zip;
 

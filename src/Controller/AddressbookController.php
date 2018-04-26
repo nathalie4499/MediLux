@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Doctors;
@@ -26,87 +25,55 @@ use App\Form\Type\DoctorType;
 use App\Entity\Zip;
 use App\Entity\Country;
 
-
 class AddressbookController extends Controller
 {
-    public function addressbookList(
-                                     Environment $twig,
-                                     DoctorsRepository $repository,
-                                     AddressDoctorsRepository $addressrepo
-                                    )
+
+    public function addressbookList(Environment $twig, DoctorsRepository $repository, AddressDoctorsRepository $addressrepo)
     {
-        return new Response(
-                            $twig->render(
-                                            'Modules/Addressbook/addressbookList.html.twig', 
-                                            [
-                                                'doctor' => $repository->findAll(),
-                                                'address' => $addressrepo->findAll()
-                                            ]
-                                          )
-                            );
+        return new Response($twig->render('Modules/Addressbook/addressbookList.html.twig', [
+            'doctor' => $repository->findAll(),
+            'address' => $addressrepo->findAll()
+        ]));
     }
- 
-    public function searchDoctor
-                    (
-                        DoctorsRepository $repository,
-                        Request $request,
-                        Environment $twig
-                     )
+
+    public function searchDoctor(DoctorsRepository $repository, Request $request, Environment $twig)
     {
-        //get data from jquery assign to $datafromform
+        // get data from jquery assign to $datafromform
         $dataFromForm = $request->request->get('dataFromForm');
         
         $foundData = $repository->dataExists($dataFromForm);
         
-      
         return new JsonResponse($foundData);
     }
+
+    public function addDoctor(Environment $twig, FormFactoryInterface $factory, Request $request, SessionInterface $session, UrlGeneratorInterface $urlGenerator, ObjectManager $manager)
     
-    public function addDoctor(
-                                Environment $twig,
-                                FormFactoryInterface $factory,
-                                Request $request,
-                                SessionInterface $session,
-                                UrlGeneratorInterface $urlGenerator,
-                                ObjectManager $manager
-                               
-                              
-        )
     {
         $doctor = new Doctors();
-        $form = $factory->create
-                          (
-                              DoctorType::class,
-                              $doctor,
-                              ['stateless' => true]
-                           );
+        $form = $factory->create(DoctorType::class, $doctor, [
+            'stateless' => true
+        ]);
         
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() /**&& $form->isValid() **/)
-        { 
-           
-            //$addressDoctor = new  AddressDoctors();
+        if ($form->isSubmitted()) /**
+         * && $form->isValid() *
+         */
+        {
             
-            
+            // $addressDoctor = new AddressDoctors();
+            foreach ($doctor->getAddress() as $address) {
+                $manager->persist($address);
+            }
             $manager->persist($doctor);
-
+            
             $manager->flush();
- 
-            return new RedirectResponse
-            (
-                $urlGenerator->generate('addressbook_list')
-            );
-        
+            
+            return new RedirectResponse($urlGenerator->generate('addressbook_list'));
         }
-                    
-        return new Response
-        (
-             $twig->render(
-                    'Modules/Addressbook/addressbookAdd.html.twig',
-                    [ 'doctorFormular' => $form->createView()]
-                    )
-         );
-                    
+        
+        return new Response($twig->render('Modules/Addressbook/addressbookAdd.html.twig', [
+            'doctorFormular' => $form->createView()
+        ]));
     }
 }

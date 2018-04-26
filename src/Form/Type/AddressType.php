@@ -39,7 +39,7 @@ class AddressType extends AbstractType
     */
    public function configureOptions(OptionsResolver $resolver)
    {
-       $resolver->setDefault('data_type', AddressDoctors::class);
+       $resolver->setDefault('data_class', AddressDoctors::class);
        $resolver->setDefault('stateless', false);
        
    }
