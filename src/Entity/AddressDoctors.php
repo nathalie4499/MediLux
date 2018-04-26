@@ -122,4 +122,10 @@ class AddressDoctors
 
         return $this;
     }
+    public function setDoctors(?Doctors $doctor): self
+    {
+        $this->doctor = $doctor;
+        
+        return $this;
+    }
 }

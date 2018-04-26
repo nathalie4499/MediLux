@@ -19,6 +19,22 @@ class PatientRepository extends ServiceEntityRepository
         parent::__construct($registry, Patient::class);
     }
 
+    
+    public function dataExists(string $dataFromTable)
+    {
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.birthname LIKE :val')
+        ->setParameter('val', '%' . $dataFromTable . '%')
+        ->orderBy('d.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getArrayResult();
+        
+    }
+    
+    
+
+
 //    /**
 //     * @return Patient[] Returns an array of Patient objects
 //     */

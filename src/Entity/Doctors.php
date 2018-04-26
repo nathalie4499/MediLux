@@ -217,11 +217,17 @@ class Doctors
     {
         if (!$this->address->contains($address)) {
             $this->address[] = $address;
+            $address->setDoctors($this);
         }
 
         return $this;
     }
 
+    
+    
+  
+    
+    
     public function removeAddress(AddressDoctors $address): self
     {
         if ($this->address->contains($address)) {

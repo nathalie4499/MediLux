@@ -12,11 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
- * @UniqueEntity(
- *      fields={"ssn"},
- *      errorPath="ssn",
- *      message="This ssn is already in use"
- * )
+ *
  */
 class Patient
 {
@@ -27,7 +23,6 @@ class Patient
      */
     private $id;
     /**
-
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      *
@@ -60,9 +55,8 @@ class Patient
      */
     private $language;
     /**
-
      * @ORM\Column(type="string", length=255, nullable=true)
-     * 
+
      */
     private $age;
     /**
