@@ -31,10 +31,9 @@
 							'<td>'  + responseData[i].maritalname + '</td>' +
 							'<td>'  + responseData[i].nationality + '</td>' +
 							'<td>'  + responseData[i].telephone + '</td>' +
-							'<td>'  + responseData[i].age + '</td>' +
 							'<td>'  +
 							'<a href="/en/patient/select/' + responseData[i].id  +'">' +
-							'<i class="fas fa-info-circle"></i>' +
+							'<i class="fas fa-notes-medical"></i>' +
 							'</a>' +
 							'</td>' +
 							'</tr>'
