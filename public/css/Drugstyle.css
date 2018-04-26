@@ -6,10 +6,9 @@ margin: 25px;
 padding: 25px;
 }
 #Drugsform{
-display: flex;
 margin: 25px;
-padding: 25px;
-width: calc( 100vw - 50px);
+padding: 10px;
+width: calc( 80vw - 50px);
 }
 #Drugslist{
 display: flex;

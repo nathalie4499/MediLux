@@ -1,5 +1,16 @@
 $(document).ready(function()
 {
+	$('#specialization').bind
+	(
+	  'input', function()
+	  {
+		  var isEmpty = $('#specialization').val().length;
+		  if (isEmpty > 0 )
+  		   { 
+		  		searchData($(this).val())  
+           }
+	  }
+	);
 	
 	function searchData(dataFromForm)
 	{
@@ -10,19 +21,39 @@ $(document).ready(function()
 			}).done
 			   (
 				function(responseData) //receive json from searchDoctor()
-				{
-					console.log("response data: " + responseData);
+				{	
+					$('.searchResults tr').remove();
+					
+					var empty = responseData.length;
+					console.log(empty);
+					console.log(responseData);
+					
+					if (empty > 0)
+					{
+						console.log('inside if');
+						for (i = 0; i < responseData.length; i++)
+						{
+							$('.searchResults').append
+							(
+							  '<tr>' +							  
+							  '<td>' + responseData[i].specialization +'</td>' +
+							  '<td>' + responseData[i].lastname +'</td>' +
+							  '<td>' + responseData[i].firstname +'</td>' +
+							  '<td>' + responseData[i].telwork +'</td>' +
+							  '<td>' + 
+							  '<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#'+ responseData[i].id +'">' +
+					          '<i class="fas fa-info-circle"></i>' +
+					          '</a>' +
+							  '</td>' +
+							  '</tr>'
+							);
+						}
+					return;	
+					}
+					location.reload();
+					
 				}
-			   ).fail(function(sam){
-				   console.log(sam);
-			   });
-		console.log("from form data " + dataFromForm);
+			   );
 	}
-	$('#specialization').on
-						(
-						  'keyup', function()
-						  		   {
-							  		searchData($(this).val());
-						  		   }
-						);
 });
+

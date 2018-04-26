@@ -68,6 +68,11 @@ drugs_add:
           _locale: 'en'
      requirements:
           _locale: 'en|fr|de'
+          
+drugs_search:
+     path: /drugs/Search
+     controller: App\Controller\DrugsController::drugsSearch
+     methods: ['POST']
 
 addressbook_list:
      path: /{_locale}/addressbook/list
