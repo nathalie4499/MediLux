@@ -1,7 +1,6 @@
-## codemix-vanilla-php
+## MediLux
 
-Template for project creation of PHP inside CodeMix
+A doctor office management software...
 
-# Contents
+STATUS: PRE-ALPHA
 
-This template project is an example that prints on the console the Hello World!!! Greeting HTML tagged with the PHP language.
