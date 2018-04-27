@@ -17,24 +17,14 @@ class Acl
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $search;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="acls")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="acl", cascade={"persist", "remove"})
      */
     private $user;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $addressbook;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $drugs;
+    private $search;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -44,23 +34,21 @@ class Acl
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
+    private $address_book;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $drugs;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
     private $admin;
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getSearch(): ?bool
-    {
-        return $this->search;
-    }
-
-    public function setSearch(?bool $search): self
-    {
-        $this->search = $search;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -75,26 +63,14 @@ class Acl
         return $this;
     }
 
-    public function getAddressbook(): ?bool
+    public function getSearch(): ?bool
     {
-        return $this->addressbook;
+        return $this->search;
     }
 
-    public function setAddressbook(?bool $addressbook): self
+    public function setSearch(?bool $search): self
     {
-        $this->addressbook = $addressbook;
-
-        return $this;
-    }
-
-    public function getDrugs(): ?bool
-    {
-        return $this->drugs;
-    }
-
-    public function setDrugs(?bool $drugs): self
-    {
-        $this->drugs = $drugs;
+        $this->search = $search;
 
         return $this;
     }
@@ -107,6 +83,30 @@ class Acl
     public function setPatient(?bool $patient): self
     {
         $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getAddressBook(): ?bool
+    {
+        return $this->address_book;
+    }
+
+    public function setAddressBook(?bool $address_book): self
+    {
+        $this->address_book = $address_book;
+
+        return $this;
+    }
+
+    public function getDrugs(): ?bool
+    {
+        return $this->drugs;
+    }
+
+    public function setDrugs(?bool $drugs): self
+    {
+        $this->drugs = $drugs;
 
         return $this;
     }

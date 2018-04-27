@@ -1,65 +1,80 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} 
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="/css/style_nath.css">
-
 {% endblock %}
+
+{% block title %}{{ parent() }} - Patient Module{% endblock %}
 
 {% block body %}
 
-{{ form_start(patientCreationFormular) }}	
-
-<div class="datacontainer" id="ssn">
-	<h1>Patient File</h1>
-
-	<form>
-		<div class="form-row" id="ssnage" >
-			<div class="form-group col-md-3">
-				{{ form_label(patientCreationFormular.ssn) }}
-				{{ form_widget(patientCreationFormular.ssn) }}					
-			</div>	
-			<div class="form-group col-md-3">
-				{{ form_label(patientCreationFormular.age) }}
-				{{ form_widget(patientCreationFormular.age) }}					
-			</div>
+	<div class="datacontainerbtngrp">
+    <h3>{{ 'MLPATIENT.TITLE'|trans }}</h3><br/>
+    
+    	{% set infoMessages = app.flashes('info') %}
+    {% if infoMessages is not empty %}
+    <div class="container">
+    	{% for message in infoMessages %}
+    		<p class="bg-success p-1">{{ message }}</p>
+    	{% endfor %}
+    </div>
+    {% endif %}
+    
+        <div class="btn-group"  role="group" aria-label="Basic example">
+	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Fill Address " href="{{ path ('search_patient_list') }}"><i class="fas fa-home"></i></button></a>
+	      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#"><a data-toggle="modal" data-trigger="hover" data-content="add pathology"><i class="fas fa-user-plus"></i></button></a>
+	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search" href="{{ path ('search_patient_list') }}"><i class="fas fa-search-plus"></i></button></a>
 		</div>
+    </div>
 
-		<div class="form-row">
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.givenname) }}
-    			{{ form_widget(patientCreationFormular.givenname) }}
-			</div>
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.birthname) }}
-    			{{ form_widget(patientCreationFormular.birthname) }}	
-			</div>	
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.maritalname) }}
-    			{{ form_widget(patientCreationFormular.maritalname) }}			
-			</div>
-		</div>
-		
-		<div class="form-row" id="natlang">
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.nationality) }}
-    			{{ form_widget(patientCreationFormular.nationality) }}					
-			</div>
-			<div class="form-group col-md-4">
-    			{{ form_label(patientCreationFormular.language) }}
-    			{{ form_widget(patientCreationFormular.language) }}		
-			</div>
-		</div>
 
-    <ul class="">
-        {# iterate over each existing tag and render its only field: name #}
-        {% for patientaddress in patientCreationFormular.patientaddresslist %}
-            <li>{{ form_row(patientaddress.country) }}</li>
-        {% endfor %}
-    </ul>				
-		</div>			
 
-	</form>
-</div>
-{{ form_end(patientCreationFormular) }}
+	<div class="datacontainer patientregistration">
+	{{ form_start(patientCreationFormular) }} 
+
+	    <table id="patients" class="table table-dark table-striped table-bordered table-hover">		
+			  <tr>
+			    <td>{{ form_label(patientCreationFormular.ssn) }}</td>
+			    <td>{{ form_widget(patientCreationFormular.ssn) }}</td> 
+  			  </tr>
+			  <tr>		
+			  	<th>{{ form_label(patientCreationFormular.age) }}</th>
+			  	<th>{{ form_widget(patientCreationFormular.age) }}</th> 
+			  </tr>
+			  <tr>
+			  	<th>{{ form_label(patientCreationFormular.givenname) }}</th>
+			    <th>{{ form_widget(patientCreationFormular.givenname) }}</th>
+			  </tr> 
+			  <tr> 
+			    <th>{{ form_label(patientCreationFormular.birthname) }}</th> 
+			    <th>{{ form_widget(patientCreationFormular.birthname) }}</th>
+			  </tr>
+			  <tr>   			    
+			    <th>{{ form_label(patientCreationFormular.maritalname) }}</th> 
+			    <th>{{ form_widget(patientCreationFormular.maritalname) }}</th>
+			  </tr>
+			  <tr>  
+			    <th>{{ form_label(patientCreationFormular.nationality) }}</th> 
+			    <th>{{ form_widget(patientCreationFormular.nationality) }}</th> 
+			  </tr>
+			  <tr>  
+			    <th>{{ form_label(patientCreationFormular.language) }}</th> 
+			    <th>{{ form_widget(patientCreationFormular.language) }}</th> 
+			  </tr>
+			  <tr>  
+			    <th>{{ form_label(patientCreationFormular.patientaddresslist) }}</th> 
+			    <th>{{ form_widget(patientCreationFormular.patientaddresslist) }}</th> 
+			  </tr>
+			  <tr>
+    		  	<td></td>
+			  	<td>{{ form_row(patientCreationFormular.submit) }}</td> 
+  			 </tr>	
+  		</table> 
+	{{ form_end(patientCreationFormular) }} 		 
+  	  </div>
+	        
+
+
+
 {% endblock %}
+

@@ -1,15 +1,97 @@
 HEADER:
   TRANSLATIONLIST: Langues
-  SEARCH: Recherche 
-  PATIENT: Patient
-  ADDRESSBOOK: Carnet d'adresses
-  ADMIN: Admin
+  SEARCHPATIENT: Recherche
+  PATIENTRECORD: Patient
+  ADDRESSBOOKLIST: Liste d'adresses
+  ADMIN: Administration
   USER: Utilisateur
-  LOGOUT: Déconnection
-  TRANSLATIONEN: English
-  TRANSLATIONDE: Deutsch
+  LOGOUT: Logout
+  LOGIN: Login
+  TRANSLATIONEN: Anglais
+  TRANSLATIONDE: Allemand
   TRANSLATIONFR: Français
+  DRUGSLIST: Médicaments
+  ADMINMAIN: Menu principal
+  USERLIST: Liste des utilisateurs
+  ADMINUSER: Gestion des utilisateurs
+  NEWPATIENT: Création
+  SELECTPATIENT: Modification
 
 ADDRESSBOOK:
     DETAIL: détails
-    ADD: add
+    ADD: Ajouter
+
+MLPATIENT:
+    TITLE: Nouveau Patient MediLux 
+    SSN: Numéro de sécurité sociale
+    GIVENNAME: Prénom
+    BIRTHNAME: Nom de naissance
+    MARITALNAME: Nom marital
+    AGE: Age
+    NATIONALITY: Nationalité
+    LANGUAGE: Langue
+    TELEPHONE: Téléphone
+    STREETNUMBER: Numéro de rue
+    STREET: Rue
+    LOCALITY: Localité
+    MUNICIPALITY: Ville
+    COUNTRY: Pays
+    ZIP: Code postal
+    SUBMIT: Ajouter
+    DESCRIPTION: Description
+    ACTIVEPROBLEMS: Liste des pathologies
+
+FORM:
+  USER:
+    USERNAME: Nom d'utilisateur (obligatoire)
+    FIRSTNAME: Prénom
+    LASTNAME: Nom
+    PASSWORD: Mot de passe (obligatoire)
+    ROLETOADD: Statut à ajouter
+    PLACEHOLDER:
+      USERNAME: entrer le nom d'utilisateur
+      FIRSTNAME: entrer le prénom
+      LASTNAME: entrer le nom
+      PASSWORD: entrer le Mot de passe
+  ADDRESSBOOK:
+    FIRSTNAME: Prénom
+    LASTNAME: Nom
+    SPECIALIZATION: Spécialité
+    TELWORK: TELPRO
+    TELPRIV: TELPRIV
+    MOBILE: MOBILE
+    EMAIL: EMAIL
+    FAX: FAX
+    LANGUAGE: Langue
+    TITLE: TITRE
+    ADDRESS: ADDRESSE
+    SUBMIT: ajouter
+  PATIENT:
+    SSN: Numéro de sécurité sociale
+    GIVENNAME: Prénom
+    BIRTHNAME: Nom de naissance
+    MARITALNAME: Nom marital
+    NATIONALITY: Nationalité
+    TELEPHONE: Téléphone
+    LANGUAGE: Langue
+    STREETNUMBER: Numéro de rue
+    STREET: Rue
+    LOCALITY: Localité
+    COUNTRY: Pays
+    ZIP: Code postal
+    SUBMIT: ajouter
+    AGE: Age
+    TITLE: Pathologies
+    DESCRIPTION: Description
+    ACTIVEPROBLEMS: Liste des pathologies
+  DRUGS:
+    NAME: Nom
+    SUPPLIER: fabricant
+    DOSAGE: dosage
+    CONTRAINDICATIONS: contre-indications
+    SIDEEFFECTS: effets secondaires
+    INCOMPATIBILITIES: incompatibilités
+    OVERDOSE: surdose
+    COMPONENTS: composants
+
+       

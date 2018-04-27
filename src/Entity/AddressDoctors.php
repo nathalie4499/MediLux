@@ -56,7 +56,7 @@ class AddressDoctors
         return $this->zip;
     }
 
-    public function setZip(int $zip): self
+    public function setZip($zip): self
     {
         $this->zip = $zip;
 
@@ -120,6 +120,12 @@ class AddressDoctors
     {
         $this->number = $number;
 
+        return $this;
+    }
+    public function setDoctors(?Doctors $doctor): self
+    {
+        $this->doctor = $doctor;
+        
         return $this;
     }
 }
