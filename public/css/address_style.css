@@ -18,10 +18,7 @@
 }
 
 /*doctors modal*/
-#doctormodal{
-  display: flex;
-  align-items: center;
-}
+
 #doctormodal div h1,h2{
   text-align: center;
   color: white;

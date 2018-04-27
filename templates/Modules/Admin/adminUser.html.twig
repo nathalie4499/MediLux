@@ -31,7 +31,7 @@
       						<button type="button" class="btn" data-toggle="modal" data-target="#{{ mluser.username }}">
      							 <a data-toggle="popover" data-trigger="hover" data-content="user details"><i class="fas fa-info-circle"></i></a>
     						</button>
-    						{% if is_granted('ROLE_ADMIN') %}
+    						{% if is_granted('ROLE_ADMIN') and mluser.username != 'admin' %}
                             	<a onclick="return confirm('Are your sure to delete the user {{ mluser.username }}?')" href="{{ path('userdelete', { 'userid': mluser.id }) }}" class="btn btn-danger btn-sm"><i class="fas fa-user-times"></i></a>
     						{% endif %}
     					    <a href="{{ path('useredit', { 'userid': mluser.getID() }) }}" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a>
