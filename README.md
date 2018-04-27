@@ -2,5 +2,5 @@
 
 A doctor office management software...
 
-STADE: PRE-ALPHA
+STATUS: PRE-ALPHA
 
