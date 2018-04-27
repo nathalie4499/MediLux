@@ -4,15 +4,18 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Entity\ActiveProblems;
-use App\Entity\PatientAddress;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+
 
 class ActiveProblemsForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$builder = $factory->createBuilder(FormType::class, $patient);
+        $activeproblems = new ActiveProblems();
+        
         $builder->add(
             'title', TextareaType::class,
             [
@@ -33,8 +36,12 @@ class ActiveProblemsForm extends AbstractType
                 ]
             ]
        );
+
+            $form = $builder->getForm();
+            
+
+
     }
-    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

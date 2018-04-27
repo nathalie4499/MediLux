@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c6c6648ce0e7e41255ed85f5fe1b816",
+    "content-hash": "7f5bd30e9d7ce3efc3e9365a296b30dc",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "algolia/search-bundle",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/search-bundle.git",
-                "reference": "8327cdd27c692b7d9a2aff873d80a547824ad435"
+                "reference": "24de92788a70051312a4b5fef33c7ddc50ac511a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/search-bundle/zipball/8327cdd27c692b7d9a2aff873d80a547824ad435",
-                "reference": "8327cdd27c692b7d9a2aff873d80a547824ad435",
+                "url": "https://api.github.com/repos/algolia/search-bundle/zipball/24de92788a70051312a4b5fef33c7ddc50ac511a",
+                "reference": "24de92788a70051312a4b5fef33c7ddc50ac511a",
                 "shasum": ""
             },
             "require": {
@@ -110,7 +110,7 @@
                     "email": "julien@sigerr.org"
                 }
             ],
-            "time": "2018-03-22T10:48:07+00:00"
+            "time": "2018-04-26T10:06:32+00:00"
         },
         {
             "name": "composer/installers",
@@ -231,6 +231,26 @@
                 "zikula"
             ],
             "time": "2017-12-29T09:13:20+00:00"
+        },
+        {
+            "name": "dimsemenov/magnific-popup",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dimsemenov/Magnific-Popup.git",
+                "reference": "6b7a8088783cbce01034414c1fd2d8e1889093ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dimsemenov/Magnific-Popup/zipball/6b7a8088783cbce01034414c1fd2d8e1889093ae",
+                "reference": "6b7a8088783cbce01034414c1fd2d8e1889093ae",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Light and responsive lightbox script with focus on performance.",
+            "homepage": "http://dimsemenov.com/plugins/magnific-popup/",
+            "time": "2016-02-20T09:06:30+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -5002,16 +5022,16 @@
         },
         {
             "name": "zendframework/zend-eventmanager",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "9d72db10ceb6e42fb92350c0cb54460da61bd79c"
+                "reference": "a5e2583a211f73604691586b8406ff7296a946dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/9d72db10ceb6e42fb92350c0cb54460da61bd79c",
-                "reference": "9d72db10ceb6e42fb92350c0cb54460da61bd79c",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/a5e2583a211f73604691586b8406ff7296a946dd",
+                "reference": "a5e2583a211f73604691586b8406ff7296a946dd",
                 "shasum": ""
             },
             "require": {
@@ -5020,7 +5040,7 @@
             "require-dev": {
                 "athletic/athletic": "^0.1",
                 "container-interop/container-interop": "^1.1.0",
-                "phpunit/phpunit": "^6.0.7 || ^5.7.14",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
                 "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-stdlib": "^2.7.3 || ^3.0"
             },
@@ -5052,7 +5072,7 @@
                 "events",
                 "zf2"
             ],
-            "time": "2017-07-11T19:17:22+00:00"
+            "time": "2018-04-25T15:33:34+00:00"
         }
     ],
     "packages-dev": [

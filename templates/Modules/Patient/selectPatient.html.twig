@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %} - Patient Module{% endblock %}
+
+{% block body %}
+
+	<div class="datacontainerbtngrp">
+    <h3>{{ 'MLPATIENT.MODIFY'|trans }}</h3><br/>
+    
+    	{% set infoMessages = app.flashes('info') %}
+    {% if infoMessages is not empty %}
+    <div class="container">
+    	{% for message in infoMessages %}
+    		<p class="bg-success p-1">{{ message }}</p>
+    	{% endfor %}
+    </div>
+    {% endif %}
+    
+        <div class="btn-group"  role="group" aria-label="Basic example">
+	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Fill Address " href="{{ path ('search_patient_list') }}"><i class="fas fa-home"></i></button></a>
+	      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalpathology"><a data-toggle="popover" data-trigger="hover" data-content="add pathology"><i class="fas fa-user-plus"></i></button></a>
+	      <button type="button" class="btn btn-secondary"><a data-toggle="popover" data-trigger="hover" data-content="Back to Search" href="{{ path ('search_patient_list') }}"><i class="fas fa-search-plus"></i></button></a>
+		</div>
+    </div>
+    
+    
+    <!-- Modal -->
+<div id="modalpathology" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Pathology</h4>
+      </div>
+      <div class="modal-body">
+        <p>title : </h4>patho</p>
+        <p>description : patho</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>       
+    
+
+	<div class="datacontainer patientregistration">
+    {{ form_start(patientedit) }}
+    
+	    <table id="patients" class="table table-dark table-striped table-bordered table-hover">		
+		  <tr>
+		    <td>{{ form_label(patientedit.ssn) }}</td>
+		    <td>{{ form_widget(patientedit.ssn) }}</td> 
+		  </tr>
+		  <tr>	
+    	    <td>{{ form_label(patientedit.age) }}</td>
+    	    <td>{{ form_widget(patientedit.age) }}</td> 
+    	  </tr>
+    	  <tr>
+		    <td>{{ form_label(patientedit.givenname) }}</td>
+		    <td>{{ form_widget(patientedit.givenname) }}</td> 
+		  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.birthname) }}</td>
+    	    <td>{{ form_widget(patientedit.birthname) }}</td> 
+    	  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.maritalname) }}</td>
+    	    <td>{{ form_widget(patientedit.maritalname) }}</td> 
+    	  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.nationality) }}</td>
+    	    <td>{{ form_widget(patientedit.nationality) }}</td> 
+    	  </tr>
+    	  <tr>
+    	    <td>{{ form_label(patientedit.language) }}</td>
+    	    <td>{{ form_widget(patientedit.language) }}</td> 
+    	  </tr> 
+	  	  <tr>  
+		    <th>{{ form_label(patientedit.patientaddresslist) }}</th> 
+		    <th>{{ form_widget(patientedit.patientaddresslist) }}</th> 
+		  </tr>   	      	      	  		  
+	  	  <tr>
+		  	<td></td>
+		  	<td>{{ form_row(patientedit.save) }}</td> 
+		  </tr>	
+
+  		</table> 		 
+  	  </div> 
+
+
+    {{ form_end(patientedit) }}
+    
+
+
+{% endblock %}

@@ -24,7 +24,6 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Role;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,6 +31,8 @@ use App\Entity\Acl;
 use Doctrine\DBAL\Types\ArrayType;
 use App\Repository\RoleRepository;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 
@@ -57,7 +58,7 @@ class AdminController extends Controller
         $builder = $factory->createBuilder(FormType::class, $user);
         $builder->add(
             'username',
-            TextType::class,
+            TextareaType::class,
             [
                 'required' => true,
                 'label' => 'FORM.USER.USERNAME',
@@ -110,13 +111,25 @@ class AdminController extends Controller
                 )
 
             ->add('roleToAdd', EntityType::class, [
+                'label' => 'FORM.USER.ROLETOADD',
                 'class'        => Role::class,
                 'choice_label' => 'label',
                 'mapped'       => false,
             ])
 
 
-                
+//            ->add('aclToAdd', EntityType::class, [
+//                'label' => 'FORM.USER.ACLTOADD',
+//                'class'        => ACL::class,
+//               'choice_label' => false,
+//                'mapped'       => false,
+//                'expanded'     => true,
+//               'multiple'     => true,
+//            ])
+            
+
+            
+
             ->add('submit', SubmitType::class);
             
             $form = $builder->getForm();
@@ -146,6 +159,9 @@ class AdminController extends Controller
 
             }
 
+        $repository = $this->getDoctrine()
+        ->getRepository(Acl::class);
+        $acl = $repository->findAll();
             
         $repository = $this->getDoctrine()
         ->getRepository(Role::class);
@@ -160,6 +176,7 @@ class AdminController extends Controller
                 [
                     'users' => $users,
                     'role' => $role,
+                    'acl' => $acl,
                     'formular_add_user'=>  $form->createView(),
                     'isTrue'=> true
                     
@@ -168,6 +185,9 @@ class AdminController extends Controller
                 
                 )
             );
+        
+     
+        
     }
 
     
@@ -202,7 +222,7 @@ class AdminController extends Controller
      *
      * @Route("/user/edit/{userid}", name="useredit")
      */
-    public function editUser(Request $request, User $userid, FormFactoryInterface $factory, ObjectManager $manager)
+    public function editUser(Request $request, User $userid, FormFactoryInterface $factory, ObjectManager $manager,  UrlGeneratorInterface $urlGenerator )
     {
     
         $editUserId = $userid->getID();
@@ -216,8 +236,6 @@ class AdminController extends Controller
             'username',
             TextType::class,
             [
-                'label_format' => 'edit.user.%id%',
-                'block_name' => 'edit_user',
                 'required' => true,
                 'label' => 'FORM.USER.USERNAME',
                 'attr' => [
@@ -234,8 +252,6 @@ class AdminController extends Controller
                 'firstname',
                 TextType::class,
                 [
-                    'label_format' => 'edit.user.%id%',
-                    'block_name' => 'edit_user',
                     'required' => true,
                     'label' => 'FORM.USER.FIRSTNAME',
                     'attr' => [
@@ -250,8 +266,6 @@ class AdminController extends Controller
                 'lastname',
                 TextType::class,
                 [
-                    'label_format' => 'edit.user.%id%',
-                    'block_name' => 'edit_user',
                     'required' => true,
                     'label' => 'FORM.USER.LASTNAME',
                     'attr' => [
@@ -264,22 +278,13 @@ class AdminController extends Controller
             ->add('roleToModify',
                 EntityType::class,
                 [
-                'label_format' => 'edit.user.%id%',
-                'block_name' => 'edit_user',
                 'class'        => Role::class,
                 'choice_label' => 'label',
                 'mapped'       => false,
             ])
-            ->add('id',
-                HiddenType::class
-                )
-            
- 
                 
-            ->add('submit', SubmitType::class, [
-                'label_format' => 'edit.user.%id%',
-                'block_name' => 'edit_user',
-            ]);
+            ->add('save', SubmitType::class, array('label' => 'Modify the user'));
+            
         $formedituser = $builder->getForm();
         $formedituser->handleRequest($request);
             
@@ -288,19 +293,20 @@ class AdminController extends Controller
         
         if ($formedituser->isSubmitted() && $formedituser->isValid()) {
             
-            $role = $form->get('roleToModify')->getData();
+            $role = $formedituser->get('roleToModify')->getData();
             
             $userid->setRole($role);
             
             $manager->persist($userid);
             $manager->flush();
+            return new RedirectResponse($urlGenerator->generate('admin_user'));
         }
         
         return $this->render('Modules/User/userEdit.html.twig', [
             'useredit' => $formedituser->createView(),
             'routeAttr' => ['userid' => $userid ->getId()
-            ]
-
+            ],
+            'currentuser' => $userid ->getId()
         ]);
     }
     

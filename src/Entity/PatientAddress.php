@@ -24,18 +24,39 @@ class PatientAddress
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $streetnumber;
     
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $street;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $locality;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $municipality;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $canton;
+      
+    
     /**  
-    * @ORM\OneToMany(targetEntity="App\Entity\Zip", mappedBy="patientaddress")  
+    * @ORM\Column(type="string", length=255, nullable=true)
     * @Assert\Valid()  
     */
     private $zips;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $country;
 
@@ -50,14 +71,59 @@ class PatientAddress
         return $this->id;
     }
     
-    public function getStreetnumber(): ?NumberType
+    public function getStreetnumber(): ?string
     {
-        return $this->streetumber;
+        return $this->streetnumber;
     }
     
-    public function setStreetnumber(?NumberType $streetnumber): self
+    public function setStreetnumber(?string $streetnumber): self
     {
         $this->streetnumber = $streetnumber;
+        return $this;
+    }
+    
+    public function getStreet(): ?string
+    {
+        return $this->street;
+    }
+    
+    public function setStreet(?string $street): self
+    {
+        $this->street = $street;
+        return $this;
+    }
+    
+    public function getLocality(): ?string
+    {
+        return $this->locality;
+    }
+    
+    public function setLocality(?string $locality): self
+    {
+        $this->locality = $locality;
+        return $this;
+    }
+    
+    public function getMunicipality(): ?string
+    {
+        return $this->municipality;
+    }
+    
+    public function setMunicipality(?string $municipality): self
+    {
+        $this->municipality = $municipality;
+        return $this;
+    }
+    
+    public function getCanton(): ?string
+    {
+        return $this->canton;
+    }
+    
+    public function setCanton(?string $canton): self
+    {
+        $this->canton = $canton;
+        return $this;
     }
     
     public function getCountry(): ?string
@@ -72,45 +138,6 @@ class PatientAddress
         return $this;
     }
     
-    
-    /**
-    
-    * @return Collection|Zip[]
-    
-    */
-    public function getZips(): Collection
-    {
-        return $this->zips;
-    }
-
-    public function addZip(Zip $zip): self
-    {
-        if(!$this->zips->contains($zip)) {
-            $this->zips[] = $zip;
-            $zip->setPatientAddress($this);
-        }
-
-        return $this;
-    }
-    
-    
-    
-    public function removeZip(Zip $zip): self    
-    {
-        
-        if ($this->zips->contains($zip)) {
-            
-            $this->zips->removeElement($zip);
-            
-            // set the owning side to null (unless already changed)
-            
-            if ($zip->getPatientAddress() === $this) {
-                
-                $zip->setPatientAddress(null);   
-            }
-        }
-        return $this;
-    }
 
     public function getPatient(): ?Patient
     {
@@ -123,4 +150,22 @@ class PatientAddress
 
         return $this;
     }
+    /**
+     * @return mixed
+     */
+    public function getZips()
+    {
+        return $this->zips;
+    }
+
+    /**
+     * @param mixed $zips
+     */
+    public function setZips($zips)
+    {
+        $this->zips = $zips;
+        return $this;
+    }
+
 }
+    
